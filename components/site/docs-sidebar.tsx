@@ -12,8 +12,8 @@ export function DocsSidebar() {
   return (
     <>
       <div className="mb-6 lg:hidden">
-        <details className="rounded-[28px] border border-slate-900/10 bg-white/85 p-4 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.35)]">
-          <summary className="cursor-pointer list-none text-sm font-medium text-slate-900">
+        <details className="bg-card rounded-[28px] border border-border p-4 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.35)]">
+          <summary className="text-foreground cursor-pointer list-none text-sm font-medium">
             Browse documentation
           </summary>
           <div className="mt-4">
@@ -22,7 +22,7 @@ export function DocsSidebar() {
           <nav className="mt-5 space-y-5">
             {docsNavGroups.map((group) => (
               <div key={group.title}>
-                <div className="text-xs uppercase tracking-[0.22em] text-slate-400">
+                <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                   {group.title}
                 </div>
                 <div className="mt-2 space-y-1">
@@ -39,8 +39,8 @@ export function DocsSidebar() {
                         className={cn(
                           "block rounded-2xl px-3 py-2.5 text-sm transition",
                           active
-                            ? "bg-[#0f1720] text-white"
-                            : "text-slate-600 hover:bg-slate-900/5 hover:text-slate-950",
+                            ? "bg-primary text-primary-foreground"
+                            : "text-muted-foreground hover:bg-accent hover:text-foreground",
                         )}
                       >
                         {page.title}
@@ -55,12 +55,12 @@ export function DocsSidebar() {
       </div>
 
       <aside className="sticky top-24 hidden h-fit lg:block">
-        <div className="rounded-[32px] border border-slate-900/10 bg-white/85 p-5 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.35)]">
+        <div className="bg-card rounded-[32px] border border-border p-5 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.35)]">
           <DocsSearch />
           <nav className="mt-6 space-y-6">
             {docsNavGroups.map((group) => (
               <div key={group.title}>
-                <div className="text-xs uppercase tracking-[0.22em] text-slate-400">
+                <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                   {group.title}
                 </div>
                 <div className="mt-2 space-y-1">
@@ -77,8 +77,8 @@ export function DocsSidebar() {
                         className={cn(
                           "block rounded-2xl px-3 py-2.5 text-sm leading-6 transition",
                           active
-                            ? "bg-[#0f1720] text-white"
-                            : "text-slate-600 hover:bg-slate-900/5 hover:text-slate-950",
+                            ? "bg-primary text-primary-foreground"
+                            : "text-muted-foreground hover:bg-accent hover:text-foreground",
                         )}
                       >
                         {page.title}
