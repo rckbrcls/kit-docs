@@ -1,0 +1,81 @@
+---
+title: Using Polterbase with Ops
+description: Polterbase is the recommended workflow manager for Ops Supabase operations. Use it for setup, link, migrations, configuration, and packaged app installation.
+---
+
+Polterbase exists because Ops needs repeatable Supabase workflows that are easier to discover, less error-prone, and more explicit than keeping those responsibilities inside the app CLI.
+
+The result is a clean split: Ops owns local development startup, while Polterbase owns setup, project linking, migrations, runtime configuration, and installation workflows.
+
+## Why Ops uses Polterbase
+
+A self-hosted desktop app needs more than a generic dev command. Operators need project-aware setup, controlled migration workflows, and a way to prepare packaged apps with a runtime backend connection. Polterbase is the workflow layer that standardizes those jobs.
+
+This separation also keeps the Ops CLI intentionally small, which is useful for maintainability and clearer documentation.
+
+### Polterbase references
+
+<Cards>
+  <Card title="Polterbase on npm" href="https://www.npmjs.com/package/@polterware/polterbase">
+    Package and installation reference for the recommended Ops workflow manager.
+  </Card>
+  <Card title="Polterbase on GitHub" href="https://github.com/polterware/polterbase">
+    Source repository for Polterbase, including workflow and command details.
+  </Card>
+</Cards>
+
+## Major commands
+
+| Command | Description |
+|---|---|
+| `npx polterbase app setup ops --path .` | Full source-checkout bootstrap. Recommended when cloning or refreshing a local repository. |
+| `npx polterbase app link ops --path .` | Link or relink the checkout to the intended Supabase project. |
+| `npx polterbase app migrate ops push --path .` | Push pending migrations to the linked Supabase project. |
+| `npx polterbase app migrate ops lint --path .` | Check migrations for lint issues before applying them. |
+| `npx polterbase app migrate ops reset --path .` | Destructively reset the linked remote database and reapply migrations. |
+| `npx polterbase app migrate ops local-reset --path .` | Destructively reset the local Docker-based Supabase database. |
+| `npx polterbase app configure ops --path .` | Refresh .env.local and runtime bootstrap material without reinstalling the app. |
+| `npx @polterware/polterbase@latest app install ops` | Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection payload. Add `--version <version>` to pin a release. |
+| `npx @polterware/polterbase@latest app update ops` | Update an existing packaged macOS install to a newer release while preserving persisted runtime configuration, local settings, and session data. |
+
+## When to use each workflow
+
+<Steps>
+
+### Use setup
+
+When you have a fresh checkout or want Polterbase to drive the full Ops bootstrap process from dependency validation through runtime payload preparation.
+
+### Use link
+
+When the repository should target a different Supabase project or when the link needs to be repaired.
+
+### Use migrate
+
+When the project is already linked and you need to push, lint, reset, or local-reset migrations.
+
+### Use configure
+
+When the backend connection changed and you want to refresh development env values or the runtime payload without reinstalling the app.
+
+### Use install
+
+When you are distributing or testing a packaged macOS app and need Polterbase to install it with the right Supabase connection context.
+
+### Use update
+
+When Ops is already installed and you only want to replace the app bundle with a newer release while preserving the current runtime/app state.
+
+</Steps>
+
+<Callout type="warn" title="Do not treat old Ops commands as the current workflow">
+Historical commands such as pnpm opssetup, pnpm opsdb, and pnpm opscheck are not the current documented path. The current source of truth is the Polterbase workflow set above plus pnpm ops dev for development startup.
+</Callout>
+
+## Advanced notes for operators
+
+- Use configure when you need to rotate runtime connection details without reinstalling the packaged app.
+- Use update when you want a newer packaged build without re-entering connection details.
+- Use link before migration workflows if the repository was moved between Supabase projects.
+- Reserve reset for intentional destructive operations and communicate it clearly to stakeholders.
+- Treat install as an application distribution workflow, not as a substitute for migration management.

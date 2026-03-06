@@ -1,0 +1,18 @@
+---
+title: Browser Matrix
+description: See which browsers and operating systems support native install prompts, manual guides, or are unsupported.
+---
+
+The library only generates install instructions for verified browser and OS combinations. Unverified environments return unsupported rather than guessing.
+
+## Support matrix
+
+| Browser / OS | Support |
+|---|---|
+| Safari on iOS | Manual guide — uses ios_share_sheet. |
+| Safari on macOS | Manual guide — uses safari_add_to_dock. |
+| Chrome desktop | Native prompt — available only after beforeinstallprompt. |
+| Edge desktop | Native prompt — available only after beforeinstallprompt. |
+| Samsung Internet | Native prompt — available only after beforeinstallprompt. |
+| Arc desktop | Unsupported — no manual fallback is generated. |
+| Firefox / unknown browsers | Unsupported — no guessed instructions. |

@@ -1,0 +1,43 @@
+---
+title: Introduction
+description: "Understand the Polterware ecosystem: Ops for desktop business management, Polterbase for Supabase CLI workflows, and PWA for headless install utilities."
+---
+
+Polterware is a collection of open-source tools for business operations. Ops is a desktop business management app powered by Supabase. Polterbase is an interactive CLI for managing Supabase workflows. PWA provides headless install utilities and manifest tools for progressive web apps.
+
+Each project can be used independently. Together they form a coherent ecosystem where Ops handles the desktop experience, Polterbase manages the backend lifecycle, and PWA covers web app installation flows.
+
+## What Ops does
+
+- Manage a product catalog with structured business data.
+- Track inventory levels and stock movements.
+- Handle orders, sales, and payment workflows.
+- Review analytics in a single desktop workspace.
+- Enforce role-based access for admins, operators, and analysts.
+
+Ops is not a generic website template or a local spreadsheet wrapper. It is a serious desktop operations app that expects a Supabase backend and uses that backend for authentication, database access, row-level security, and server-side functions.
+
+## Who Ops is for
+
+<Cards>
+  <Card title="Teams that want to use the app" href="/docs/ops/getting-started">
+    You care about opening the app, signing in, and doing operational work. You should follow the installation and getting started guides.
+  </Card>
+  <Card title="People responsible for the Supabase project" href="/docs/ops/configuration">
+    You decide which project Ops connects to, apply migrations, maintain credentials, and reconfigure packaged apps when the backend changes.
+  </Card>
+  <Card title="People modifying the codebase" href="/docs/ops/for-developers">
+    You work in source, start local development with pnpm ops dev, and use Polterbase for setup, link, migrate, configure, and install workflows.
+  </Card>
+</Cards>
+
+## How Ops, Supabase, and Polterbase fit together
+
+- **Ops desktop app** — The user-facing desktop application for daily operations, sign-in, analytics, and business workflows.
+- **Supabase backend** — Auth, Postgres, row-level security policies, and RPC functions that enforce the business contract.
+- **Polterbase workflow layer** — The recommended operator and developer workflow manager for setup, link, migration, runtime configuration, and packaged app installation.
+- **Runtime connection model** — The installed app can receive a Supabase bootstrap payload on first launch, while source checkouts can still fall back to .env.local.
+
+<Callout type="info" title="Current CLI boundary">
+The Ops CLI is now intentionally minimal and focused on development through pnpm ops dev. Supabase setup, linking, migrations, configuration, and installation workflows moved to Polterbase.
+</Callout>

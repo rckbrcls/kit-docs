@@ -1,0 +1,9 @@
+{
+  "title": "polterware/kit",
+  "description": "Open-source tools for business operations and modern web apps.",
+  "root": true,
+  "pages": [
+    "index",
+    "introduction"
+  ]
+}

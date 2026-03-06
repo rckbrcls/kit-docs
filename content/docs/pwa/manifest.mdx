@@ -1,0 +1,27 @@
+---
+title: Manifest Module
+description: Use generateManifest and mergeManifest to create and update web app manifests programmatically.
+---
+
+The manifest helpers live in @polterware/pwa/manifest and provide programmatic manifest generation and merging.
+
+## generateManifest
+
+```ts
+import { generateManifest, mergeManifest } from "@polterware/pwa/manifest";
+
+const manifest = generateManifest({
+  name: "Polterware",
+  short_name: "Polter",
+  description: "Headless PWA install flow",
+  start_url: "/",
+  icons: [
+    {
+      src: "/icons/icon-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
+      purpose: "any maskable",
+    },
+  ],
+});
+```
