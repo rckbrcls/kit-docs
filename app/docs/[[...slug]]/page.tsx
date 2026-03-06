@@ -20,7 +20,7 @@ type PageProps = {
 
 export async function generateStaticParams() {
   return docsPages.map((page) => ({
-    slug: page.slug ? [page.slug] : [],
+    slug: page.slug ? page.slug.split("/") : [],
   }));
 }
 

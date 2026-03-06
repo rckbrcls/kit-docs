@@ -1,25 +1,20 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import "./globals.css";
 
-const body = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const mono = IBM_Plex_Mono({
+const fira = Fira_Code({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Uru Documentation",
-    template: "%s | Uru Documentation",
+    default: "polterware/kit",
+    template: "%s | polterware/kit",
   },
   description:
-    "Documentation for Uru, the open-source desktop business manager powered by Supabase and operated with Polterbase workflows.",
+    "Documentation for the Polterware ecosystem: Ops (desktop business manager), Polterbase (CLI workflow manager), and PWA (headless install utilities), powered by Supabase.",
 };
 
 export default function RootLayout({
@@ -28,11 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${body.variable} ${mono.variable} dark`}>
-      <body className="min-h-screen bg-[color:var(--background)] font-sans text-[color:var(--foreground)] antialiased">
+    <html lang="en" className={`${fira.variable} dark`}>
+      <body className="min-h-screen bg-[color:var(--background)] font-mono text-[color:var(--foreground)] antialiased">
         <div className="site-noise" />
-        <div className="site-orb site-orb-left" />
-        <div className="site-orb site-orb-right" />
         <div className="relative">{children}</div>
       </body>
     </html>

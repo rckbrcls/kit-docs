@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, BookOpen, Wrench } from "lucide-react";
+import { ArrowUpRight, BookOpen, Smartphone, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,9 +12,9 @@ const navLinks = [
 ];
 
 const actionLinks = [
-  { href: "/docs/getting-started", label: "Install Uru" },
-  { href: "/docs/for-developers", label: "Modify Uru" },
- ] as const;
+  { href: "/docs/ops/getting-started", label: "Install Ops" },
+  { href: "/docs/ops/for-developers", label: "Modify Ops" },
+] as const;
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -30,18 +30,10 @@ export function SiteHeader() {
       <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex min-w-0 items-center">
           <div className="min-w-0">
-            <div
-              className="text-primary text-[1.7rem] leading-none"
-              style={{
-                fontFamily:
-                  'Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif',
-              }}
-            >
-              Urú
+            <div className="text-primary font-medium  leading-none">
+              polterware/kit
             </div>
-            <div className="text-muted-foreground mt-1 hidden text-xs sm:block">
-              Desktop operations powered by Supabase
-            </div>
+
           </div>
         </Link>
 
@@ -80,7 +72,13 @@ export function SiteHeader() {
             </Link>
           </Button>
           <Button asChild size="sm" variant="outline" className="px-4">
-            <Link href="/docs/polterbase">
+            <Link href="/docs/pwa/getting-started">
+              <Smartphone className="size-4" />
+              PWA
+            </Link>
+          </Button>
+          <Button asChild size="sm" variant="outline" className="px-4">
+            <Link href="/docs/polterbase/getting-started">
               <ArrowUpRight className="size-4" />
               Polterbase
             </Link>
@@ -126,7 +124,14 @@ export function SiteHeader() {
               </div>
               <div className="border-t border-border pt-2">
                 <Link
-                  href="/docs/polterbase"
+                  href="/docs/pwa/getting-started"
+                  className="text-muted-foreground hover:bg-accent hover:text-primary flex items-center justify-between px-3 py-2.5 text-sm"
+                >
+                  PWA
+                  <ArrowUpRight className="text-primary/70 size-4" />
+                </Link>
+                <Link
+                  href="/docs/polterbase/getting-started"
                   className="text-muted-foreground hover:bg-accent hover:text-primary flex items-center justify-between px-3 py-2.5 text-sm"
                 >
                   Polterbase

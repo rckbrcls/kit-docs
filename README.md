@@ -1,10 +1,10 @@
-# Uru Docs
+# polterware/kit
 
-Documentation website for Uru, the open-source desktop business manager powered by Supabase.
+Documentation and marketing site for the Polterware ecosystem: **Ops** (desktop business manager), **Polterbase** (CLI workflow manager for Supabase), and **PWA** (headless PWA install utilities).
 
 ## What is inside
 
-- Marketing landing page for product positioning and audience entry points
+- Marketing landing page with product positioning for the three projects
 - Documentation home with guided paths for end users, operators, and developers
 - Dynamic docs route backed by centralized content data in `content/docs.ts`
 - Reusable documentation UI components for callouts, code panels, sidebar navigation, search, and section rendering
@@ -16,15 +16,8 @@ Documentation website for Uru, the open-source desktop business manager powered 
 - `app/docs/[[...slug]]/page.tsx` renders the documentation pages from the shared content model.
 - `components/site/*` contains the reusable product-site and documentation components.
 
-## Scope
+## Projects
 
-This site documents the current Uru workflow boundary:
-
-- `pnpm uru dev` for local development startup
-- Polterbase for setup, linking, migration, configuration, and packaged app installation
-- Packaged installs are documented as direct Polterbase commands, with macOS as the only supported target today
-
-Polterbase references included in the documentation:
-
-- npm: https://www.npmjs.com/package/@polterware/polterbase
-- GitHub: https://github.com/polterware/polterbase
+- **Ops** — Open-source desktop business manager powered by Supabase
+- **Polterbase** — Interactive CLI for managing Supabase CLI workflows
+- **PWA** — Headless PWA install utilities and manifest tools

@@ -198,7 +198,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
 
           case "audienceSplit":
             return (
-              <div key={index} className="grid gap-4 md:grid-cols-3">
+              <div key={index} className="grid gap-4">
                 {block.items.map((item) => (
                   <Link
                     key={item.audience}

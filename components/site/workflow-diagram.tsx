@@ -12,7 +12,7 @@ export function WorkflowDiagram({
     <div
       className={cn(
         "grid gap-4",
-        compact ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-2",
+        compact ? "md:grid-cols-2" : "md:grid-cols-2",
       )}
     >
       {items.map((item, index) => (

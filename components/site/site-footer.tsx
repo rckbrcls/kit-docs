@@ -4,16 +4,16 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-[color:var(--panel)]">
       <div className="text-muted-foreground mx-auto flex max-w-7xl flex-col gap-3 px-4 py-10 text-sm sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-        <p>
-          Uru is an open-source desktop business manager powered by Supabase and
-          documented around end users, operators, and developers.
-        </p>
+
         <div className="flex flex-wrap items-center gap-4">
           <Link href="/docs" className="hover:text-foreground">
             Documentation
           </Link>
-          <Link href="/docs/polterbase" className="hover:text-foreground">
-            Polterbase Workflows
+          <Link href="/docs/polterbase/getting-started" className="hover:text-foreground">
+            Polterbase
+          </Link>
+          <Link href="/docs/pwa/getting-started" className="hover:text-foreground">
+            PWA
           </Link>
           <a
             href="https://www.npmjs.com/package/@polterware/polterbase"

@@ -106,21 +106,21 @@ export const audiencePaths: Array<{
 }> = [
   {
     audience: "End Users",
-    heading: "Install and start using Uru",
+    heading: "Install and start using Ops",
     body: "Use the packaged macOS app or a prepared source checkout, connect to Supabase, and start managing catalog, inventory, orders, sales, payments, and analytics.",
-    href: "/docs/getting-started",
+    href: "/docs/ops/getting-started",
   },
   {
     audience: "Self-Hosters / Operators",
-    heading: "Connect Uru to your own Supabase project",
-    body: "Use Polterbase to set up, link, migrate, configure, and install Uru against the Supabase project you operate.",
-    href: "/docs/polterbase",
+    heading: "Connect Ops to your own Supabase project",
+    body: "Use Polterbase to set up, link, migrate, configure, and install Ops against the Supabase project you operate.",
+    href: "/docs/ops/polterbase",
   },
   {
     audience: "Developers",
     heading: "Modify the app and extend the stack",
-    body: "Work from source, run the minimal Uru development CLI, and use Polterbase for Supabase workflows instead of legacy app commands.",
-    href: "/docs/for-developers",
+    body: "Work from source, run the minimal Ops development CLI, and use Polterbase for Supabase workflows instead of legacy app commands.",
+    href: "/docs/ops/for-developers",
   },
 ];
 
@@ -129,110 +129,86 @@ export const docsPages: DocPage[] = [
     slug: "",
     title: "Documentation Home",
     summary:
-      "Start here to choose the right Uru workflow for installation, self-hosting, and development.",
-    section: "Overview",
+      "Start here to explore the Polterware ecosystem: Ops, Polterbase, and PWA.",
+    section: "polterware/kit",
     audience: ["End Users", "Self-Hosters / Operators", "Developers"],
     keywords: [
       "docs",
       "start here",
+      "ops",
+      "polterbase",
+      "pwa",
       "install",
       "self host",
       "developer docs",
     ],
     intro: [
-      "Uru is an open-source desktop business manager powered by Supabase. This documentation is organized around the three jobs people actually need to do: use the app, operate the backend, and modify the codebase.",
-      "The recommended mental model is simple: Uru is the desktop app, Supabase is the backend, and Polterbase is the workflow layer that prepares, links, migrates, configures, and installs Uru.",
+      "polterware/kit documents three open-source projects: Ops (desktop business manager), Polterbase (CLI workflow manager for Supabase), and PWA (headless install utilities for progressive web apps).",
+      "Each project has its own documentation section. Use the links below to jump straight into the one you need.",
     ],
     sections: [
       {
-        title: "Choose your path",
-        blocks: [
-          {
-            type: "audienceSplit",
-            items: audiencePaths,
-          },
-        ],
-      },
-      {
-        title: "Recommended quick paths",
-        blocks: [
-          {
-            type: "steps",
-            title: "Source checkout",
-            items: [
-              {
-                title: "Install dependencies",
-                body: "Run pnpm install in the Uru source checkout so the repository dependencies, including Polterbase, are available.",
-              },
-              {
-                title: "Bootstrap with Polterbase",
-                body: "Run npx polterbase app setup uru --path . to prepare local config, link Supabase, push migrations, and write the desktop bootstrap payload.",
-              },
-              {
-                title: "Start development",
-                body: "Run pnpm uru dev to launch the minimal development workflow and choose web-only or desktop mode.",
-              },
-            ],
-          },
-          {
-            type: "steps",
-            title: "Installed macOS app",
-            items: [
-              {
-                title: "Install the packaged app",
-                body: "Use Polterbase to fetch and install the macOS artifact instead of rebuilding the app locally.",
-              },
-              {
-                title: "Prepare runtime connection",
-                body: "Polterbase writes the bootstrap payload that contains the Supabase URL and publishable key for first launch.",
-              },
-              {
-                title: "Launch and sign in",
-                body: "On first launch, Uru consumes the bootstrap payload, persists the runtime connection, and then allows users to sign in.",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        title: "Core references",
+        title: "Projects",
         blocks: [
           {
             type: "linkGrid",
             links: [
               {
-                label: "Introduction",
-                href: "/docs/introduction",
+                label: "Ops",
+                href: "/docs/ops/getting-started",
                 description:
-                  "What Uru does, who it is for, and how Uru, Supabase, and Polterbase fit together.",
+                  "Open-source desktop business manager powered by Supabase. Product catalog, inventory, orders, sales, payments, and analytics.",
               },
               {
-                label: "Getting Started",
-                href: "/docs/getting-started",
+                label: "Polterbase",
+                href: "/docs/polterbase/getting-started",
                 description:
-                  "Beginner-first quick starts for source checkouts and the packaged macOS app.",
+                  "Interactive CLI for managing Supabase CLI workflows with setup, linking, migrations, configuration, and app installation.",
               },
               {
-                label: "Using Polterbase with Uru",
-                href: "/docs/polterbase",
+                label: "PWA",
+                href: "/docs/pwa/getting-started",
                 description:
-                  "The current workflow source of truth for setup, linking, migrations, configuration, and installation.",
-              },
-              {
-                label: "For Developers",
-                href: "/docs/for-developers",
-                description:
-                  "Project structure, CLI boundaries, runtime config model, and contribution guidance.",
+                  "Headless PWA install utilities and manifest tools. Detect install environments, show manual guides, and use React hooks.",
               },
             ],
+          },
+        ],
+      },
+      {
+        title: "Ops quick start",
+        blocks: [
+          {
+            type: "audienceSplit",
+            items: audiencePaths,
           },
           {
             type: "code",
             title: "Main bootstrap flow",
             language: "bash",
             code: `pnpm install
-npx polterbase app setup uru --path .
-pnpm uru dev`,
+npx polterbase app setup ops --path .
+pnpm ops dev`,
+          },
+        ],
+      },
+      {
+        title: "PWA quick start",
+        blocks: [
+          {
+            type: "code",
+            title: "Install and detect",
+            language: "bash",
+            code: `npm install @polterware/pwa`,
+          },
+          {
+            type: "code",
+            title: "Usage",
+            language: "ts",
+            code: `import { detectInstallEnvironment, getInstallGuide } from "@polterware/pwa";
+
+const env = detectInstallEnvironment();
+const guide = getInstallGuide(env.guideId, { locale: "en" });`,
           },
         ],
       },
@@ -242,17 +218,17 @@ pnpm uru dev`,
     slug: "introduction",
     title: "Introduction",
     summary:
-      "Understand what Uru is, the audiences it serves, and why Polterbase is part of the stack.",
-    section: "Overview",
+      "Understand the Polterware ecosystem: Ops for desktop business management, Polterbase for Supabase CLI workflows, and PWA for headless install utilities.",
+    section: "polterware/kit",
     audience: ["End Users", "Self-Hosters / Operators", "Developers"],
-    keywords: ["what is uru", "who is it for", "polterbase", "supabase"],
+    keywords: ["what is ops", "who is it for", "polterbase", "supabase"],
     intro: [
-      "Uru is a desktop business management app for teams that want direct control over their operations stack. It is powered by Supabase and designed to keep business logic, access rules, and transactional data operations in the backend instead of scattering them across local state.",
-      "The product combines beginner-friendly workflows for installation and first use with a technical foundation that self-hosters and developers can inspect, configure, and extend.",
+      "Polterware is a collection of open-source tools for business operations. Ops is a desktop business management app powered by Supabase. Polterbase is an interactive CLI for managing Supabase workflows. PWA provides headless install utilities and manifest tools for progressive web apps.",
+      "Each project can be used independently. Together they form a coherent ecosystem where Ops handles the desktop experience, Polterbase manages the backend lifecycle, and PWA covers web app installation flows.",
     ],
     sections: [
       {
-        title: "What Uru does",
+        title: "What Ops does",
         blocks: [
           {
             type: "list",
@@ -268,13 +244,13 @@ pnpm uru dev`,
           {
             type: "paragraphs",
             values: [
-              "Uru is not a generic website template or a local spreadsheet wrapper. It is a serious desktop operations app that expects a Supabase backend and uses that backend for authentication, database access, row-level security, and server-side functions.",
+              "Ops is not a generic website template or a local spreadsheet wrapper. It is a serious desktop operations app that expects a Supabase backend and uses that backend for authentication, database access, row-level security, and server-side functions.",
             ],
           },
         ],
       },
       {
-        title: "Who Uru is for",
+        title: "Who Ops is for",
         blocks: [
           {
             type: "audienceSplit",
@@ -283,32 +259,32 @@ pnpm uru dev`,
                 audience: "End Users",
                 heading: "Teams that want to use the app",
                 body: "You care about opening the app, signing in, and doing operational work. You should follow the installation and getting started guides.",
-                href: "/docs/getting-started",
+                href: "/docs/ops/getting-started",
               },
               {
                 audience: "Self-Hosters / Operators",
                 heading: "People responsible for the Supabase project",
-                body: "You decide which project Uru connects to, apply migrations, maintain credentials, and reconfigure packaged apps when the backend changes.",
-                href: "/docs/configuration",
+                body: "You decide which project Ops connects to, apply migrations, maintain credentials, and reconfigure packaged apps when the backend changes.",
+                href: "/docs/ops/configuration",
               },
               {
                 audience: "Developers",
                 heading: "People modifying the codebase",
-                body: "You work in source, start local development with pnpm uru dev, and use Polterbase for setup, link, migrate, configure, and install workflows.",
-                href: "/docs/for-developers",
+                body: "You work in source, start local development with pnpm ops dev, and use Polterbase for setup, link, migrate, configure, and install workflows.",
+                href: "/docs/ops/for-developers",
               },
             ],
           },
         ],
       },
       {
-        title: "How Uru, Supabase, and Polterbase fit together",
+        title: "How Ops, Supabase, and Polterbase fit together",
         blocks: [
           {
             type: "architecture",
             items: [
               {
-                title: "Uru desktop app",
+                title: "Ops desktop app",
                 body: "The user-facing desktop application for daily operations, sign-in, analytics, and business workflows.",
               },
               {
@@ -329,22 +305,22 @@ pnpm uru dev`,
             type: "callout",
             tone: "note",
             title: "Current CLI boundary",
-            body: "The Uru CLI is now intentionally minimal and focused on development through pnpm uru dev. Supabase setup, linking, migrations, configuration, and installation workflows moved to Polterbase.",
+            body: "The Ops CLI is now intentionally minimal and focused on development through pnpm ops dev. Supabase setup, linking, migrations, configuration, and installation workflows moved to Polterbase.",
           },
         ],
       },
     ],
   },
   {
-    slug: "getting-started",
+    slug: "ops/getting-started",
     title: "Getting Started",
     summary:
       "Follow the fastest path for either a source checkout or the packaged macOS app, then verify the first successful launch.",
-    section: "Overview",
+    section: "Ops",
     audience: ["End Users", "Self-Hosters / Operators", "Developers"],
     keywords: ["quick start", "first launch", "macos app", "source checkout"],
     intro: [
-      "There are two supported ways to get started with Uru. The right path depends on whether you want to modify the app from source or install a packaged macOS desktop app.",
+      "There are two supported ways to get started with Ops. The right path depends on whether you want to modify the app from source or install a packaged macOS desktop app.",
       "Both flows depend on a Supabase connection. The difference is where the connection comes from: source checkouts can use .env.local as a fallback, while installed apps are designed around runtime configuration.",
     ],
     sections: [
@@ -361,14 +337,14 @@ pnpm uru dev`,
             type: "code",
             language: "bash",
             code: `pnpm install
-npx polterbase app setup uru --path .
-pnpm uru dev`,
+npx polterbase app setup ops --path .
+pnpm ops dev`,
           },
           {
             type: "paragraphs",
             values: [
               "Polterbase performs the important repository-aware work in the middle of that flow. It validates prerequisites, prepares configuration, links the Supabase project, pushes migrations, and writes the runtime bootstrap payload used by the desktop app.",
-              "After setup finishes, pnpm uru dev is the only Uru CLI command you normally need for local development.",
+              "After setup finishes, pnpm ops dev is the only Ops CLI command you normally need for local development.",
             ],
           },
         ],
@@ -380,7 +356,7 @@ pnpm uru dev`,
             type: "callout",
             tone: "tip",
             title: "Recommended path",
-            body: "Use this path if you want to deploy or test the packaged app without rebuilding Uru locally.",
+            body: "Use this path if you want to deploy or test the packaged app without rebuilding Ops locally.",
           },
           {
             type: "code",
@@ -434,11 +410,11 @@ pnpm uru dev`,
     ],
   },
   {
-    slug: "installation",
+    slug: "ops/installation",
     title: "Installation",
     summary:
-      "Install Uru from source or as a packaged macOS app, and understand what Polterbase configures for each path.",
-    section: "Setup",
+      "Install Ops from source or as a packaged macOS app, and understand what Polterbase configures for each path.",
+    section: "Ops",
     audience: ["End Users", "Self-Hosters / Operators", "Developers"],
     keywords: [
       "installation",
@@ -448,7 +424,7 @@ pnpm uru dev`,
       "runtime config",
     ],
     intro: [
-      "Uru installation is really two related but different workflows: source checkout setup for people working in the repository, and packaged desktop installation for people who want a ready-to-run macOS app.",
+      "Ops installation is really two related but different workflows: source checkout setup for people working in the repository, and packaged desktop installation for people who want a ready-to-run macOS app.",
       "The key distinction is not whether you use Supabase. Both paths do. The distinction is whether the connection is prepared as development config or runtime app config.",
     ],
     sections: [
@@ -460,13 +436,13 @@ pnpm uru dev`,
             title: "Recommended source flow",
             language: "bash",
             code: `pnpm install
-npx polterbase app setup uru --path .
-pnpm uru dev`,
+npx polterbase app setup ops --path .
+pnpm ops dev`,
           },
           {
             type: "paragraphs",
             values: [
-              "This is the main checkout bootstrap flow. Do not replace it with historical Uru CLI setup or database commands. Those responsibilities moved to Polterbase.",
+              "This is the main checkout bootstrap flow. Do not replace it with historical Ops CLI setup or database commands. Those responsibilities moved to Polterbase.",
             ],
           },
         ],
@@ -498,14 +474,14 @@ pnpm uru dev`,
             items: [
               "A Supabase project that will host authentication, database schema, row-level security, and RPC functions.",
               "Credentials and access needed for linking and migration workflows.",
-              "A project URL and publishable key that can be used by Uru at runtime.",
+              "A project URL and publishable key that can be used by Ops at runtime.",
             ],
           },
           {
             type: "callout",
             tone: "note",
             title: "Supabase workflows are centralized",
-            body: "Polterbase is the recommended workflow manager for Uru Supabase operations. It is the layer that wraps setup, link, migrate, configure, and install in a way that is specific to Uru.",
+            body: "Polterbase is the recommended workflow manager for Ops Supabase operations. It is the layer that wraps setup, link, migrate, configure, and install in a way that is specific to Ops.",
           },
         ],
       },
@@ -561,26 +537,26 @@ pnpm uru dev`,
     ],
   },
   {
-    slug: "polterbase",
-    title: "Using Polterbase with Uru",
+    slug: "ops/polterbase",
+    title: "Using Polterbase with Ops",
     summary:
-      "Polterbase is the recommended workflow manager for Uru Supabase operations. Use it for setup, link, migrations, configuration, and packaged app installation.",
-    section: "Setup",
+      "Polterbase is the recommended workflow manager for Ops Supabase operations. Use it for setup, link, migrations, configuration, and packaged app installation.",
+    section: "Ops",
     audience: ["Self-Hosters / Operators", "Developers"],
     keywords: ["polterbase", "setup", "link", "migrate", "configure", "install"],
     intro: [
-      "Polterbase exists because Uru needs repeatable Supabase workflows that are easier to discover, less error-prone, and more explicit than keeping those responsibilities inside the app CLI.",
-      "The result is a clean split: Uru owns local development startup, while Polterbase owns setup, project linking, migrations, runtime configuration, and installation workflows.",
+      "Polterbase exists because Ops needs repeatable Supabase workflows that are easier to discover, less error-prone, and more explicit than keeping those responsibilities inside the app CLI.",
+      "The result is a clean split: Ops owns local development startup, while Polterbase owns setup, project linking, migrations, runtime configuration, and installation workflows.",
     ],
     sections: [
       {
-        title: "Why Uru uses Polterbase",
+        title: "Why Ops uses Polterbase",
         blocks: [
           {
             type: "paragraphs",
             values: [
               "A self-hosted desktop app needs more than a generic dev command. Operators need project-aware setup, controlled migration workflows, and a way to prepare packaged apps with a runtime backend connection. Polterbase is the workflow layer that standardizes those jobs.",
-              "This separation also keeps the Uru CLI intentionally small, which is useful for maintainability and clearer documentation.",
+              "This separation also keeps the Ops CLI intentionally small, which is useful for maintainability and clearer documentation.",
             ],
           },
           {
@@ -591,7 +567,7 @@ pnpm uru dev`,
                 label: "Polterbase on npm",
                 href: "https://www.npmjs.com/package/@polterware/polterbase",
                 description:
-                  "Package and installation reference for the recommended Uru workflow manager.",
+                  "Package and installation reference for the recommended Ops workflow manager.",
               },
               {
                 label: "Polterbase on GitHub",
@@ -610,37 +586,37 @@ pnpm uru dev`,
             type: "commandTable",
             commands: [
               {
-                command: "npx polterbase app setup uru --path .",
+                command: "npx polterbase app setup ops --path .",
                 description:
                   "Full source-checkout bootstrap. Recommended when cloning or refreshing a local repository.",
               },
               {
-                command: "npx polterbase app link uru --path .",
+                command: "npx polterbase app link ops --path .",
                 description:
                   "Link or relink the checkout to the intended Supabase project.",
               },
               {
-                command: "npx polterbase app migrate uru push --path .",
+                command: "npx polterbase app migrate ops push --path .",
                 description:
                   "Push pending migrations to the linked Supabase project.",
               },
               {
-                command: "npx polterbase app migrate uru lint --path .",
+                command: "npx polterbase app migrate ops lint --path .",
                 description:
                   "Check migrations for lint issues before applying them.",
               },
               {
-                command: "npx polterbase app migrate uru reset --path .",
+                command: "npx polterbase app migrate ops reset --path .",
                 description:
                   "Destructively reset the linked remote database and reapply migrations.",
               },
               {
-                command: "npx polterbase app migrate uru local-reset --path .",
+                command: "npx polterbase app migrate ops local-reset --path .",
                 description:
                   "Destructively reset the local Docker-based Supabase database.",
               },
               {
-                command: "npx polterbase app configure uru --path .",
+                command: "npx polterbase app configure ops --path .",
                 description:
                   "Refresh .env.local and runtime bootstrap material without reinstalling the app.",
               },
@@ -650,7 +626,7 @@ pnpm uru dev`,
                   "Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection payload. Add --version <version> to pin a release.",
               },
               {
-                command: "npx @polterware/polterbase@latest app update uru",
+                command: "npx @polterware/polterbase@latest app update ops",
                 description:
                   "Update an existing packaged macOS install to a newer release while preserving persisted runtime configuration, local settings, and session data.",
               },
@@ -666,7 +642,7 @@ pnpm uru dev`,
             items: [
               {
                 title: "Use setup",
-                body: "When you have a fresh checkout or want Polterbase to drive the full Uru bootstrap process from dependency validation through runtime payload preparation.",
+                body: "When you have a fresh checkout or want Polterbase to drive the full Ops bootstrap process from dependency validation through runtime payload preparation.",
               },
               {
                 title: "Use link",
@@ -686,15 +662,15 @@ pnpm uru dev`,
               },
               {
                 title: "Use update",
-                body: "When Uru is already installed and you only want to replace the app bundle with a newer release while preserving the current runtime/app state.",
+                body: "When Ops is already installed and you only want to replace the app bundle with a newer release while preserving the current runtime/app state.",
               },
             ],
           },
           {
             type: "callout",
             tone: "warning",
-            title: "Do not treat old Uru commands as the current workflow",
-            body: "Historical commands such as pnpm uru setup, pnpm uru db, and pnpm uru check are not the current documented path. The current source of truth is the Polterbase workflow set above plus pnpm uru dev for development startup.",
+            title: "Do not treat old Ops commands as the current workflow",
+            body: "Historical commands such as pnpm opssetup, pnpm opsdb, and pnpm opscheck are not the current documented path. The current source of truth is the Polterbase workflow set above plus pnpm ops dev for development startup.",
           },
         ],
       },
@@ -717,11 +693,11 @@ pnpm uru dev`,
     ],
   },
   {
-    slug: "configuration",
+    slug: "ops/configuration",
     title: "Configuration",
     summary:
-      "Understand .env.local fallback, runtime Supabase connections, bootstrap payloads, and how to reconfigure Uru later.",
-    section: "Operations",
+      "Understand .env.local fallback, runtime Supabase connections, bootstrap payloads, and how to reconfigure Ops later.",
+    section: "Ops",
     audience: ["Self-Hosters / Operators", "Developers"],
     keywords: [
       "configuration",
@@ -731,7 +707,7 @@ pnpm uru dev`,
       "reconfigure",
     ],
     intro: [
-      "Uru supports two related configuration models: build-time environment fallback for development and runtime Supabase connection storage for desktop app installs.",
+      "Ops supports two related configuration models: build-time environment fallback for development and runtime Supabase connection storage for desktop app installs.",
       "The practical rule is straightforward. Source checkouts may still use .env.local. Packaged desktop installs are meant to use runtime configuration, usually prepared by Polterbase.",
     ],
     sections: [
@@ -741,7 +717,7 @@ pnpm uru dev`,
           {
             type: "paragraphs",
             values: [
-              "In a source checkout, Uru can still resolve its Supabase connection from .env.local using the development fallback variables. This keeps local development simple and compatible with existing repo-based workflows.",
+              "In a source checkout, Ops can still resolve its Supabase connection from .env.local using the development fallback variables. This keeps local development simple and compatible with existing repo-based workflows.",
             ],
           },
           {
@@ -758,7 +734,7 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
           {
             type: "paragraphs",
             values: [
-              "Installed desktop apps should not depend on source-repository env files. Instead, Uru stores a runtime Supabase connection after first launch or after the user saves a new connection in the app settings.",
+              "Installed desktop apps should not depend on source-repository env files. Instead, Ops stores a runtime Supabase connection after first launch or after the user saves a new connection in the app settings.",
               "This makes packaged deployments practical because the app can be repointed to another backend without rebuilding the desktop bundle.",
             ],
           },
@@ -775,7 +751,7 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
                 body: "The payload contains the Supabase URL, publishable key, and optional project reference for the intended deployment.",
               },
               {
-                title: "Uru consumes it on first launch",
+                title: "Ops consumes it on first launch",
                 body: "The desktop app reads the payload, persists the connection as runtime config, and removes the one-time bootstrap file.",
               },
               {
@@ -798,7 +774,7 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
           {
             type: "code",
             language: "bash",
-            code: `npx polterbase app configure uru --path .`,
+            code: `npx polterbase app configure ops --path .`,
           },
           {
             type: "paragraphs",
@@ -812,15 +788,15 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
     ],
   },
   {
-    slug: "running-uru",
-    title: "Running Uru",
+    slug: "ops/running-ops",
+    title: "Running Ops",
     summary:
-      "Use the minimal Uru CLI for development only, and understand how web and desktop dev modes relate to the current workflow boundary.",
-    section: "Operations",
+      "Use the minimal Ops CLI for development only, and understand how web and desktop dev modes relate to the current workflow boundary.",
+    section: "Ops",
     audience: ["Developers", "Self-Hosters / Operators"],
-    keywords: ["pnpm uru dev", "web mode", "desktop mode", "minimal cli"],
+    keywords: ["pnpm ops dev", "web mode", "desktop mode", "minimal cli"],
     intro: [
-      "The current Uru CLI is intentionally narrow. Its job is to start local development, not to own Supabase operations.",
+      "The current Ops CLI is intentionally narrow. Its job is to start local development, not to own Supabase operations.",
       "That keeps the command surface small and reduces confusion about where setup, migration, configuration, and installation workflows belong.",
     ],
     sections: [
@@ -830,12 +806,12 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
           {
             type: "code",
             language: "bash",
-            code: `pnpm uru dev`,
+            code: `pnpm ops dev`,
           },
           {
             type: "paragraphs",
             values: [
-              "This is the development entry point that remains inside Uru. Use it after the repository has already been prepared with Polterbase.",
+              "This is the development entry point that remains inside Ops. Use it after the repository has already been prepared with Polterbase.",
             ],
           },
         ],
@@ -861,21 +837,21 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
             type: "callout",
             tone: "warning",
             title: "Responsibilities moved to Polterbase",
-            body: "Do not rely on Uru CLI commands for setup, database linking, migration management, runtime configuration, or packaged app installation. Those workflows are owned by Polterbase.",
+            body: "Do not rely on Ops CLI commands for setup, database linking, migration management, runtime configuration, or packaged app installation. Those workflows are owned by Polterbase.",
           },
           {
             type: "commandTable",
             commands: [
               {
-                command: "pnpm uru dev",
-                description: "Start local development. This is the supported Uru CLI workflow.",
+                command: "pnpm ops dev",
+                description: "Start local development. This is the supported Ops CLI workflow.",
               },
               {
-                command: "npx polterbase app setup uru --path .",
+                command: "npx polterbase app setup ops --path .",
                 description: "Prepare a source checkout before running the app locally.",
               },
               {
-                command: "npx polterbase app configure uru --path .",
+                command: "npx polterbase app configure ops --path .",
                 description: "Refresh development and runtime connection material when the backend changes.",
               },
             ],
@@ -885,15 +861,15 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
     ],
   },
   {
-    slug: "database-and-migrations",
+    slug: "ops/database-and-migrations",
     title: "Database and Migrations",
     summary:
       "Run linked-project workflows safely with Polterbase and understand the difference between push, lint, reset, and local-reset.",
-    section: "Operations",
+    section: "Ops",
     audience: ["Self-Hosters / Operators", "Developers"],
     keywords: ["migrations", "push", "lint", "reset", "local reset", "linked project"],
     intro: [
-      "Uru stores its database contract in Supabase migrations. The recommended way to operate that contract is through Polterbase app workflows that understand the Uru repository layout.",
+      "Ops stores its database contract in Supabase migrations. The recommended way to operate that contract is through Polterbase app workflows that understand the Ops repository layout.",
       "Linking matters because migration commands target a concrete Supabase project. Destructive commands matter even more because they can wipe data if used carelessly.",
     ],
     sections: [
@@ -903,8 +879,8 @@ VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...`,
           {
             type: "code",
             language: "bash",
-            code: `npx polterbase app link uru --path .
-npx polterbase app migrate uru push --path .`,
+            code: `npx polterbase app link ops --path .
+npx polterbase app migrate ops push --path .`,
           },
           {
             type: "paragraphs",
@@ -921,19 +897,19 @@ npx polterbase app migrate uru push --path .`,
             type: "commandTable",
             commands: [
               {
-                command: "npx polterbase app migrate uru push --path .",
+                command: "npx polterbase app migrate ops push --path .",
                 description: "Apply pending migrations to the linked remote Supabase project.",
               },
               {
-                command: "npx polterbase app migrate uru lint --path .",
+                command: "npx polterbase app migrate ops lint --path .",
                 description: "Validate migration quality before applying changes.",
               },
               {
-                command: "npx polterbase app migrate uru reset --path .",
+                command: "npx polterbase app migrate ops reset --path .",
                 description: "Destructively reset the linked remote database and then reapply migrations.",
               },
               {
-                command: "npx polterbase app migrate uru local-reset --path .",
+                command: "npx polterbase app migrate ops local-reset --path .",
                 description: "Destructively reset the local Docker-based database stack used for local Supabase work.",
               },
             ],
@@ -982,11 +958,11 @@ npx polterbase app migrate uru push --path .`,
     ],
   },
   {
-    slug: "troubleshooting",
+    slug: "ops/troubleshooting",
     title: "Troubleshooting",
     summary:
-      "Resolve the most common Uru setup, authentication, migration, and runtime configuration problems.",
-    section: "Operations",
+      "Resolve the most common Ops setup, authentication, migration, and runtime configuration problems.",
+    section: "Ops",
     audience: ["End Users", "Self-Hosters / Operators", "Developers"],
     keywords: [
       "troubleshooting",
@@ -996,7 +972,7 @@ npx polterbase app migrate uru push --path .`,
       "runtime config issues",
     ],
     intro: [
-      "Most Uru startup issues come from one of four causes: missing Supabase configuration, broken connectivity, a repository that is not linked correctly, or a runtime payload that was never prepared.",
+      "Most Ops startup issues come from one of four causes: missing Supabase configuration, broken connectivity, a repository that is not linked correctly, or a runtime payload that was never prepared.",
       "This page focuses on those recurring problems so beginners can recover quickly and technical users know where to look next.",
     ],
     sections: [
@@ -1014,7 +990,7 @@ npx polterbase app migrate uru push --path .`,
           {
             type: "code",
             language: "bash",
-            code: `npx polterbase app configure uru --path .`,
+            code: `npx polterbase app configure ops --path .`,
           },
         ],
       },
@@ -1038,9 +1014,9 @@ npx polterbase app migrate uru push --path .`,
           {
             type: "code",
             language: "bash",
-            code: `npx polterbase app link uru --path .
-npx polterbase app migrate uru lint --path .
-npx polterbase app migrate uru push --path .`,
+            code: `npx polterbase app link ops --path .
+npx polterbase app migrate ops lint --path .
+npx polterbase app migrate ops push --path .`,
           },
           {
             type: "paragraphs",
@@ -1068,23 +1044,23 @@ npx polterbase app migrate uru push --path .`,
             type: "callout",
             tone: "note",
             title: "Short answer",
-            body: "Because Uru no longer treats Supabase workflows as app CLI responsibilities. Polterbase is the supported workflow layer for those jobs, and the documentation assumes that split.",
+            body: "Because Ops no longer treats Supabase workflows as app CLI responsibilities. Polterbase is the supported workflow layer for those jobs, and the documentation assumes that split.",
           },
         ],
       },
     ],
   },
   {
-    slug: "for-developers",
+    slug: "ops/for-developers",
     title: "For Developers",
     summary:
       "See where the app code and migrations live, how runtime config works, and how to contribute safely within the current CLI boundary.",
-    section: "Build",
+    section: "Ops",
     audience: ["Developers"],
     keywords: ["developers", "project structure", "contributing", "runtime config", "cli boundary"],
     intro: [
-      "Uru development is centered around the app code, the Supabase contract, and the runtime configuration model that lets packaged apps connect after installation.",
-      "The most important architectural habit is to respect the current boundary: the Uru CLI starts development, and Polterbase owns the Supabase workflows around the app.",
+      "Ops development is centered around the app code, the Supabase contract, and the runtime configuration model that lets packaged apps connect after installation.",
+      "The most important architectural habit is to respect the current boundary: the Ops CLI starts development, and Polterbase owns the Supabase workflows around the app.",
     ],
     sections: [
       {
@@ -1148,7 +1124,7 @@ cli/
               },
               {
                 title: "Keep the CLI boundary intact",
-                body: "Avoid adding new Supabase workflow responsibilities back into the Uru CLI unless the product direction explicitly changes.",
+                body: "Avoid adding new Supabase workflow responsibilities back into the Ops CLI unless the product direction explicitly changes.",
               },
             ],
           },
@@ -1159,13 +1135,13 @@ cli/
         blocks: [
           {
             type: "comparison",
-            title: "Responsibility split between Uru and Polterbase",
-            columns: ["Owned by Uru CLI", "Owned by Polterbase"],
+            title: "Responsibility split between Ops and Polterbase",
+            columns: ["Owned by Ops CLI", "Owned by Polterbase"],
             rows: [
               {
                 label: "Primary role",
                 values: [
-                  "Start local development with pnpm uru dev.",
+                  "Start local development with pnpm ops dev.",
                   "Handle setup, link, migrate, configure, and install workflows.",
                 ],
               },
@@ -1180,7 +1156,7 @@ cli/
                 label: "What to avoid",
                 values: [
                   "Growing the app CLI into a second workflow manager.",
-                  "Documenting old Uru workflow commands as if they were current.",
+                  "Documenting old Ops workflow commands as if they were current.",
                 ],
               },
             ],
@@ -1190,15 +1166,15 @@ cli/
     ],
   },
   {
-    slug: "architecture",
+    slug: "ops/architecture",
     title: "Architecture",
     summary:
-      "Review the high-level technical model behind the Uru desktop app, the Supabase backend, and the runtime configuration workflow.",
-    section: "Build",
+      "Review the high-level technical model behind the Ops desktop app, the Supabase backend, and the runtime configuration workflow.",
+    section: "Ops",
     audience: ["Self-Hosters / Operators", "Developers"],
     keywords: ["architecture", "desktop app", "auth", "rls", "rpc", "runtime model"],
     intro: [
-      "Uru is best understood as a desktop interface over a Supabase-backed application contract. The desktop bundle is important, but the real business guarantees come from the database rules, auth model, and server-side operations.",
+      "Ops is best understood as a desktop interface over a Supabase-backed application contract. The desktop bundle is important, but the real business guarantees come from the database rules, auth model, and server-side operations.",
       "Polterbase completes the picture by acting as the workflow orchestrator that prepares repositories and packaged apps for a specific backend.",
     ],
     sections: [
@@ -1286,11 +1262,11 @@ cli/
     ],
   },
   {
-    slug: "faq",
+    slug: "ops/faq",
     title: "FAQ",
     summary:
       "Short answers to the recurring questions about Polterbase, Supabase, packaged apps, and configuration models.",
-    section: "Reference",
+    section: "Ops",
     audience: ["End Users", "Self-Hosters / Operators", "Developers"],
     keywords: [
       "faq",
@@ -1310,7 +1286,7 @@ cli/
             type: "steps",
             items: [
               {
-                title: "Can I use Uru without Polterbase?",
+                title: "Can I use Ops without Polterbase?",
                 body: "Not for the recommended setup, migration, configuration, and installation workflows. The current documentation assumes Polterbase for those responsibilities.",
               },
               {
@@ -1335,28 +1311,490 @@ cli/
       },
     ],
   },
+  {
+    slug: "polterbase/getting-started",
+    title: "Polterbase Getting Started",
+    summary:
+      "Install and use Polterbase, the interactive CLI for managing Supabase CLI workflows.",
+    section: "Polterbase",
+    audience: ["Self-Hosters / Operators", "Developers"],
+    keywords: ["polterbase", "cli", "supabase", "install", "setup", "workflow"],
+    intro: [
+      "Polterbase is an optimized interactive CLI for managing Supabase CLI workflows with more speed, consistency, and discoverability. It is a productivity layer on top of the official supabase CLI.",
+      "Instead of memorizing command trees, you browse one unified board, add extra args interactively, attach global flags, and pin common workflows for one-click reuse.",
+    ],
+    sections: [
+      {
+        title: "Installation",
+        blocks: [
+          {
+            type: "code",
+            title: "Run one-off without installing",
+            language: "bash",
+            code: `npx @polterware/polterbase@latest`,
+          },
+          {
+            type: "code",
+            title: "Install in a repository",
+            language: "bash",
+            code: `npm install -D @polterware/polterbase`,
+          },
+          {
+            type: "code",
+            title: "Install globally",
+            language: "bash",
+            code: `npm install -g @polterware/polterbase`,
+          },
+        ],
+      },
+      {
+        title: "Features",
+        blocks: [
+          {
+            type: "list",
+            style: "check",
+            items: [
+              "Interactive command builder with guided flow for command, subcommand, and extra args.",
+              "Unified command board with pinned runs, pinned commands, grouped categories, and actions.",
+              "Global flags picker for common flags like --debug, --yes, and --experimental.",
+              "Pinned commands and runs for one-click reuse of frequent workflows.",
+              "Custom command mode for raw Supabase arguments.",
+              "Built-in self-update through npm.",
+              "App workflows for repository-aware setup, linking, migrations, runtime configuration, and app installation.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "App workflows",
+        blocks: [
+          {
+            type: "commandTable",
+            commands: [
+              {
+                command: "polterbase app setup ops --path .",
+                description:
+                  "Full source-checkout bootstrap: install dependencies, collect Supabase connection data, link, push migrations, and write the runtime bootstrap payload.",
+              },
+              {
+                command: "polterbase app link ops --path .",
+                description:
+                  "Link or relink the checkout to the intended Supabase project.",
+              },
+              {
+                command: "polterbase app migrate ops push --path .",
+                description:
+                  "Push pending migrations to the linked Supabase project.",
+              },
+              {
+                command: "polterbase app configure ops --path .",
+                description:
+                  "Refresh runtime connection payload without reinstalling the app.",
+              },
+              {
+                command: "polterbase app install ops",
+                description:
+                  "Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection.",
+              },
+              {
+                command: "polterbase app update ops",
+                description:
+                  "Update an existing install to a newer release while preserving runtime configuration and settings.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Requirements",
+        blocks: [
+          {
+            type: "list",
+            style: "bullet",
+            items: [
+              "Node.js >= 18.",
+              "Supabase CLI installed globally or locally in the current repository.",
+            ],
+          },
+          {
+            type: "linkGrid",
+            title: "References",
+            links: [
+              {
+                label: "Polterbase on npm",
+                href: "https://www.npmjs.com/package/@polterware/polterbase",
+                description: "Package and installation reference.",
+              },
+              {
+                label: "Polterbase on GitHub",
+                href: "https://github.com/polterware/polterbase",
+                description: "Source repository with full command details.",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pwa/getting-started",
+    title: "PWA Getting Started",
+    summary:
+      "Install @polterware/pwa and detect install environments with browser-aware rules.",
+    section: "PWA",
+    audience: ["Developers"],
+    keywords: ["pwa", "install", "progressive web app", "beforeinstallprompt", "manifest"],
+    intro: [
+      "@polterware/pwa v2 is centered around install environment detection instead of UI components. Detect the current install environment with browser-aware rules, use native install prompts when available, and show manual guides only for verified flows.",
+      "The library expects the application to own the button, modal, and install UI. It provides the detection logic and guide content, not the visual components.",
+    ],
+    sections: [
+      {
+        title: "Installation",
+        blocks: [
+          {
+            type: "code",
+            language: "bash",
+            code: `npm install @polterware/pwa`,
+          },
+          {
+            type: "code",
+            title: "For React integration",
+            language: "bash",
+            code: `npm install react react-dom`,
+          },
+        ],
+      },
+      {
+        title: "Package entry points",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `import { detectInstallEnvironment, getInstallGuide } from "@polterware/pwa";
+import { usePWAInstall } from "@polterware/pwa/react";
+import { generateManifest, mergeManifest } from "@polterware/pwa/manifest";`,
+          },
+        ],
+      },
+      {
+        title: "Quick start — Vanilla TypeScript",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `import { detectInstallEnvironment, getInstallGuide } from "@polterware/pwa";
+
+const environment = detectInstallEnvironment();
+const guide = getInstallGuide(environment.guideId, { locale: "en" });
+
+if (environment.availability === "manual" && guide) {
+  console.log(guide.title);
+  console.log(guide.steps);
+}`,
+          },
+        ],
+      },
+      {
+        title: "Quick start — React",
+        blocks: [
+          {
+            type: "code",
+            language: "tsx",
+            code: `import { usePWAInstall } from "@polterware/pwa/react";
+
+export function InstallCallout() {
+  const { canPrompt, promptInstall, status, guide } = usePWAInstall({
+    locale: "en",
+  });
+
+  if (status === "installed" || status === "unsupported") return null;
+
+  if (canPrompt) {
+    return <button onClick={() => void promptInstall()}>Install app</button>;
+  }
+
+  if (!guide) return null;
+
+  return (
+    <section>
+      <h2>{guide.title}</h2>
+      <p>{guide.description}</p>
+      <ol>
+        {guide.steps.map((step) => (
+          <li key={step.number}>
+            <strong>{step.title}</strong>
+            <p>{step.description}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pwa/runtime-api",
+    title: "Runtime API",
+    summary:
+      "Use detectInstallEnvironment and getInstallGuide to detect browser capabilities and generate manual install content.",
+    section: "PWA",
+    audience: ["Developers"],
+    keywords: ["detectInstallEnvironment", "getInstallGuide", "runtime", "api", "browser"],
+    intro: [
+      "The runtime API provides two main functions: detectInstallEnvironment for browser-aware snapshots and getInstallGuide for manual install content.",
+    ],
+    sections: [
+      {
+        title: "detectInstallEnvironment()",
+        description: "Returns a browser-aware snapshot of the current runtime.",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `const environment = detectInstallEnvironment();
+
+// {
+//   os: "windows",
+//   browser: "chrome",
+//   isInstalled: false,
+//   availability: "unavailable",
+//   reason: "criteria_unmet",
+//   guideId: null
+// }`,
+          },
+        ],
+      },
+      {
+        title: "getInstallGuide(guideId, config?)",
+        description: "Returns manual install content only for supported guide ids.",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `const guide = getInstallGuide("ios_share_sheet", { locale: "en" });`,
+          },
+        ],
+      },
+      {
+        title: "Public types",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `type OperatingSystem = "ios" | "android" | "macos" | "windows" | "linux" | "other";
+type Browser = "safari" | "chrome" | "arc" | "edge" | "firefox" | "samsungInternet" | "other";
+type InstallAvailability = "native" | "manual" | "unsupported" | "unavailable";
+type InstallGuideId = "ios_share_sheet" | "safari_add_to_dock";`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pwa/react-hook",
+    title: "React Hook",
+    summary:
+      "Use the usePWAInstall hook to combine environment detection, deferred prompt lifecycle, and guide lookup in React.",
+    section: "PWA",
+    audience: ["Developers"],
+    keywords: ["usePWAInstall", "react", "hook", "beforeinstallprompt", "appinstalled"],
+    intro: [
+      "The usePWAInstall hook combines environment detection, deferred prompt lifecycle, and guide lookup into a single React hook.",
+    ],
+    sections: [
+      {
+        title: "usePWAInstall(options?)",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `const {
+  environment,
+  canPrompt,
+  promptInstall,
+  status,
+  guide,
+} = usePWAInstall();`,
+          },
+          {
+            type: "list",
+            title: "What the hook does",
+            style: "check",
+            items: [
+              "Captures beforeinstallprompt events.",
+              "Exposes canPrompt to check if native install is available.",
+              "Runs promptInstall() only when a deferred prompt exists.",
+              "Reacts to appinstalled events.",
+              "Keeps manual guides and native prompts mutually exclusive.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pwa/manifest",
+    title: "Manifest Module",
+    summary:
+      "Use generateManifest and mergeManifest to create and update web app manifests programmatically.",
+    section: "PWA",
+    audience: ["Developers"],
+    keywords: ["manifest", "generateManifest", "mergeManifest", "web app manifest", "icons"],
+    intro: [
+      "The manifest helpers live in @polterware/pwa/manifest and provide programmatic manifest generation and merging.",
+    ],
+    sections: [
+      {
+        title: "generateManifest",
+        blocks: [
+          {
+            type: "code",
+            language: "ts",
+            code: `import { generateManifest, mergeManifest } from "@polterware/pwa/manifest";
+
+const manifest = generateManifest({
+  name: "Polterware",
+  short_name: "Polter",
+  description: "Headless PWA install flow",
+  start_url: "/",
+  icons: [
+    {
+      src: "/icons/icon-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
+      purpose: "any maskable",
+    },
+  ],
+});`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pwa/cli",
+    title: "CLI",
+    summary:
+      "Use npx @polterware/pwa init to create or update manifest.json interactively.",
+    section: "PWA",
+    audience: ["Developers"],
+    keywords: ["cli", "init", "manifest", "npx", "interactive"],
+    intro: [
+      "The CLI provides an interactive way to create or update your web app manifest.",
+    ],
+    sections: [
+      {
+        title: "Usage",
+        blocks: [
+          {
+            type: "code",
+            title: "Create or update manifest.json",
+            language: "bash",
+            code: `npx @polterware/pwa init`,
+          },
+          {
+            type: "code",
+            title: "Custom manifest path",
+            language: "bash",
+            code: `npx @polterware/pwa init --manifest-path public/manifest.json`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pwa/browser-matrix",
+    title: "Browser Matrix",
+    summary:
+      "See which browsers and operating systems support native install prompts, manual guides, or are unsupported.",
+    section: "PWA",
+    audience: ["Developers"],
+    keywords: ["browser", "matrix", "support", "ios", "chrome", "safari", "edge", "samsung"],
+    intro: [
+      "The library only generates install instructions for verified browser and OS combinations. Unverified environments return unsupported rather than guessing.",
+    ],
+    sections: [
+      {
+        title: "Support matrix",
+        blocks: [
+          {
+            type: "commandTable",
+            title: "Browser / OS support",
+            commands: [
+              {
+                command: "Safari on iOS",
+                description: "Manual guide — uses ios_share_sheet.",
+              },
+              {
+                command: "Safari on macOS",
+                description: "Manual guide — uses safari_add_to_dock.",
+              },
+              {
+                command: "Chrome desktop",
+                description: "Native prompt — available only after beforeinstallprompt.",
+              },
+              {
+                command: "Edge desktop",
+                description: "Native prompt — available only after beforeinstallprompt.",
+              },
+              {
+                command: "Samsung Internet",
+                description: "Native prompt — available only after beforeinstallprompt.",
+              },
+              {
+                command: "Arc desktop",
+                description: "Unsupported — no manual fallback is generated.",
+              },
+              {
+                command: "Firefox / unknown browsers",
+                description: "Unsupported — no guessed instructions.",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const docsNavGroups = [
   {
-    title: "Overview",
-    items: ["", "introduction", "getting-started"],
+    title: "polterware/kit",
+    items: ["", "introduction"],
   },
   {
-    title: "Setup",
-    items: ["installation", "polterbase"],
+    title: "Ops",
+    items: [
+      "ops/getting-started",
+      "ops/installation",
+      "ops/polterbase",
+      "ops/configuration",
+      "ops/running-ops",
+      "ops/database-and-migrations",
+      "ops/troubleshooting",
+      "ops/for-developers",
+      "ops/architecture",
+      "ops/faq",
+    ],
   },
   {
-    title: "Operations",
-    items: ["configuration", "running-uru", "database-and-migrations", "troubleshooting"],
+    title: "Polterbase",
+    items: ["polterbase/getting-started"],
   },
   {
-    title: "Build",
-    items: ["for-developers", "architecture"],
-  },
-  {
-    title: "Reference",
-    items: ["faq"],
+    title: "PWA",
+    items: [
+      "pwa/getting-started",
+      "pwa/runtime-api",
+      "pwa/react-hook",
+      "pwa/manifest",
+      "pwa/cli",
+      "pwa/browser-matrix",
+    ],
   },
 ] as const;
 
@@ -1369,11 +1807,8 @@ export function getDocBySlug(slugSegments?: string[]): DocPage | null {
     return docsPages[0] ?? null;
   }
 
-  if (slugSegments.length !== 1) {
-    return null;
-  }
-
-  return docsPages.find((page) => page.slug === slugSegments[0]) ?? null;
+  const joined = slugSegments.join("/");
+  return docsPages.find((page) => page.slug === joined) ?? null;
 }
 
 export function getOrderedDocsPages(): DocPage[] {

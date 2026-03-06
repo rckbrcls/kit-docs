@@ -1,12 +1,9 @@
 import Link from "next/link";
 import {
-  ArrowRight,
   BookOpen,
   Boxes,
-  Database,
-  HardDriveDownload,
-  ShieldCheck,
-  Wrench,
+  Smartphone,
+  Terminal,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CodePanel } from "@/components/site/code-panel";
@@ -16,61 +13,61 @@ import { SiteHeader } from "@/components/site/site-header";
 import { WorkflowDiagram } from "@/components/site/workflow-diagram";
 import { INSTALL_COMMAND } from "@/lib/install";
 
-const featureCards = [
+const productCards = [
   {
     icon: Boxes,
-    title: "Product catalog and inventory",
-    body: "Track products, stock movements, and daily operations in one desktop workspace.",
+    title: "Ops",
+    body: "Open-source desktop business manager. Product catalog, inventory, orders, sales, payments, and analytics in one app powered by Supabase.",
+    href: "/docs/ops/getting-started",
   },
   {
-    icon: ShieldCheck,
-    title: "Orders, sales, payments, and roles",
-    body: "Run business workflows with role-based access layered directly over the backend.",
+    icon: Terminal,
+    title: "Polterbase",
+    body: "CLI workflow manager for Supabase operations. Setup, linking, migrations, runtime configuration, and packaged app installation.",
+    href: "/docs/polterbase/getting-started",
   },
   {
-    icon: Database,
-    title: "Analytics backed by Supabase",
-    body: "Keep auth, data access, RLS, and transactional backend logic in Supabase.",
+    icon: Smartphone,
+    title: "PWA",
+    body: "Headless PWA install utilities and manifest tools. Detect install environments, show manual guides, and use React hooks.",
+    href: "/docs/pwa/getting-started",
   },
 ];
 
-const audienceCards = [
+const featureCards = [
   {
-    eyebrow: "End Users",
-    title: "Install Uru and get to work",
-    body: "Use the packaged app or a prepared checkout and move straight into catalog, inventory, sales, and analytics.",
-    href: "/docs/getting-started",
+    icon: Boxes,
+    title: "Desktop business management",
+    body: "Product catalog, inventory, orders, sales, payments, analytics, and role-based access in one Supabase-powered app.",
   },
   {
-    eyebrow: "Self-Hosters / Operators",
-    title: "Run Uru on your own Supabase project",
-    body: "Use Polterbase to link, migrate, configure, and install Uru against the backend you operate.",
-    href: "/docs/polterbase",
+    icon: Terminal,
+    title: "Interactive Supabase CLI",
+    body: "Browse commands, pin workflows, manage migrations, and install packaged apps from one unified board.",
   },
   {
-    eyebrow: "Developers",
-    title: "Modify the app safely",
-    body: "Start with pnpm uru dev and keep Supabase workflows in Polterbase instead of legacy app commands.",
-    href: "/docs/for-developers",
+    icon: Smartphone,
+    title: "Headless PWA install",
+    body: "Detect install environments, use native prompts or manual guides, and generate manifests with zero UI opinions.",
   },
 ];
 
 const diagramItems = [
   {
-    title: "Uru app",
-    body: "The desktop interface where teams manage products, inventory, orders, sales, payments, analytics, and role-based access.",
+    title: "Ops",
+    body: "Desktop business manager for product catalog, inventory, orders, sales, payments, analytics, and role-based access.",
   },
   {
-    title: "Polterbase workflow",
-    body: "The recommended workflow manager for setup, linking, migrations, configuration refresh, and packaged installs.",
+    title: "Polterbase",
+    body: "Interactive CLI for Supabase workflows: setup, linking, migrations, configuration, and packaged app installation.",
   },
   {
-    title: "Supabase project",
-    body: "The backend that provides auth, Postgres, RLS policies, and RPC functions.",
+    title: "PWA",
+    body: "Headless install utilities: browser detection, native prompts, manual guides, manifest generation, and a React hook.",
   },
   {
-    title: "Runtime app connection",
-    body: "The installed app can consume a bootstrap payload on first launch and persist the connection locally.",
+    title: "Supabase",
+    body: "The backend that provides auth, Postgres, RLS policies, and RPC functions for Ops and other projects.",
   },
 ];
 
@@ -83,42 +80,39 @@ export default function HomePage() {
         <section className="site-shell relative overflow-hidden py-16 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div>
-              <div className="text-primary/80 bg-primary/6 mb-5 inline-flex border border-primary/15 px-4 py-2 text-xs uppercase tracking-[0.22em]">
-                Open-source desktop business manager
-              </div>
               <h1 className="text-foreground max-w-4xl font-display text-5xl font-semibold tracking-[-0.04em] sm:text-6xl lg:text-7xl">
-                Uru brings serious business operations into a desktop app powered by Supabase.
+                Open-source tools for business operations and modern web apps.
               </h1>
               <p className="text-muted-foreground mt-6 max-w-2xl text-lg leading-8">
-                Use Uru as an end user, self-host it on your own Supabase
-                project, or modify it from source. The workflow split is clear:
-                `pnpm uru dev` for development, Polterbase for setup, linking,
-                migration, configuration, and packaged app installation.
+                Ops is a desktop business manager powered by Supabase.
+                Polterbase is an interactive CLI for Supabase workflows.
+                PWA provides headless install utilities for progressive web
+                apps. Together they form the polterware/kit ecosystem.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="px-6">
-                  <Link href="/docs/getting-started">
-                    <HardDriveDownload className="size-4" />
-                    Install Uru
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="bg-card px-6">
-                  <Link href="/docs/installation">
-                    <Database className="size-4" />
-                    Self-host with Supabase
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="bg-card px-6">
                   <Link href="/docs">
                     <BookOpen className="size-4" />
                     Read the Docs
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-card px-6">
-                  <Link href="/docs/for-developers">
-                    <Wrench className="size-4" />
-                    Modify Uru
+                  <Link href="/docs/ops/getting-started">
+                    <Boxes className="size-4" />
+                    Ops
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="bg-card px-6">
+                  <Link href="/docs/polterbase/getting-started">
+                    <Terminal className="size-4" />
+                    Polterbase
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="bg-card px-6">
+                  <Link href="/docs/pwa/getting-started">
+                    <Smartphone className="size-4" />
+                    PWA
                   </Link>
                 </Button>
               </div>
@@ -127,12 +121,12 @@ export default function HomePage() {
             <div className="space-y-6">
               <div className="border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-45px_rgba(7,15,24,0.75)]">
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="bg-primary text-primary-foreground flex size-12 items-center justify-center">
+                  <div className="bg-primary text-primary-foreground flex size-12 items-center justify-center rounded-lg">
                     <Boxes className="size-5" />
                   </div>
                   <div>
                     <div className="text-foreground font-display text-xl font-semibold tracking-tight">
-                      Documentation-first product site
+                      polterware/kit
                     </div>
                     <div className="text-primary/70 text-sm">
                       Built for beginners and technical users at the same time
@@ -140,41 +134,73 @@ export default function HomePage() {
                   </div>
                 </div>
                 <DocsSearch />
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <div className="mt-5 grid gap-3">
                   <div className="bg-card border border-border p-4">
                     <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                      Recommended bootstrap
+                      Ops
                     </div>
                     <p className="text-muted-foreground mt-2 text-sm leading-7">
-                      Start from source with pnpm install, Polterbase setup, and
-                      pnpm uru dev.
+                      Desktop business manager powered by Supabase.
                     </p>
                   </div>
                   <div className="bg-card border border-border p-4">
                     <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                      Recommended packaged flow
+                      Polterbase
                     </div>
                     <p className="text-muted-foreground mt-2 text-sm leading-7">
-                      Install directly with Polterbase, then let Uru consume the
-                      runtime connection prepared for first launch.
+                      Interactive CLI for Supabase workflows.
+                    </p>
+                  </div>
+                  <div className="bg-card border border-border p-4">
+                    <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
+                      PWA
+                    </div>
+                    <p className="text-muted-foreground mt-2 text-sm leading-7">
+                      Headless install utilities for web apps.
                     </p>
                   </div>
                 </div>
               </div>
 
               <CodePanel
-                title="Main source workflow"
+                title="Quick start"
                 language="bash"
-                code={`pnpm install
-npx polterbase app setup uru --path .
-pnpm uru dev`}
+                code={`npm install @polterware/pwa        # PWA
+npx @polterware/polterbase         # Polterbase
+npx polterbase app setup ops       # Ops`}
               />
             </div>
           </div>
         </section>
 
         <section className="site-shell py-8 sm:py-12">
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid gap-4">
+            {productCards.map((card) => {
+              const Icon = card.icon;
+
+              return (
+                <Link
+                  key={card.title}
+                  href={card.href}
+                  className="bg-card hover:bg-accent border border-border p-6 shadow-[0_20px_60px_-45px_rgba(12,23,34,0.55)] transition hover:-translate-y-0.5"
+                >
+                  <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-lg">
+                    <Icon className="size-5" />
+                  </div>
+                  <h2 className="text-foreground mt-5 font-display text-2xl font-semibold tracking-tight">
+                    {card.title}
+                  </h2>
+                  <p className="text-muted-foreground mt-3 text-sm leading-7">
+                    {card.body}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="site-shell py-8 sm:py-12">
+          <div className="grid gap-4">
             {featureCards.map((card) => {
               const Icon = card.icon;
 
@@ -183,7 +209,7 @@ pnpm uru dev`}
                   key={card.title}
                   className="bg-card border border-border p-6 shadow-[0_20px_60px_-45px_rgba(12,23,34,0.55)]"
                 >
-                  <div className="bg-primary/10 text-primary flex size-12 items-center justify-center">
+                  <div className="bg-primary/10 text-primary flex size-12 items-center justify-center rounded-lg">
                     <Icon className="size-5" />
                   </div>
                   <h2 className="text-foreground mt-5 font-display text-2xl font-semibold tracking-tight">
@@ -199,115 +225,10 @@ pnpm uru dev`}
         </section>
 
         <section className="site-shell py-16">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Why Polterbase exists
-              </div>
-              <h2 className="text-foreground mt-3 font-display text-4xl font-semibold tracking-tight">
-                Uru stopped treating backend operations as app CLI work.
-              </h2>
-              <p className="text-muted-foreground mt-4 max-w-xl text-base leading-8">
-                Uru keeps a minimal local CLI focused on development through
-                `pnpm uru dev`. Polterbase is the recommended workflow manager
-                for Uru Supabase operations, including setup, linking,
-                migration, runtime configuration, and packaged app installation.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="https://www.npmjs.com/package/@polterware/polterbase"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-muted-foreground bg-card hover:text-primary border border-border px-4 py-2 text-sm"
-                >
-                  Polterbase on npm
-                </a>
-                <a
-                  href="https://github.com/polterware/polterbase"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-muted-foreground bg-card hover:text-primary border border-border px-4 py-2 text-sm"
-                >
-                  Polterbase on GitHub
-                </a>
-              </div>
-            </div>
-
-            <div className="border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-45px_rgba(7,15,24,0.75)]">
-              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Workflow split
-              </div>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="bg-card border border-border p-5">
-                  <div className="text-foreground font-display text-xl font-semibold tracking-tight">
-                    Uru CLI
-                  </div>
-                  <p className="text-muted-foreground mt-2 text-sm leading-7">
-                    Local development startup with `pnpm uru dev`.
-                  </p>
-                </div>
-                <div className="bg-card border border-border p-5">
-                  <div className="text-foreground font-display text-xl font-semibold tracking-tight">
-                    Polterbase
-                  </div>
-                  <p className="text-muted-foreground mt-2 text-sm leading-7">
-                    Setup, link, migrate, configure, and install workflows.
-                  </p>
-                </div>
-              </div>
-              <div className="bg-card text-muted-foreground mt-5 border border-border p-5 text-sm leading-7">
-                <code>npx polterbase app setup uru --path .</code> is the main
-                source-checkout bootstrap. <code>{INSTALL_COMMAND}</code> is the
-                packaged install path for macOS.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="site-shell py-10">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Who Uru is for
-              </div>
-              <h2 className="text-foreground mt-3 font-display text-4xl font-semibold tracking-tight">
-                One product, three clearly labeled pathways.
-              </h2>
-            </div>
-            <Link
-              href="/docs"
-              className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-sm font-medium"
-            >
-              Explore full documentation
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {audienceCards.map((card) => (
-              <Link
-                key={card.title}
-                href={card.href}
-                className="bg-card hover:bg-accent border border-border p-6 transition hover:-translate-y-0.5"
-              >
-                <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                  {card.eyebrow}
-                </div>
-                <h3 className="text-foreground mt-3 font-display text-2xl font-semibold tracking-tight">
-                  {card.title}
-                </h3>
-                <p className="text-muted-foreground mt-3 text-sm leading-7">
-                  {card.body}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="site-shell py-16">
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6">
             <div className="bg-card border border-border p-6">
               <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Two ways to get started
+                Ops
               </div>
               <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
                 Source checkout
@@ -321,14 +242,14 @@ pnpm uru dev`}
                   title="Source checkout"
                   language="bash"
                   code={`pnpm install
-npx polterbase app setup uru --path .
-pnpm uru dev`}
+npx polterbase app setup ops --path .
+pnpm ops dev`}
                 />
               </div>
             </div>
             <div className="bg-card border border-border p-6">
               <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Two ways to get started
+                Ops
               </div>
               <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
                 Installed macOS app
@@ -346,6 +267,25 @@ pnpm uru dev`}
                 />
               </div>
             </div>
+            <div className="bg-card border border-border p-6">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
+                PWA
+              </div>
+              <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
+                Headless install flow
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm leading-7">
+                Detect install environments, use native prompts when available,
+                and show manual guides for verified browsers.
+              </p>
+              <div className="mt-5">
+                <CodePanel
+                  title="PWA install"
+                  language="bash"
+                  code={`npm install @polterware/pwa`}
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -355,47 +295,12 @@ pnpm uru dev`}
               Architecture at a glance
             </div>
             <h2 className="text-foreground mt-3 font-display text-4xl font-semibold tracking-tight">
-              A desktop app with a controlled backend workflow layer.
+              Three tools, one coherent ecosystem.
             </h2>
           </div>
           <WorkflowDiagram items={diagramItems} compact />
         </section>
 
-        <section className="site-shell py-16">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <Link
-              href="/docs/troubleshooting"
-              className="bg-card hover:bg-accent border border-border p-6 transition hover:-translate-y-0.5"
-            >
-              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Troubleshooting
-              </div>
-              <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
-                Missing config, auth failures, migration issues, or runtime payload confusion?
-              </h2>
-              <p className="text-muted-foreground mt-3 text-sm leading-7">
-                The troubleshooting guide covers the common failure modes and
-                the exact Polterbase workflows that usually resolve them.
-              </p>
-            </Link>
-            <Link
-              href="/docs/for-developers"
-              className="bg-card hover:bg-accent border border-border p-6 transition hover:-translate-y-0.5"
-            >
-              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
-                Contributors
-              </div>
-              <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
-                Understand the current CLI boundary before you extend the codebase.
-              </h2>
-              <p className="text-muted-foreground mt-3 text-sm leading-7">
-                The developer docs explain where the app code lives, where
-                migrations live, and why Uru CLI development and Polterbase
-                Supabase workflows are intentionally separated.
-              </p>
-            </Link>
-          </div>
-        </section>
       </main>
 
       <SiteFooter />

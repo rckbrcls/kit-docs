@@ -1,6 +1,7 @@
+import { codeToHtml } from "shiki";
 import { cn } from "@/lib/utils";
 
-export function CodePanel({
+export async function CodePanel({
   code,
   language = "text",
   title,
@@ -11,6 +12,11 @@ export function CodePanel({
   title?: string;
   className?: string;
 }) {
+  const html = await codeToHtml(code, {
+    lang: language,
+    theme: "github-dark-default",
+  });
+
   return (
     <div
       className={cn(
@@ -28,9 +34,10 @@ export function CodePanel({
           {title ?? language}
         </div>
       </div>
-      <pre className="text-foreground overflow-x-auto px-5 py-5 text-sm leading-7">
-        <code>{code}</code>
-      </pre>
+      <div
+        className="overflow-x-auto px-5 py-5 text-sm leading-7 [&_pre]:!bg-transparent [&_code]:!bg-transparent"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </div>
   );
 }
