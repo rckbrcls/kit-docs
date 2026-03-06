@@ -22,12 +22,7 @@ This site documents the current Uru workflow boundary:
 
 - `pnpm uru dev` for local development startup
 - Polterbase for setup, linking, migration, configuration, and packaged app installation
-- `public/install.sh` as the public macOS installer entrypoint for packaged releases
-
-## Site origin
-
-- Copy `.env.example` to `.env.local` when you need the copyable install command to point at a non-default domain.
-- `NEXT_PUBLIC_SITE_ORIGIN` defaults to `https://rckbrcls.github.io/uru-docs`, which keeps the static installer compatible with GitHub Pages.
+- Packaged installs are documented as direct Polterbase commands, with macOS as the only supported target today
 
 Polterbase references included in the documentation:
 

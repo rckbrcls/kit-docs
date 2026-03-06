@@ -14,10 +14,7 @@ import { DocsSearch } from "@/components/site/docs-search";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { WorkflowDiagram } from "@/components/site/workflow-diagram";
-import {
-  ADVANCED_INSTALL_COMMAND,
-  getPublicInstallCommand,
-} from "@/lib/install";
+import { INSTALL_COMMAND } from "@/lib/install";
 
 const featureCards = [
   {
@@ -78,8 +75,6 @@ const diagramItems = [
 ];
 
 export default function HomePage() {
-  const publicInstallCommand = getPublicInstallCommand();
-
   return (
     <div>
       <SiteHeader />
@@ -160,8 +155,8 @@ export default function HomePage() {
                       Recommended packaged flow
                     </div>
                     <p className="text-muted-foreground mt-2 text-sm leading-7">
-                      Start from the public install script, then let Polterbase
-                      prepare the runtime connection Uru consumes on first launch.
+                      Install directly with Polterbase, then let Uru consume the
+                      runtime connection prepared for first launch.
                     </p>
                   </div>
                 </div>
@@ -262,10 +257,8 @@ pnpm uru dev`}
               </div>
               <div className="bg-card text-muted-foreground mt-5 border border-border p-5 text-sm leading-7">
                 <code>npx polterbase app setup uru --path .</code> is the main
-                source-checkout bootstrap. <code>{publicInstallCommand}</code>{" "}
-                is the main packaged install path, with{" "}
-                <code>{ADVANCED_INSTALL_COMMAND}</code> as the direct
-                Polterbase alternative.
+                source-checkout bootstrap. <code>{INSTALL_COMMAND}</code> is the
+                packaged install path for macOS.
               </div>
             </div>
           </div>
@@ -349,7 +342,7 @@ pnpm uru dev`}
                 <CodePanel
                   title="macOS install"
                   language="bash"
-                  code={publicInstallCommand}
+                  code={INSTALL_COMMAND}
                 />
               </div>
             </div>
