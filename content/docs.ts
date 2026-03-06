@@ -649,6 +649,11 @@ pnpm uru dev`,
                 description:
                   "Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection payload. Add --version <version> to pin a release.",
               },
+              {
+                command: "npx @polterware/polterbase@latest app update uru",
+                description:
+                  "Update an existing packaged macOS install to a newer release while preserving persisted runtime configuration, local settings, and session data.",
+              },
             ],
           },
         ],
@@ -679,6 +684,10 @@ pnpm uru dev`,
                 title: "Use install",
                 body: "When you are distributing or testing a packaged macOS app and need Polterbase to install it with the right Supabase connection context.",
               },
+              {
+                title: "Use update",
+                body: "When Uru is already installed and you only want to replace the app bundle with a newer release while preserving the current runtime/app state.",
+              },
             ],
           },
           {
@@ -697,6 +706,7 @@ pnpm uru dev`,
             style: "bullet",
             items: [
               "Use configure when you need to rotate runtime connection details without reinstalling the packaged app.",
+              "Use update when you want a newer packaged build without re-entering connection details.",
               "Use link before migration workflows if the repository was moved between Supabase projects.",
               "Reserve reset for intentional destructive operations and communicate it clearly to stakeholders.",
               "Treat install as an application distribution workflow, not as a substitute for migration management.",
