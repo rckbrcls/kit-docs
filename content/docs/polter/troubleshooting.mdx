@@ -1,25 +1,43 @@
 ---
 title: Troubleshooting
-description: Common issues and solutions when using Polter, plus security notes.
+description: Common issues and solutions when using Polter.
 ---
 
-## supabase: command not found
+## Tool not found
 
-Supabase CLI is not installed in the current repository and is not available in your `PATH`.
+A CLI tool (`supabase`, `gh`, `vercel`, or `pulumi`) is not installed or not in your `PATH`.
 
 **Fix:**
 
-1. Install Supabase CLI globally or in the current repository
+1. Install the missing tool — see [Tool Status](/docs/polter/tool-status) for install links
 2. Restart your terminal
-3. Verify with `supabase --version`
+3. Run `polter status` to verify detection
 
-See the [Supabase CLI Guide](https://supabase.com/docs/guides/cli) for installation instructions.
+## Pulumi: project not initialized
+
+Pulumi commands require a `Pulumi.yaml` in the current directory. If it's missing, commands will fail.
+
+**Fix:**
+
+1. Navigate to your infrastructure directory
+2. Run `pulumi new` to create a project from a template, or ensure `Pulumi.yaml` exists
+
+## Editor did not open
+
+The `edit config` and `edit code` commands use `$VISUAL` or `$EDITOR` to open files. If neither is set, the editor won't launch.
+
+**Fix:**
+
+```bash
+export EDITOR="code --wait"   # VS Code
+export EDITOR="vim"           # Vim
+```
+
+Add the export to your shell profile (`~/.zshrc`, `~/.bashrc`) and restart your terminal.
 
 ## Command exits with non-zero code
 
-Polter forwards execution to Supabase CLI. Use `--debug` and re-run the command to inspect detailed logs.
-
-Interactive path:
+Polter forwards execution to the underlying CLI tool. Re-run with `--debug` to see detailed output.
 
 1. Select the same command
 2. Add the same extra args
@@ -28,16 +46,14 @@ Interactive path:
 
 ## Pinned commands are missing
 
-Pins are managed directly in the board. Select a base command and press `→` to pin it, or pin an exact run after a successful execution.
+Pins are stored in OS-level app config. If you switch machines or clear app data, pins need to be recreated. Press `→` on a command to pin it.
 
-Pins are stored using OS-level app config storage. If you switch machines or clear app data, pins will need to be recreated.
+## Interactive prompt did not open
 
-## Interactive prompt did not open correctly
-
-Ensure you are running in a terminal that supports interactive TTY prompts. Some environments (CI runners, non-interactive shells, piped commands) do not support interactive input.
+Polter requires a TTY-capable terminal. CI runners, non-interactive shells, and piped commands don't support interactive input. Use `polter pipeline run <name>` for headless execution.
 
 ## Security Notes
 
-- Polter executes local shell commands through your installed Supabase CLI.
-- Keep Supabase tokens out of shared shells and CI logs.
-- Prefer short-lived tokens and least-privileged project access.
+- Polter executes shell commands through your installed CLI tools. It does not store or transmit credentials.
+- Keep tokens out of shared shells and CI logs — this applies to Supabase access tokens, GitHub tokens, and Pulumi Cloud tokens.
+- Prefer short-lived tokens and least-privileged access.

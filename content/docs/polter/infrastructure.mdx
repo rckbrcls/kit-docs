@@ -1,0 +1,78 @@
+---
+title: Infrastructure
+description: Manage Pulumi infrastructure from Polter — stacks, deploys, config, and editor integration.
+---
+
+The **Infrastructure** tab brings Pulumi operations into Polter's interactive flow. You can manage stacks, preview and deploy changes, edit config, and import existing resources — all without leaving the CLI.
+
+## Core Operations
+
+| Command | What it does |
+|---|---|
+| `up` | Deploy infrastructure changes |
+| `preview` | Preview changes before deploying |
+| `destroy` | Tear down all resources in the current stack |
+| `refresh` | Sync state with the actual cloud provider |
+
+These commands support the `--stack`, `--yes`, and `--debug` flags through the interactive flag picker.
+
+## Stack Management
+
+| Command | What it does |
+|---|---|
+| `stack ls` | List all stacks |
+| `stack select` | Switch to a different stack |
+| `stack init` | Create a new stack |
+| `stack rm` | Remove a stack |
+| `stack output` | Show current stack outputs |
+
+## Config
+
+| Command | What it does |
+|---|---|
+| `config` | List all config key-value pairs |
+| `config set` | Set a config value (supports `--secret` via extra args) |
+| `config get` | Get a specific config value |
+
+## Import & State
+
+| Command | What it does |
+|---|---|
+| `import` | Import an existing cloud resource into Pulumi state |
+| `state delete` | Remove a resource from state without destroying it |
+
+## Auth & Setup
+
+| Command | What it does |
+|---|---|
+| `login` | Log in to Pulumi Cloud |
+| `whoami` | Show the current authenticated user |
+| `new` | Create a new Pulumi project from a template |
+
+These also appear in the **Setup** tab alongside login commands for other tools.
+
+## Editor Integration
+
+Two commands open files directly in your editor:
+
+- **edit config** — opens `Pulumi.yaml`
+- **edit code** — opens the main IaC source file (e.g. `index.ts`, `__main__.py`)
+
+Polter uses `$VISUAL` or `$EDITOR` to determine which editor to launch. See [Troubleshooting](/docs/polter/troubleshooting#editor-did-not-open) if the editor doesn't open.
+
+## Example: Preview and Deploy
+
+Interactive path:
+
+1. Navigate to the **Infrastructure** tab
+2. Select `preview`
+3. Pick `--stack dev` in the flag picker
+4. Review the diff
+5. Go back, select `up` with `--yes --stack dev`
+
+Executed commands:
+
+```bash
+pulumi preview --stack dev
+pulumi up --yes --stack dev
+```

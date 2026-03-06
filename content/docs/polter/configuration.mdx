@@ -1,0 +1,103 @@
+---
+title: Configuration
+description: Project config, declarative state with polter.yaml, and the plan/apply workflow.
+---
+
+Polter supports two layers of configuration: a project config file for tool settings and pipelines, and a declarative YAML file for desired-state management.
+
+## Project Config
+
+Stored at `.polter/config.json` in the repository root. Created automatically when you save project-scoped pipelines or tool settings.
+
+```json
+{
+  "version": 1,
+  "tools": {
+    "supabase": { "projectRef": "abc123" },
+    "vercel": { "projectId": "prj_xxx", "orgId": "team_xxx" },
+    "gh": { "repo": "org/repo" },
+    "pulumi": { "stackName": "dev", "orgName": "my-org" }
+  },
+  "pipelines": []
+}
+```
+
+Access the config screen interactively with `polter config` or from the **Project Config** screen.
+
+## Declarative State (polter.yaml)
+
+Define your desired project state in a `polter.yaml` file at the repository root. Polter compares this against the current state and generates a plan of actions to converge.
+
+```yaml
+version: 1
+
+project:
+  name: my-app
+
+supabase:
+  project_ref: abc123
+  functions:
+    - name: process-webhook
+      verify_jwt: false
+    - name: send-email
+  secrets:
+    - RESEND_API_KEY
+
+vercel:
+  project_id: prj_xxx
+  domains:
+    - app.example.com
+  env:
+    production:
+      API_URL: "https://api.example.com"
+
+github:
+  repo: org/my-app
+  secrets:
+    - SUPABASE_URL
+
+pipelines:
+  deploy:
+    description: Full deploy pipeline
+    steps:
+      - supabase:db pull --yes
+      - vercel:deploy:prod
+```
+
+## Plan and Apply
+
+The plan/apply workflow works like Terraform or Pulumi:
+
+### Plan
+
+```bash
+polter plan
+```
+
+Reads `polter.yaml`, checks current state (linked projects, deployed functions, configured domains), and outputs a list of actions needed to reach the desired state. No changes are made.
+
+### Apply
+
+```bash
+polter apply
+```
+
+Executes the planned actions sequentially. Each action runs the appropriate CLI tool (Supabase, Vercel, or GitHub) with the required arguments.
+
+## What Gets Planned
+
+| Section | Actions |
+|---|---|
+| `supabase.functions` | Deploy missing edge functions |
+| `supabase.secrets` | Set missing secrets |
+| `vercel.domains` | Add missing domains |
+| `vercel.env` | Set missing environment variables |
+| `github.secrets` | Set missing GitHub secrets |
+
+## Status
+
+```bash
+polter status
+```
+
+Shows the current detected state: Supabase link status and functions, Vercel auth, and GitHub repo and auth status. Useful for comparing against your `polter.yaml` before running `plan`.

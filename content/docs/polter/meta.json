@@ -1,13 +1,16 @@
 {
   "title": "Polter",
-  "description": "CLI workflow manager for Supabase operations.",
+  "description": "Interactive CLI orchestrator for Supabase, GitHub, Vercel, and Pulumi.",
   "root": true,
   "pages": [
     "getting-started",
-    "features",
+    "command-board",
+    "pipelines",
+    "infrastructure",
+    "ci-cd",
+    "tool-status",
+    "configuration",
     "app-workflows",
-    "command-reference",
-    "usage-examples",
     "troubleshooting"
   ]
 }
