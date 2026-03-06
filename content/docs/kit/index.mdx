@@ -1,0 +1,61 @@
+---
+title: Documentation Home
+description: "Start here to explore the Polterware ecosystem: Ops, Polterbase, and PWA."
+---
+
+polterware/kit documents three open-source projects: Ops (desktop business manager), Polterbase (CLI workflow manager for Supabase), and PWA (headless install utilities for progressive web apps).
+
+Each project has its own documentation section. Use the links below to jump straight into the one you need.
+
+## Projects
+
+<Cards>
+  <Card title="Ops" href="/docs/ops/getting-started">
+    Open-source desktop business manager powered by Supabase. Product catalog, inventory, orders, sales, payments, and analytics.
+  </Card>
+  <Card title="Polterbase" href="/docs/polterbase/getting-started">
+    Interactive CLI for managing Supabase CLI workflows with setup, linking, migrations, configuration, and app installation.
+  </Card>
+  <Card title="PWA" href="/docs/pwa/getting-started">
+    Headless PWA install utilities and manifest tools. Detect install environments, show manual guides, and use React hooks.
+  </Card>
+</Cards>
+
+## Ops quick start
+
+<Cards>
+  <Card title="Install and start using Ops" href="/docs/ops/getting-started">
+    Use the packaged macOS app or a prepared source checkout, connect to Supabase, and start managing catalog, inventory, orders, sales, payments, and analytics.
+  </Card>
+  <Card title="Connect Ops to your own Supabase project" href="/docs/ops/polterbase">
+    Use Polterbase to set up, link, migrate, configure, and install Ops against the Supabase project you operate.
+  </Card>
+  <Card title="Modify the app and extend the stack" href="/docs/ops/for-developers">
+    Work from source, run the minimal Ops development CLI, and use Polterbase for Supabase workflows instead of legacy app commands.
+  </Card>
+</Cards>
+
+### Main bootstrap flow
+
+```bash
+pnpm install
+npx polterbase app setup ops --path .
+pnpm ops dev
+```
+
+## PWA quick start
+
+### Install and detect
+
+```bash
+npm install @polterware/pwa
+```
+
+### Usage
+
+```ts
+import { detectInstallEnvironment, getInstallGuide } from "@polterware/pwa";
+
+const env = detectInstallEnvironment();
+const guide = getInstallGuide(env.guideId, { locale: "en" });
+```

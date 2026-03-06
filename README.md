@@ -1,30 +1,45 @@
-# Uru Docs
+# kit-docs
 
-Documentation website for Uru, the open-source desktop business manager powered by Supabase.
+This is a Next.js application generated with
+[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
-## What is inside
+Run development server:
 
-- Marketing landing page for product positioning and audience entry points
-- Documentation home with guided paths for end users, operators, and developers
-- Dynamic docs route backed by centralized content data in `content/docs.ts`
-- Reusable documentation UI components for callouts, code panels, sidebar navigation, search, and section rendering
+```bash
+npm run dev
+# or
+pnpm dev
+# or
+yarn dev
+```
 
-## Content model
+Open http://localhost:3000 with your browser to see the result.
 
-- `content/docs.ts` is the source of truth for documentation pages, navigation groups, audience pathways, and search keywords.
-- `app/page.tsx` contains the landing page.
-- `app/docs/[[...slug]]/page.tsx` renders the documentation pages from the shared content model.
-- `components/site/*` contains the reusable product-site and documentation components.
+## Explore
 
-## Scope
+In the project, you can see:
 
-This site documents the current Uru workflow boundary:
+- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
+- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
 
-- `pnpm uru dev` for local development startup
-- Polterbase for setup, linking, migration, configuration, and packaged app installation
-- Packaged installs are documented as direct Polterbase commands, with macOS as the only supported target today
+| Route                     | Description                                            |
+| ------------------------- | ------------------------------------------------------ |
+| `app/(home)`              | The route group for your landing page and other pages. |
+| `app/docs`                | The documentation layout and pages.                    |
+| `app/api/search/route.ts` | The Route Handler for search.                          |
 
-Polterbase references included in the documentation:
+### Fumadocs MDX
 
-- npm: https://www.npmjs.com/package/@polterware/polterbase
-- GitHub: https://github.com/polterware/polterbase
+A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+
+Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+
+## Learn More
+
+To learn more about Next.js and Fumadocs, take a look at the following
+resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
+  features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs

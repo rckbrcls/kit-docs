@@ -1,0 +1,40 @@
+---
+title: Runtime API
+description: Use detectInstallEnvironment and getInstallGuide to detect browser capabilities and generate manual install content.
+---
+
+The runtime API provides two main functions: detectInstallEnvironment for browser-aware snapshots and getInstallGuide for manual install content.
+
+## detectInstallEnvironment()
+
+Returns a browser-aware snapshot of the current runtime.
+
+```ts
+const environment = detectInstallEnvironment();
+
+// {
+//   os: "windows",
+//   browser: "chrome",
+//   isInstalled: false,
+//   availability: "unavailable",
+//   reason: "criteria_unmet",
+//   guideId: null
+// }
+```
+
+## getInstallGuide(guideId, config?)
+
+Returns manual install content only for supported guide ids.
+
+```ts
+const guide = getInstallGuide("ios_share_sheet", { locale: "en" });
+```
+
+## Public types
+
+```ts
+type OperatingSystem = "ios" | "android" | "macos" | "windows" | "linux" | "other";
+type Browser = "safari" | "chrome" | "arc" | "edge" | "firefox" | "samsungInternet" | "other";
+type InstallAvailability = "native" | "manual" | "unsupported" | "unavailable";
+type InstallGuideId = "ios_share_sheet" | "safari_add_to_dock";
+```

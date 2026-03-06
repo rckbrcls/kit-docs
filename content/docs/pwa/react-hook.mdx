@@ -1,0 +1,26 @@
+---
+title: React Hook
+description: Use the usePWAInstall hook to combine environment detection, deferred prompt lifecycle, and guide lookup in React.
+---
+
+The usePWAInstall hook combines environment detection, deferred prompt lifecycle, and guide lookup into a single React hook.
+
+## usePWAInstall(options?)
+
+```ts
+const {
+  environment,
+  canPrompt,
+  promptInstall,
+  status,
+  guide,
+} = usePWAInstall();
+```
+
+### What the hook does
+
+- Captures beforeinstallprompt events.
+- Exposes canPrompt to check if native install is available.
+- Runs promptInstall() only when a deferred prompt exists.
+- Reacts to appinstalled events.
+- Keeps manual guides and native prompts mutually exclusive.

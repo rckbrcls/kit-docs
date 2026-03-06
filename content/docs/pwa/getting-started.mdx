@@ -1,0 +1,77 @@
+---
+title: PWA Getting Started
+description: Install @polterware/pwa and detect install environments with browser-aware rules.
+---
+
+@polterware/pwa v2 is centered around install environment detection instead of UI components. Detect the current install environment with browser-aware rules, use native install prompts when available, and show manual guides only for verified flows.
+
+The library expects the application to own the button, modal, and install UI. It provides the detection logic and guide content, not the visual components.
+
+## Installation
+
+```bash
+npm install @polterware/pwa
+```
+
+### For React integration
+
+```bash
+npm install react react-dom
+```
+
+## Package entry points
+
+```ts
+import { detectInstallEnvironment, getInstallGuide } from "@polterware/pwa";
+import { usePWAInstall } from "@polterware/pwa/react";
+import { generateManifest, mergeManifest } from "@polterware/pwa/manifest";
+```
+
+## Quick start — Vanilla TypeScript
+
+```ts
+import { detectInstallEnvironment, getInstallGuide } from "@polterware/pwa";
+
+const environment = detectInstallEnvironment();
+const guide = getInstallGuide(environment.guideId, { locale: "en" });
+
+if (environment.availability === "manual" && guide) {
+  console.log(guide.title);
+  console.log(guide.steps);
+}
+```
+
+## Quick start — React
+
+```tsx
+import { usePWAInstall } from "@polterware/pwa/react";
+
+export function InstallCallout() {
+  const { canPrompt, promptInstall, status, guide } = usePWAInstall({
+    locale: "en",
+  });
+
+  if (status === "installed" || status === "unsupported") return null;
+
+  if (canPrompt) {
+    return <button onClick={() => void promptInstall()}>Install app</button>;
+  }
+
+  if (!guide) return null;
+
+  return (
+    <section>
+      <h2>{guide.title}</h2>
+      <p>{guide.description}</p>
+      <ol>
+        {guide.steps.map((step) => (
+          <li key={step.number}>
+            <strong>{step.title}</strong>
+            <p>{step.description}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+```

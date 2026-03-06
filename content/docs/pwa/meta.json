@@ -1,0 +1,13 @@
+{
+  "title": "PWA",
+  "description": "Headless install utilities and manifest tools.",
+  "root": true,
+  "pages": [
+    "getting-started",
+    "runtime-api",
+    "react-hook",
+    "manifest",
+    "cli",
+    "browser-matrix"
+  ]
+}

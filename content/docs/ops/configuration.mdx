@@ -1,0 +1,55 @@
+---
+title: Configuration
+description: Understand .env.local fallback, runtime Supabase connections, bootstrap payloads, and how to reconfigure Ops later.
+---
+
+Ops supports two related configuration models: build-time environment fallback for development and runtime Supabase connection storage for desktop app installs.
+
+The practical rule is straightforward. Source checkouts may still use .env.local. Packaged desktop installs are meant to use runtime configuration, usually prepared by Polterbase.
+
+## .env.local fallback for development
+
+In a source checkout, Ops can still resolve its Supabase connection from .env.local using the development fallback variables. This keeps local development simple and compatible with existing repo-based workflows.
+
+```dotenv
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...
+```
+
+## Runtime Supabase connection for installed apps
+
+Installed desktop apps should not depend on source-repository env files. Instead, Ops stores a runtime Supabase connection after first launch or after the user saves a new connection in the app settings.
+
+This makes packaged deployments practical because the app can be repointed to another backend without rebuilding the desktop bundle.
+
+## How bootstrap payloads work
+
+<Steps>
+
+### Polterbase prepares a bootstrap payload
+
+The payload contains the Supabase URL, publishable key, and optional project reference for the intended deployment.
+
+### Ops consumes it on first launch
+
+The desktop app reads the payload, persists the connection as runtime config, and removes the one-time bootstrap file.
+
+### Later launches use persisted runtime config
+
+The app no longer depends on the bootstrap file after the connection is stored locally.
+
+</Steps>
+
+<Callout type="info" title="Conceptual model">
+Think of the bootstrap payload as a handoff document from the operator workflow into the installed app. It is not the long-term source of truth after first launch.
+</Callout>
+
+## How to reconfigure a connection later
+
+```bash
+npx polterbase app configure ops --path .
+```
+
+Use configure when the Supabase project URL or publishable key changes, or when you want to refresh both development fallback data and runtime bootstrap material.
+
+End users can also adjust the runtime connection from inside the app when the connection form is exposed, but operator-managed configuration through Polterbase is the recommended path for controlled deployments.

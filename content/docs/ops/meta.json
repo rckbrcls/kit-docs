@@ -1,0 +1,17 @@
+{
+  "title": "Ops",
+  "description": "Desktop business manager powered by Supabase.",
+  "root": true,
+  "pages": [
+    "getting-started",
+    "installation",
+    "polterbase",
+    "configuration",
+    "running-ops",
+    "database-and-migrations",
+    "troubleshooting",
+    "for-developers",
+    "architecture",
+    "faq"
+  ]
+}
