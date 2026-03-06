@@ -9,10 +9,10 @@ export function SiteFooter() {
           <Link href="/docs" className="hover:text-foreground">
             Documentation
           </Link>
-          <Link href="/docs/polterbase/getting-started" className="hover:text-foreground">
+          <Link href="/polterbase" className="hover:text-foreground">
             Polterbase
           </Link>
-          <Link href="/docs/pwa/getting-started" className="hover:text-foreground">
+          <Link href="/pwa" className="hover:text-foreground">
             PWA
           </Link>
           <a

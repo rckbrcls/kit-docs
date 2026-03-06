@@ -108,19 +108,19 @@ export const audiencePaths: Array<{
     audience: "End Users",
     heading: "Install and start using Ops",
     body: "Use the packaged macOS app or a prepared source checkout, connect to Supabase, and start managing catalog, inventory, orders, sales, payments, and analytics.",
-    href: "/docs/ops/getting-started",
+    href: "/ops/docs/getting-started",
   },
   {
     audience: "Self-Hosters / Operators",
     heading: "Connect Ops to your own Supabase project",
     body: "Use Polterbase to set up, link, migrate, configure, and install Ops against the Supabase project you operate.",
-    href: "/docs/ops/polterbase",
+    href: "/ops/docs/polterbase",
   },
   {
     audience: "Developers",
     heading: "Modify the app and extend the stack",
     body: "Work from source, run the minimal Ops development CLI, and use Polterbase for Supabase workflows instead of legacy app commands.",
-    href: "/docs/ops/for-developers",
+    href: "/ops/docs/for-developers",
   },
 ];
 
@@ -155,19 +155,19 @@ export const docsPages: DocPage[] = [
             links: [
               {
                 label: "Ops",
-                href: "/docs/ops/getting-started",
+                href: "/ops/docs/getting-started",
                 description:
                   "Open-source desktop business manager powered by Supabase. Product catalog, inventory, orders, sales, payments, and analytics.",
               },
               {
                 label: "Polterbase",
-                href: "/docs/polterbase/getting-started",
+                href: "/polterbase/docs/getting-started",
                 description:
                   "Interactive CLI for managing Supabase CLI workflows with setup, linking, migrations, configuration, and app installation.",
               },
               {
                 label: "PWA",
-                href: "/docs/pwa/getting-started",
+                href: "/pwa/docs/getting-started",
                 description:
                   "Headless PWA install utilities and manifest tools. Detect install environments, show manual guides, and use React hooks.",
               },
@@ -259,19 +259,19 @@ const guide = getInstallGuide(env.guideId, { locale: "en" });`,
                 audience: "End Users",
                 heading: "Teams that want to use the app",
                 body: "You care about opening the app, signing in, and doing operational work. You should follow the installation and getting started guides.",
-                href: "/docs/ops/getting-started",
+                href: "/ops/docs/getting-started",
               },
               {
                 audience: "Self-Hosters / Operators",
                 heading: "People responsible for the Supabase project",
                 body: "You decide which project Ops connects to, apply migrations, maintain credentials, and reconfigure packaged apps when the backend changes.",
-                href: "/docs/ops/configuration",
+                href: "/ops/docs/configuration",
               },
               {
                 audience: "Developers",
                 heading: "People modifying the codebase",
                 body: "You work in source, start local development with pnpm ops dev, and use Polterbase for setup, link, migrate, configure, and install workflows.",
-                href: "/docs/ops/for-developers",
+                href: "/ops/docs/for-developers",
               },
             ],
           },
@@ -1798,8 +1798,48 @@ export const docsNavGroups = [
   },
 ] as const;
 
+export type DocsProduct = {
+  id: string;
+  label: string;
+  section: string;
+  basePath: string;
+  entrySlug: string;
+  description: string;
+};
+
+export const docsProducts: DocsProduct[] = [
+  { id: "", label: "polterware/kit", section: "polterware/kit", basePath: "", entrySlug: "", description: "Open-source tools for business operations and modern web apps." },
+  { id: "ops", label: "Ops", section: "Ops", basePath: "/ops", entrySlug: "ops/getting-started", description: "Open-source desktop business manager. Product catalog, inventory, orders, sales, payments, and analytics in one app powered by Supabase." },
+  { id: "polterbase", label: "Polterbase", section: "Polterbase", basePath: "/polterbase", entrySlug: "polterbase/getting-started", description: "CLI workflow manager for Supabase operations. Setup, linking, migrations, runtime configuration, and packaged app installation." },
+  { id: "pwa", label: "PWA", section: "PWA", basePath: "/pwa", entrySlug: "pwa/getting-started", description: "Headless PWA install utilities and manifest tools. Detect install environments, show manual guides, and use React hooks." },
+];
+
+export function getActiveProduct(pathname: string): DocsProduct {
+  return (
+    docsProducts.find((p) => p.id !== "" && (pathname === p.basePath || pathname.startsWith(p.basePath + "/"))) ??
+    docsProducts[0]
+  );
+}
+
+export function getNavGroupsForProduct(product: DocsProduct) {
+  return docsNavGroups.filter((group) => group.title === product.section);
+}
+
 export function getDocHref(slug: string): string {
+  const product = docsProducts.find((p) => p.id && slug.startsWith(p.id + "/"));
+  if (product) {
+    const subSlug = slug.slice(product.id.length + 1);
+    return `${product.basePath}/docs/${subSlug}`;
+  }
   return slug ? `/docs/${slug}` : "/docs";
+}
+
+export function getProductLandingHref(product: DocsProduct): string {
+  return product.basePath || "/";
+}
+
+export function getProductDocsHref(product: DocsProduct): string {
+  return getDocHref(product.entrySlug);
 }
 
 export function getDocBySlug(slugSegments?: string[]): DocPage | null {
@@ -1824,11 +1864,18 @@ export function getPrevNextDocs(
     return { previous: null, next: null };
   }
 
-  const index = docsPages.findIndex((page) => page.slug === current.slug);
+  const product = docsProducts.find((p) => p.section === current.section) ?? docsProducts[0];
+  const groups = getNavGroupsForProduct(product);
+  const productSlugs = groups.flatMap((g) => g.items);
+  const productPages = productSlugs
+    .map((slug) => docsPages.find((p) => p.slug === slug))
+    .filter((p): p is DocPage => p != null);
+
+  const index = productPages.findIndex((page) => page.slug === current.slug);
 
   return {
-    previous: index > 0 ? docsPages[index - 1] : null,
-    next: index >= 0 && index < docsPages.length - 1 ? docsPages[index + 1] : null,
+    previous: index > 0 ? productPages[index - 1] : null,
+    next: index >= 0 && index < productPages.length - 1 ? productPages[index + 1] : null,
   };
 }
 

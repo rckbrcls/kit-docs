@@ -4,35 +4,50 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import {
   docsPages,
+  docsProducts,
   getDocBySlug,
   getDocHref,
+  getNavGroupsForProduct,
   getPrevNextDocs,
   toAnchorId,
 } from "@/content/docs";
 import { DocsRenderer } from "@/components/site/docs-renderer";
 import { DocsToc } from "@/components/site/docs-toc";
 
+const productIds = ["ops", "polterbase", "pwa"];
+
 type PageProps = {
   params: Promise<{
+    product: string;
     slug?: string[];
   }>;
 };
 
-export async function generateStaticParams() {
-  return docsPages
-    .filter((page) => page.section === "polterware/kit")
-    .map((page) => ({
-      slug: page.slug ? page.slug.split("/") : [],
-    }));
+export function generateStaticParams() {
+  const params: Array<{ product: string; slug: string[] }> = [];
+
+  for (const productId of productIds) {
+    const product = docsProducts.find((p) => p.id === productId);
+    if (!product) continue;
+
+    const groups = getNavGroupsForProduct(product);
+    const slugs = groups.flatMap((g) => g.items);
+
+    for (const fullSlug of slugs) {
+      const subSlug = fullSlug.slice(productId.length + 1);
+      params.push({ product: productId, slug: subSlug ? subSlug.split("/") : [] });
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const page = getDocBySlug(slug);
+  const { product, slug } = await params;
+  const fullSlug = slug ? `${product}/${slug.join("/")}` : product;
+  const page = getDocBySlug(fullSlug.split("/"));
 
-  if (!page) {
-    return {};
-  }
+  if (!page) return {};
 
   return {
     title: page.title,
@@ -40,15 +55,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function DocsPage({ params }: PageProps) {
-  const { slug } = await params;
-  const page = getDocBySlug(slug);
+export default async function ProductDocsPage({ params }: PageProps) {
+  const { product, slug } = await params;
+  const fullSlug = slug ? `${product}/${slug.join("/")}` : product;
+  const fullSlugSegments = fullSlug.split("/");
+  const page = getDocBySlug(fullSlugSegments);
 
   if (!page) {
     notFound();
   }
 
-  const { previous, next } = getPrevNextDocs(slug);
+  const { previous, next } = getPrevNextDocs(fullSlugSegments);
 
   return (
     <>

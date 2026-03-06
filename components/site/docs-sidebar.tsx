@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { docsNavGroups, docsPages, getDocHref } from "@/content/docs";
+import { docsPages, getDocHref, getActiveProduct, getNavGroupsForProduct } from "@/content/docs";
 import { cn } from "@/lib/utils";
 import { DocsSearch } from "@/components/site/docs-search";
 
 export function DocsSidebar() {
   const pathname = usePathname();
+  const activeProduct = getActiveProduct(pathname);
+  const groups = getNavGroupsForProduct(activeProduct);
 
   return (
     <>
@@ -20,7 +22,7 @@ export function DocsSidebar() {
             <DocsSearch />
           </div>
           <nav className="mt-5 space-y-5">
-            {docsNavGroups.map((group) => (
+            {groups.map((group) => (
               <div key={group.title}>
                 <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                   {group.title}
@@ -59,7 +61,7 @@ export function DocsSidebar() {
           <div className="bg-card border border-border p-5 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.35)]">
             <DocsSearch />
             <nav className="mt-6 space-y-6">
-              {docsNavGroups.map((group) => (
+              {groups.map((group) => (
                 <div key={group.title}>
                   <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                     {group.title}

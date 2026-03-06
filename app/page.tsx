@@ -18,19 +18,19 @@ const productCards = [
     icon: Boxes,
     title: "Ops",
     body: "Open-source desktop business manager. Product catalog, inventory, orders, sales, payments, and analytics in one app powered by Supabase.",
-    href: "/docs/ops/getting-started",
+    href: "/ops",
   },
   {
     icon: Terminal,
     title: "Polterbase",
     body: "CLI workflow manager for Supabase operations. Setup, linking, migrations, runtime configuration, and packaged app installation.",
-    href: "/docs/polterbase/getting-started",
+    href: "/polterbase",
   },
   {
     icon: Smartphone,
     title: "PWA",
     body: "Headless PWA install utilities and manifest tools. Detect install environments, show manual guides, and use React hooks.",
-    href: "/docs/pwa/getting-started",
+    href: "/pwa",
   },
 ];
 
@@ -98,19 +98,19 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-card px-6">
-                  <Link href="/docs/ops/getting-started">
+                  <Link href="/ops">
                     <Boxes className="size-4" />
                     Ops
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-card px-6">
-                  <Link href="/docs/polterbase/getting-started">
+                  <Link href="/polterbase">
                     <Terminal className="size-4" />
                     Polterbase
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-card px-6">
-                  <Link href="/docs/pwa/getting-started">
+                  <Link href="/pwa">
                     <Smartphone className="size-4" />
                     PWA
                   </Link>
