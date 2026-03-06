@@ -535,6 +535,7 @@ pnpm uru dev`,
         blocks: [
           {
             type: "comparison",
+            title: "Choose the configuration path that matches your environment",
             columns: ["Use .env.local fallback", "Use runtime configuration"],
             rows: [
               {
@@ -1153,6 +1154,7 @@ cli/
         blocks: [
           {
             type: "comparison",
+            title: "Responsibility split between Uru and Polterbase",
             columns: ["Owned by Uru CLI", "Owned by Polterbase"],
             rows: [
               {
