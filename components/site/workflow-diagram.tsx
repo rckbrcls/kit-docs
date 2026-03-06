@@ -17,13 +17,13 @@ export function WorkflowDiagram({
     >
       {items.map((item, index) => (
         <div key={item.title} className="relative">
-          <div className="bg-card h-full rounded-[28px] border border-border p-5 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.4)]">
+          <div className="bg-card h-full border border-border p-5 shadow-[0_20px_60px_-40px_rgba(12,23,34,0.4)]">
             <div className="mb-3 flex items-center justify-between">
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 {String(index + 1).padStart(2, "0")}
               </div>
               {!compact && index < items.length - 1 ? (
-                <ArrowRight className="text-muted-foreground hidden size-4 lg:block" />
+                <ArrowRight className="text-primary/70 hidden size-4 lg:block" />
               ) : null}
             </div>
             <h3 className="text-foreground font-display text-xl font-semibold tracking-tight">

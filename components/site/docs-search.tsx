@@ -28,7 +28,7 @@ export function DocsSearch() {
 
   return (
     <div className="relative">
-      <label className="bg-card flex items-center gap-2 rounded-full border border-border px-4 py-3 shadow-[0_12px_40px_-30px_rgba(12,23,34,0.35)]">
+      <label className="bg-card flex items-center gap-2 border border-border px-4 py-3 shadow-[0_12px_40px_-30px_rgba(12,23,34,0.35)]">
         <Search className="text-muted-foreground size-4" />
         <input
           value={query}
@@ -39,13 +39,13 @@ export function DocsSearch() {
       </label>
 
       {trimmed ? (
-        <div className="bg-popover absolute left-0 right-0 top-[calc(100%+0.75rem)] z-30 rounded-[28px] border border-border p-2 shadow-2xl">
+        <div className="bg-popover absolute left-0 right-0 top-[calc(100%+0.75rem)] z-30 border border-border p-2 shadow-2xl">
           {results.length > 0 ? (
             results.map((result) => (
               <Link
                 key={result.slug || "docs-home"}
                 href={getDocHref(result.slug)}
-                className="hover:bg-accent block rounded-2xl px-3 py-3 transition"
+                className="hover:bg-accent block px-3 py-3 transition"
               >
                 <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                   {result.section}

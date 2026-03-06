@@ -50,6 +50,8 @@
 }
 
 :root {
+  --supabase-accent: oklch(0.762 0.154 159.4);
+  --supabase-accent-foreground: #081116;
   --font-brand:
     Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman",
     serif;
@@ -60,8 +62,8 @@
   --card-foreground: oklch(0.2 0 0);
   --popover: oklch(0.985 0 0);
   --popover-foreground: oklch(0.2 0 0);
-  --primary: oklch(0.32 0 0);
-  --primary-foreground: oklch(0.98 0 0);
+  --primary: var(--supabase-accent);
+  --primary-foreground: var(--supabase-accent-foreground);
   --secondary: oklch(0.95 0 0);
   --secondary-foreground: oklch(0.25 0 0);
   --muted: oklch(0.96 0 0);
@@ -71,7 +73,7 @@
   --destructive: oklch(0.45 0 0);
   --border: oklch(0.88 0 0);
   --input: oklch(0.88 0 0);
-  --ring: oklch(0.62 0 0);
+  --ring: var(--supabase-accent);
   --chart-1: oklch(0.82 0 0);
   --chart-2: oklch(0.7 0 0);
   --chart-3: oklch(0.58 0 0);
@@ -80,12 +82,12 @@
   --radius: 0rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.2 0 0);
-  --sidebar-primary: oklch(0.32 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-primary: var(--supabase-accent);
+  --sidebar-primary-foreground: var(--supabase-accent-foreground);
   --sidebar-accent: oklch(0.95 0 0);
   --sidebar-accent-foreground: oklch(0.25 0 0);
   --sidebar-border: oklch(0.88 0 0);
-  --sidebar-ring: oklch(0.62 0 0);
+  --sidebar-ring: var(--supabase-accent);
   --panel: color-mix(in oklab, var(--card) 88%, transparent);
 }
 
@@ -96,8 +98,8 @@
   --card-foreground: oklch(0.95 0 0);
   --popover: oklch(0.22 0 0);
   --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.9 0 0);
-  --primary-foreground: oklch(0.12 0 0);
+  --primary: var(--supabase-accent);
+  --primary-foreground: var(--supabase-accent-foreground);
   --secondary: oklch(0.24 0 0);
   --secondary-foreground: oklch(0.95 0 0);
   --muted: oklch(0.24 0 0);
@@ -107,15 +109,15 @@
   --destructive: oklch(0.72 0 0);
   --border: oklch(0.35 0 0);
   --input: oklch(0.35 0 0);
-  --ring: oklch(0.58 0 0);
+  --ring: var(--supabase-accent);
   --sidebar: oklch(0.22 0 0);
   --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.9 0 0);
-  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-primary: var(--supabase-accent);
+  --sidebar-primary-foreground: var(--supabase-accent-foreground);
   --sidebar-accent: oklch(0.24 0 0);
   --sidebar-accent-foreground: oklch(0.95 0 0);
   --sidebar-border: oklch(0.35 0 0);
-  --sidebar-ring: oklch(0.58 0 0);
+  --sidebar-ring: var(--supabase-accent);
   --panel: color-mix(in oklab, var(--card) 92%, transparent);
 }
 
@@ -131,8 +133,8 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      radial-gradient(circle at top left, color-mix(in oklab, var(--foreground) 8%, transparent), transparent 30%),
-      radial-gradient(circle at top right, color-mix(in oklab, var(--muted-foreground) 9%, transparent), transparent 28%),
+      radial-gradient(circle at top left, color-mix(in oklab, var(--primary) 12%, transparent), transparent 30%),
+      radial-gradient(circle at top right, color-mix(in oklab, var(--primary) 8%, transparent), transparent 28%),
       linear-gradient(180deg, color-mix(in oklab, var(--card) 64%, transparent), transparent);
   }
 
@@ -144,6 +146,15 @@
 @layer components {
   .site-shell {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .site-noise {
@@ -172,7 +183,7 @@
   .site-orb-left {
     left: -8rem;
     top: 7rem;
-    background: color-mix(in oklab, var(--foreground) 14%, transparent);
+    background: color-mix(in oklab, var(--primary) 20%, transparent);
   }
 
   .site-orb-right {

@@ -14,6 +14,10 @@ import { DocsSearch } from "@/components/site/docs-search";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { WorkflowDiagram } from "@/components/site/workflow-diagram";
+import {
+  ADVANCED_INSTALL_COMMAND,
+  getPublicInstallCommand,
+} from "@/lib/install";
 
 const featureCards = [
   {
@@ -74,6 +78,8 @@ const diagramItems = [
 ];
 
 export default function HomePage() {
+  const publicInstallCommand = getPublicInstallCommand();
+
   return (
     <div>
       <SiteHeader />
@@ -82,7 +88,7 @@ export default function HomePage() {
         <section className="site-shell relative overflow-hidden py-16 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div>
-              <div className="text-muted-foreground bg-card mb-5 inline-flex rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/80 bg-primary/6 mb-5 inline-flex border border-primary/15 px-4 py-2 text-xs uppercase tracking-[0.22em]">
                 Open-source desktop business manager
               </div>
               <h1 className="text-foreground max-w-4xl font-display text-5xl font-semibold tracking-[-0.04em] sm:text-6xl lg:text-7xl">
@@ -96,25 +102,25 @@ export default function HomePage() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="rounded-full px-6">
+                <Button asChild size="lg" className="px-6">
                   <Link href="/docs/getting-started">
                     <HardDriveDownload className="size-4" />
                     Install Uru
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-card rounded-full px-6">
+                <Button asChild size="lg" variant="outline" className="bg-card px-6">
                   <Link href="/docs/installation">
                     <Database className="size-4" />
                     Self-host with Supabase
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-card rounded-full px-6">
+                <Button asChild size="lg" variant="outline" className="bg-card px-6">
                   <Link href="/docs">
                     <BookOpen className="size-4" />
                     Read the Docs
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-card rounded-full px-6">
+                <Button asChild size="lg" variant="outline" className="bg-card px-6">
                   <Link href="/docs/for-developers">
                     <Wrench className="size-4" />
                     Modify Uru
@@ -124,24 +130,24 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <div className="rounded-[34px] border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-45px_rgba(7,15,24,0.75)]">
+              <div className="border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-45px_rgba(7,15,24,0.75)]">
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="bg-primary text-primary-foreground flex size-12 items-center justify-center rounded-2xl">
+                  <div className="bg-primary text-primary-foreground flex size-12 items-center justify-center">
                     <Boxes className="size-5" />
                   </div>
                   <div>
                     <div className="text-foreground font-display text-xl font-semibold tracking-tight">
                       Documentation-first product site
                     </div>
-                    <div className="text-muted-foreground text-sm">
+                    <div className="text-primary/70 text-sm">
                       Built for beginners and technical users at the same time
                     </div>
                   </div>
                 </div>
                 <DocsSearch />
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  <div className="bg-card rounded-[24px] border border-border p-4">
-                    <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+                  <div className="bg-card border border-border p-4">
+                    <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                       Recommended bootstrap
                     </div>
                     <p className="text-muted-foreground mt-2 text-sm leading-7">
@@ -149,13 +155,13 @@ export default function HomePage() {
                       pnpm uru dev.
                     </p>
                   </div>
-                  <div className="bg-card rounded-[24px] border border-border p-4">
-                    <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+                  <div className="bg-card border border-border p-4">
+                    <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                       Recommended packaged flow
                     </div>
                     <p className="text-muted-foreground mt-2 text-sm leading-7">
-                      Use Polterbase install on macOS and let Uru consume runtime
-                      connection details on first launch.
+                      Start from the public install script, then let Polterbase
+                      prepare the runtime connection Uru consumes on first launch.
                     </p>
                   </div>
                 </div>
@@ -180,9 +186,9 @@ pnpm uru dev`}
               return (
                 <div
                   key={card.title}
-                  className="bg-card rounded-[30px] border border-border p-6 shadow-[0_20px_60px_-45px_rgba(12,23,34,0.55)]"
+                  className="bg-card border border-border p-6 shadow-[0_20px_60px_-45px_rgba(12,23,34,0.55)]"
                 >
-                  <div className="bg-muted text-foreground flex size-12 items-center justify-center rounded-2xl">
+                  <div className="bg-primary/10 text-primary flex size-12 items-center justify-center">
                     <Icon className="size-5" />
                   </div>
                   <h2 className="text-foreground mt-5 font-display text-2xl font-semibold tracking-tight">
@@ -200,7 +206,7 @@ pnpm uru dev`}
         <section className="site-shell py-16">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Why Polterbase exists
               </div>
               <h2 className="text-foreground mt-3 font-display text-4xl font-semibold tracking-tight">
@@ -217,7 +223,7 @@ pnpm uru dev`}
                   href="https://www.npmjs.com/package/@polterware/polterbase"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-muted-foreground bg-card hover:text-foreground rounded-full border border-border px-4 py-2 text-sm"
+                  className="text-muted-foreground bg-card hover:text-primary border border-border px-4 py-2 text-sm"
                 >
                   Polterbase on npm
                 </a>
@@ -225,19 +231,19 @@ pnpm uru dev`}
                   href="https://github.com/polterware/polterbase"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-muted-foreground bg-card hover:text-foreground rounded-full border border-border px-4 py-2 text-sm"
+                  className="text-muted-foreground bg-card hover:text-primary border border-border px-4 py-2 text-sm"
                 >
                   Polterbase on GitHub
                 </a>
               </div>
             </div>
 
-            <div className="rounded-[34px] border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-45px_rgba(7,15,24,0.75)]">
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+            <div className="border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-45px_rgba(7,15,24,0.75)]">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Workflow split
               </div>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="bg-card rounded-[24px] border border-border p-5">
+                <div className="bg-card border border-border p-5">
                   <div className="text-foreground font-display text-xl font-semibold tracking-tight">
                     Uru CLI
                   </div>
@@ -245,7 +251,7 @@ pnpm uru dev`}
                     Local development startup with `pnpm uru dev`.
                   </p>
                 </div>
-                <div className="bg-card rounded-[24px] border border-border p-5">
+                <div className="bg-card border border-border p-5">
                   <div className="text-foreground font-display text-xl font-semibold tracking-tight">
                     Polterbase
                   </div>
@@ -254,11 +260,12 @@ pnpm uru dev`}
                   </p>
                 </div>
               </div>
-              <div className="bg-card text-muted-foreground mt-5 rounded-[24px] border border-border p-5 text-sm leading-7">
-                `npx polterbase app setup uru --path .` is the main
-                source-checkout bootstrap. `npx polterbase app install uru
-                --platform macos --artifact-url &lt;url&gt;` is the main packaged
-                install path.
+              <div className="bg-card text-muted-foreground mt-5 border border-border p-5 text-sm leading-7">
+                <code>npx polterbase app setup uru --path .</code> is the main
+                source-checkout bootstrap. <code>{publicInstallCommand}</code>{" "}
+                is the main packaged install path, with{" "}
+                <code>{ADVANCED_INSTALL_COMMAND}</code> as the direct
+                Polterbase alternative.
               </div>
             </div>
           </div>
@@ -267,7 +274,7 @@ pnpm uru dev`}
         <section className="site-shell py-10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Who Uru is for
               </div>
               <h2 className="text-foreground mt-3 font-display text-4xl font-semibold tracking-tight">
@@ -276,7 +283,7 @@ pnpm uru dev`}
             </div>
             <Link
               href="/docs"
-              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm font-medium"
+              className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-sm font-medium"
             >
               Explore full documentation
               <ArrowRight className="size-4" />
@@ -287,9 +294,9 @@ pnpm uru dev`}
               <Link
                 key={card.title}
                 href={card.href}
-                className="bg-card hover:bg-accent rounded-[30px] border border-border p-6 transition hover:-translate-y-0.5"
+                className="bg-card hover:bg-accent border border-border p-6 transition hover:-translate-y-0.5"
               >
-                <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+                <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                   {card.eyebrow}
                 </div>
                 <h3 className="text-foreground mt-3 font-display text-2xl font-semibold tracking-tight">
@@ -305,8 +312,8 @@ pnpm uru dev`}
 
         <section className="site-shell py-16">
           <div className="grid gap-6 lg:grid-cols-2">
-            <div className="bg-card rounded-[34px] border border-border p-6">
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+            <div className="bg-card border border-border p-6">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Two ways to get started
               </div>
               <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
@@ -326,8 +333,8 @@ pnpm uru dev`}
                 />
               </div>
             </div>
-            <div className="bg-card rounded-[34px] border border-border p-6">
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+            <div className="bg-card border border-border p-6">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Two ways to get started
               </div>
               <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
@@ -342,7 +349,7 @@ pnpm uru dev`}
                 <CodePanel
                   title="macOS install"
                   language="bash"
-                  code={`npx polterbase app install uru --platform macos --artifact-url <url>`}
+                  code={publicInstallCommand}
                 />
               </div>
             </div>
@@ -351,7 +358,7 @@ pnpm uru dev`}
 
         <section className="site-shell py-16">
           <div className="mb-8">
-            <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+            <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
               Architecture at a glance
             </div>
             <h2 className="text-foreground mt-3 font-display text-4xl font-semibold tracking-tight">
@@ -365,9 +372,9 @@ pnpm uru dev`}
           <div className="grid gap-6 lg:grid-cols-2">
             <Link
               href="/docs/troubleshooting"
-              className="bg-card hover:bg-accent rounded-[34px] border border-border p-6 transition hover:-translate-y-0.5"
+              className="bg-card hover:bg-accent border border-border p-6 transition hover:-translate-y-0.5"
             >
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Troubleshooting
               </div>
               <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">
@@ -380,9 +387,9 @@ pnpm uru dev`}
             </Link>
             <Link
               href="/docs/for-developers"
-              className="bg-card hover:bg-accent rounded-[34px] border border-border p-6 transition hover:-translate-y-0.5"
+              className="bg-card hover:bg-accent border border-border p-6 transition hover:-translate-y-0.5"
             >
-              <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
                 Contributors
               </div>
               <h2 className="text-foreground mt-3 font-display text-3xl font-semibold tracking-tight">

@@ -53,7 +53,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                         {block.style === "check" ? (
                           <CheckCircle2 className="text-foreground mt-1 size-5 shrink-0" />
                         ) : (
-                          <span className="bg-foreground/70 mt-3 size-2 rounded-full" />
+                          <span className="bg-foreground/70 mt-3 size-2" />
                         )}
                         <span>{item}</span>
                       </li>
@@ -71,7 +71,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                   {block.items.map((item, stepIndex) => (
                     <div
                       key={item.title}
-                      className="bg-card rounded-[28px] border border-border p-5"
+                      className="bg-card border border-border p-5"
                     >
                       <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                         Step {stepIndex + 1}
@@ -112,13 +112,13 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
             return (
               <div key={index} className="space-y-4">
                 {blockTitle(block.title)}
-                <div className="bg-card overflow-hidden rounded-[28px] border border-border">
+                <div className="bg-card overflow-hidden border border-border">
                   {block.commands.map((command) => (
                     <div
                       key={command.command}
                       className="grid gap-3 border-b border-border px-5 py-4 last:border-b-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]"
                     >
-                      <code className="bg-muted text-foreground overflow-x-auto rounded-2xl px-3 py-2 text-sm">
+                      <code className="bg-muted text-foreground overflow-x-auto px-3 py-2 text-sm">
                         {command.command}
                       </code>
                       <p className="text-muted-foreground text-sm leading-7">
@@ -145,7 +145,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                       href={href}
                       target={external ? "_blank" : undefined}
                       rel={external ? "noreferrer" : undefined}
-                      className="bg-card hover:bg-accent rounded-[28px] border border-border p-5 transition hover:-translate-y-0.5"
+                      className="bg-card hover:bg-accent border border-border p-5 transition hover:-translate-y-0.5"
                     >
                       <div className="text-foreground font-display text-xl font-semibold tracking-tight">
                         {link.label}
@@ -166,7 +166,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                 <h3 className="text-foreground font-display text-xl font-semibold tracking-tight">
                   {block.title}
                 </h3>
-                <div className="bg-card overflow-hidden rounded-[28px] border border-border">
+                <div className="bg-card overflow-hidden border border-border">
                   <div className="bg-muted grid gap-4 border-b border-border px-5 py-4 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,1fr)]">
                     <div />
                     <div className="text-foreground text-sm font-medium">
@@ -203,7 +203,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                   <Link
                     key={item.audience}
                     href={item.href ?? "#"}
-                    className="bg-card hover:bg-accent rounded-[28px] border border-border p-5 transition hover:-translate-y-0.5"
+                    className="bg-card hover:bg-accent border border-border p-5 transition hover:-translate-y-0.5"
                   >
                     <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                       {item.audience}

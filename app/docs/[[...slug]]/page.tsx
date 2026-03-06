@@ -50,9 +50,9 @@ export default async function DocsPage({ params }: PageProps) {
 
   return (
     <>
-      <main className="min-w-0">
-        <div className="rounded-[36px] border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-50px_rgba(7,15,24,0.75)] sm:p-8">
-          <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
+      <main className="no-scrollbar min-w-0 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain lg:pt-8 lg:pr-2 lg:pb-8 lg:[scrollbar-gutter:stable]">
+        <div className="border border-border bg-[color:var(--panel)] p-6 shadow-[0_30px_80px_-50px_rgba(7,15,24,0.75)] sm:p-8">
+          <div className="text-primary/70 text-xs uppercase tracking-[0.22em]">
             {page.section}
           </div>
           <h1 className="text-foreground mt-3 max-w-4xl font-display text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">
@@ -66,7 +66,7 @@ export default async function DocsPage({ params }: PageProps) {
             {page.audience.map((audience) => (
               <span
                 key={audience}
-                className="text-muted-foreground bg-card rounded-full border border-border px-3 py-1.5 text-xs uppercase tracking-[0.16em]"
+                className="text-primary/80 bg-primary/6 border border-primary/15 px-3 py-1.5 text-xs uppercase tracking-[0.16em]"
               >
                 {audience}
               </span>
@@ -87,7 +87,7 @@ export default async function DocsPage({ params }: PageProps) {
             <section
               key={section.title}
               id={toAnchorId(section.title)}
-              className="bg-card rounded-[34px] border border-border p-6 shadow-[0_20px_60px_-45px_rgba(12,23,34,0.45)] sm:p-8"
+              className="bg-card border border-border p-6 shadow-[0_20px_60px_-45px_rgba(12,23,34,0.45)] sm:p-8"
             >
               <div className="mb-6">
                 <h2 className="text-foreground font-display text-3xl font-semibold tracking-tight">
@@ -108,9 +108,9 @@ export default async function DocsPage({ params }: PageProps) {
           {previous ? (
             <Link
               href={getDocHref(previous.slug)}
-              className="bg-card hover:bg-accent rounded-[28px] border border-border p-5 transition hover:-translate-y-0.5"
+              className="bg-card hover:bg-accent border border-border p-5 transition hover:-translate-y-0.5"
             >
-              <div className="text-muted-foreground flex items-center gap-2 text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 flex items-center gap-2 text-xs uppercase tracking-[0.22em]">
                 <ArrowLeft className="size-4" />
                 Previous
               </div>
@@ -125,9 +125,9 @@ export default async function DocsPage({ params }: PageProps) {
           {next ? (
             <Link
               href={getDocHref(next.slug)}
-              className="bg-card hover:bg-accent rounded-[28px] border border-border p-5 text-left transition hover:-translate-y-0.5"
+              className="bg-card hover:bg-accent border border-border p-5 text-left transition hover:-translate-y-0.5"
             >
-              <div className="text-muted-foreground flex items-center justify-end gap-2 text-xs uppercase tracking-[0.22em]">
+              <div className="text-primary/70 flex items-center justify-end gap-2 text-xs uppercase tracking-[0.22em]">
                 Next
                 <ArrowRight className="size-4" />
               </div>
