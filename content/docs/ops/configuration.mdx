@@ -5,7 +5,7 @@ description: Understand .env.local fallback, runtime Supabase connections, boots
 
 Ops supports two related configuration models: build-time environment fallback for development and runtime Supabase connection storage for desktop app installs.
 
-The practical rule is straightforward. Source checkouts may still use .env.local. Packaged desktop installs are meant to use runtime configuration, usually prepared by Polterbase.
+The practical rule is straightforward. Source checkouts may still use .env.local. Packaged desktop installs are meant to use runtime configuration, usually prepared by Polter.
 
 ## .env.local fallback for development
 
@@ -26,7 +26,7 @@ This makes packaged deployments practical because the app can be repointed to an
 
 <Steps>
 
-### Polterbase prepares a bootstrap payload
+### Polter prepares a bootstrap payload
 
 The payload contains the Supabase URL, publishable key, and optional project reference for the intended deployment.
 
@@ -47,9 +47,9 @@ Think of the bootstrap payload as a handoff document from the operator workflow 
 ## How to reconfigure a connection later
 
 ```bash
-npx polterbase app configure ops --path .
+npx polter app configure ops --path .
 ```
 
 Use configure when the Supabase project URL or publishable key changes, or when you want to refresh both development fallback data and runtime bootstrap material.
 
-End users can also adjust the runtime connection from inside the app when the connection form is exposed, but operator-managed configuration through Polterbase is the recommended path for controlled deployments.
+End users can also adjust the runtime connection from inside the app when the connection form is exposed, but operator-managed configuration through Polter is the recommended path for controlled deployments.

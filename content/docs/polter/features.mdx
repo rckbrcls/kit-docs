@@ -1,11 +1,11 @@
 ---
 title: Features
-description: Detailed overview of Polterbase features including the interactive command builder, unified board, and pinned workflows.
+description: Detailed overview of Polter features including the interactive command builder, unified board, and pinned workflows.
 ---
 
 ## Interactive Command Builder
 
-Guided flow for selecting a command, subcommand, and extra arguments. Instead of typing full Supabase CLI commands from memory, Polterbase walks you through each step interactively.
+Guided flow for selecting a command, subcommand, and extra arguments. Instead of typing full Supabase CLI commands from memory, Polter walks you through each step interactively.
 
 ## Suggested Subcommand Picker
 
@@ -28,12 +28,12 @@ Add common global flags in one step. Available flags:
 
 ## Pinned Commands and Runs
 
-Polterbase supports two pinned sections at the top of the main menu:
+Polter supports two pinned sections at the top of the main menu:
 
 - **Pinned Runs** for exact commands like `db pull --debug`
 - **Pinned Commands** for base commands like `db` or `start`
 
-Use `→` on a selected base command to pin or unpin it. Use `→` on the suggested subcommand screen to pin exact runs before executing. After a successful execution, Polterbase can also pin that exact command into Pinned Runs.
+Use `→` on a selected base command to pin or unpin it. Use `→` on the suggested subcommand screen to pin exact runs before executing. After a successful execution, Polter can also pin that exact command into Pinned Runs.
 
 Pins are persisted locally using OS-level app config storage.
 
@@ -52,16 +52,16 @@ projects list
 
 ## Built-in Self-Update
 
-Update Polterbase for the current repository or globally through npm, directly from the CLI:
+Update Polter for the current repository or globally through npm, directly from the CLI:
 
 1. Go to the **Actions** section
-2. Choose **Update Polterbase**
+2. Choose **Update Polter**
 3. Choose **Current repository** or **Global install**
 4. Confirm the npm update command
 
 ## Shell Execution
 
-Polterbase resolves the `supabase` binary from the current repository first, then falls back to `PATH`. This ensures repository-local installations take precedence.
+Polter resolves the `supabase` binary from the current repository first, then falls back to `PATH`. This ensures repository-local installations take precedence.
 
 All workflow commands are executed as:
 

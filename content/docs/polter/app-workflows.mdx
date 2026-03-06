@@ -3,10 +3,10 @@ title: App Workflows
 description: Repository-aware workflows for setup, linking, migrations, runtime configuration, and app installation.
 ---
 
-Polterbase keeps generic Supabase execution separate from app-specific automation. Use the `app` namespace when you want project-aware workflows:
+Polter keeps generic Supabase execution separate from app-specific automation. Use the `app` namespace when you want project-aware workflows:
 
 ```bash
-polterbase app <action> <target> [options]
+polter app <action> <target> [options]
 ```
 
 ## setup ops
@@ -14,7 +14,7 @@ polterbase app <action> <target> [options]
 Full source-checkout bootstrap: installs dependencies, collects Supabase connection data, links the project, pushes migrations, and writes the runtime bootstrap payload used by the desktop app.
 
 ```bash
-polterbase app setup ops --path .
+polter app setup ops --path .
 ```
 
 The `--path` flag points to the root of the Ops source checkout.
@@ -24,7 +24,7 @@ The `--path` flag points to the root of the Ops source checkout.
 Link or relink the checkout to the intended Supabase project.
 
 ```bash
-polterbase app link ops --path .
+polter app link ops --path .
 ```
 
 ## migrate ops
@@ -32,7 +32,7 @@ polterbase app link ops --path .
 Push pending migrations to the linked Supabase project. Supports subcommands:
 
 ```bash
-polterbase app migrate ops push --path .
+polter app migrate ops push --path .
 ```
 
 Available migrate subcommands:
@@ -49,7 +49,7 @@ Available migrate subcommands:
 Refresh the runtime connection payload without reinstalling the app.
 
 ```bash
-polterbase app configure ops --path .
+polter app configure ops --path .
 ```
 
 Use this when you need to update connection details without going through the full setup flow.
@@ -59,7 +59,7 @@ Use this when you need to update connection details without going through the fu
 Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection.
 
 ```bash
-polterbase app install ops
+polter app install ops
 ```
 
 Currently macOS-only. By default it resolves the latest GitHub release from `polterware/ops`.
@@ -75,13 +75,13 @@ Currently macOS-only. By default it resolves the latest GitHub release from `pol
 
 | Variable | Description |
 |---|---|
-| `POLTERBASE_OPS_MACOS_ARTIFACT_URL` | Manual override for the macOS artifact URL |
-| `POLTERBASE_OPS_GITHUB_REPO` | Resolve releases from a fork or different repository (format: `owner/repo`) |
+| `POLTER_OPS_MACOS_ARTIFACT_URL` | Manual override for the macOS artifact URL |
+| `POLTER_OPS_GITHUB_REPO` | Resolve releases from a fork or different repository (format: `owner/repo`) |
 
 Install a specific release:
 
 ```bash
-polterbase app install ops --version 1.0.0
+polter app install ops --version 1.0.0
 ```
 
 ## update ops
@@ -89,7 +89,7 @@ polterbase app install ops --version 1.0.0
 Replace the installed `ops.app` with a newer release while preserving the persisted runtime configuration, local settings, and Supabase session state stored outside the app bundle.
 
 ```bash
-polterbase app update ops
+polter app update ops
 ```
 
-Also macOS-only. Use `POLTERBASE_OPS_GITHUB_REPO=owner/repo` when you need to resolve releases from a fork or a different repository.
+Also macOS-only. Use `POLTER_OPS_GITHUB_REPO=owner/repo` when you need to resolve releases from a fork or a different repository.

@@ -1,12 +1,12 @@
 ---
 title: Usage Examples
-description: Practical examples of common Polterbase workflows and interactive paths.
+description: Practical examples of common Polter workflows and interactive paths.
 ---
 
 ## Bootstrap Ops from source
 
 ```bash
-polterbase app setup ops --path /absolute/path/to/ops
+polter app setup ops --path /absolute/path/to/ops
 ```
 
 This runs the full source-checkout bootstrap: install dependencies, collect Supabase connection data, link, push migrations, and write the runtime bootstrap payload.
@@ -14,7 +14,7 @@ This runs the full source-checkout bootstrap: install dependencies, collect Supa
 ## Reconfigure an installed Ops app
 
 ```bash
-polterbase app configure ops
+polter app configure ops
 ```
 
 Refreshes the runtime connection payload without reinstalling the app.
@@ -22,19 +22,19 @@ Refreshes the runtime connection payload without reinstalling the app.
 ## Install the latest released Ops app
 
 ```bash
-polterbase app install ops
+polter app install ops
 ```
 
 Install a specific release:
 
 ```bash
-polterbase app install ops --version 1.0.0
+polter app install ops --version 1.0.0
 ```
 
 ## Update an existing installation
 
 ```bash
-polterbase app update ops
+polter app update ops
 ```
 
 Replaces the installed app without re-running runtime configuration. Preserves settings and session state.

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Common issues and solutions when using Polterbase, plus security notes.
+description: Common issues and solutions when using Polter, plus security notes.
 ---
 
 ## supabase: command not found
@@ -17,7 +17,7 @@ See the [Supabase CLI Guide](https://supabase.com/docs/guides/cli) for installat
 
 ## Command exits with non-zero code
 
-Polterbase forwards execution to Supabase CLI. Use `--debug` and re-run the command to inspect detailed logs.
+Polter forwards execution to Supabase CLI. Use `--debug` and re-run the command to inspect detailed logs.
 
 Interactive path:
 
@@ -38,6 +38,6 @@ Ensure you are running in a terminal that supports interactive TTY prompts. Some
 
 ## Security Notes
 
-- Polterbase executes local shell commands through your installed Supabase CLI.
+- Polter executes local shell commands through your installed Supabase CLI.
 - Keep Supabase tokens out of shared shells and CI logs.
 - Prefer short-lived tokens and least-privileged project access.
