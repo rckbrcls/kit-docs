@@ -1,10 +1,5 @@
-import {
-  ADVANCED_INSTALL_COMMAND,
-  getPublicInstallCommand,
-  getVersionedInstallCommand,
-} from "@/lib/install";
+import { INSTALL_COMMAND, getVersionedInstallCommand } from "@/lib/install";
 
-const PUBLIC_INSTALL_COMMAND = getPublicInstallCommand();
 const VERSIONED_INSTALL_COMMAND = getVersionedInstallCommand();
 
 export type Audience = "End Users" | "Self-Hosters / Operators" | "Developers";
@@ -390,13 +385,13 @@ pnpm uru dev`,
           {
             type: "code",
             language: "bash",
-            code: PUBLIC_INSTALL_COMMAND,
+            code: INSTALL_COMMAND,
           },
           {
             type: "paragraphs",
             values: [
               "Polterbase installs the .app, prepares the runtime Supabase connection payload, and can hand the app off for first launch. The installed app then consumes that payload and stores the runtime connection for later launches.",
-              `If you need to pin a specific release or bypass the thin site installer, run ${VERSIONED_INSTALL_COMMAND} directly.`,
+              `If you need to pin a specific release, run ${VERSIONED_INSTALL_COMMAND}.`,
               "If you need to point the installed app at a different Supabase project later, use the configuration workflow instead of reinstalling from scratch.",
             ],
           },
@@ -483,13 +478,13 @@ pnpm uru dev`,
             type: "code",
             title: "Packaged app install",
             language: "bash",
-            code: PUBLIC_INSTALL_COMMAND,
+            code: INSTALL_COMMAND,
           },
           {
             type: "paragraphs",
             values: [
-              "Use this when you want the public packaged macOS release and want Polterbase to handle installation plus runtime connection preparation.",
-              `For pinned builds or direct CLI usage, use ${ADVANCED_INSTALL_COMMAND} and add --version <version> when needed.`,
+              "Use this when you want the packaged macOS release and want Polterbase to handle installation plus runtime connection preparation.",
+              `For a pinned build, use ${VERSIONED_INSTALL_COMMAND}.`,
             ],
           },
         ],
@@ -650,7 +645,7 @@ pnpm uru dev`,
                   "Refresh .env.local and runtime bootstrap material without reinstalling the app.",
               },
               {
-                command: ADVANCED_INSTALL_COMMAND,
+                command: INSTALL_COMMAND,
                 description:
                   "Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection payload. Add --version <version> to pin a release.",
               },
