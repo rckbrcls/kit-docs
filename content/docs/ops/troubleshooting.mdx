@@ -13,7 +13,7 @@ This page focuses on those recurring problems so beginners can recover quickly a
 - In an installed app, rerun the configuration workflow or provide the connection through the runtime form when the app asks for it.
 
 ```bash
-npx polterbase app configure ops --path .
+npx polter app configure ops --path .
 ```
 
 ## Auth and network issues
@@ -25,9 +25,9 @@ npx polterbase app configure ops --path .
 ## Migration and link issues
 
 ```bash
-npx polterbase app link ops --path .
-npx polterbase app migrate ops lint --path .
-npx polterbase app migrate ops push --path .
+npx polter app link ops --path .
+npx polter app migrate ops lint --path .
+npx polter app migrate ops push --path .
 ```
 
 If push fails, confirm the repository is linked to the right project and that you have whatever credentials the Supabase workflow needs to apply migrations.
@@ -36,8 +36,8 @@ If push fails, confirm the repository is linked to the right project and that yo
 
 If the packaged app does not connect on first launch, assume the runtime bootstrap step did not complete. Re-run the configuration or installation workflow and then relaunch the app.
 
-## Why Polterbase is required
+## Why Polter is required
 
 <Callout type="info" title="Short answer">
-Because Ops no longer treats Supabase workflows as app CLI responsibilities. Polterbase is the supported workflow layer for those jobs, and the documentation assumes that split.
+Because Ops no longer treats Supabase workflows as app CLI responsibilities. Polter is the supported workflow layer for those jobs, and the documentation assumes that split.
 </Callout>

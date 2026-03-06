@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install Ops from source or as a packaged macOS app, and understand what Polterbase configures for each path.
+description: Install Ops from source or as a packaged macOS app, and understand what Polter configures for each path.
 ---
 
 Ops installation is really two related but different workflows: source checkout setup for people working in the repository, and packaged desktop installation for people who want a ready-to-run macOS app.
@@ -13,23 +13,23 @@ The key distinction is not whether you use Supabase. Both paths do. The distinct
 
 ```bash
 pnpm install
-npx polterbase app setup ops --path .
+npx polter app setup ops --path .
 pnpm ops dev
 ```
 
-This is the main checkout bootstrap flow. Do not replace it with historical Ops CLI setup or database commands. Those responsibilities moved to Polterbase.
+This is the main checkout bootstrap flow. Do not replace it with historical Ops CLI setup or database commands. Those responsibilities moved to Polter.
 
 ## macOS app installation
 
 ### Packaged app install
 
 ```bash
-npx @polterware/polterbase@latest app install ops
+npx @polterware/polter@latest app install ops
 ```
 
-Use this when you want the packaged macOS release and want Polterbase to handle installation plus runtime connection preparation.
+Use this when you want the packaged macOS release and want Polter to handle installation plus runtime connection preparation.
 
-For a pinned build, use `npx @polterware/polterbase@latest app install ops --version <version>`.
+For a pinned build, use `npx @polterware/polter@latest app install ops --version <version>`.
 
 ## Supabase prerequisites
 
@@ -38,10 +38,10 @@ For a pinned build, use `npx @polterware/polterbase@latest app install ops --ver
 - A project URL and publishable key that can be used by Ops at runtime.
 
 <Callout type="info" title="Supabase workflows are centralized">
-Polterbase is the recommended workflow manager for Ops Supabase operations. It is the layer that wraps setup, link, migrate, configure, and install in a way that is specific to Ops.
+Polter is the recommended workflow manager for Ops Supabase operations. It is the layer that wraps setup, link, migrate, configure, and install in a way that is specific to Ops.
 </Callout>
 
-## What Polterbase installs and configures
+## What Polter installs and configures
 
 - Validates prerequisites for the requested workflow.
 - Creates or refreshes .env.local when the source workflow needs it.

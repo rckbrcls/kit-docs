@@ -5,7 +5,7 @@
   "pages": [
     "getting-started",
     "installation",
-    "polterbase",
+    "polter",
     "configuration",
     "running-ops",
     "database-and-migrations",

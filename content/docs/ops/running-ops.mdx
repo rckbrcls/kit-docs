@@ -13,7 +13,7 @@ That keeps the command surface small and reduces confusion about where setup, mi
 pnpm ops dev
 ```
 
-This is the development entry point that remains inside Ops. Use it after the repository has already been prepared with Polterbase.
+This is the development entry point that remains inside Ops. Use it after the repository has already been prepared with Polter.
 
 ## Web versus desktop development mode
 
@@ -23,12 +23,12 @@ This is the development entry point that remains inside Ops. Use it after the re
 
 ## What the minimal CLI does not do anymore
 
-<Callout type="warn" title="Responsibilities moved to Polterbase">
-Do not rely on Ops CLI commands for setup, database linking, migration management, runtime configuration, or packaged app installation. Those workflows are owned by Polterbase.
+<Callout type="warn" title="Responsibilities moved to Polter">
+Do not rely on Ops CLI commands for setup, database linking, migration management, runtime configuration, or packaged app installation. Those workflows are owned by Polter.
 </Callout>
 
 | Command | Description |
 |---|---|
 | `pnpm ops dev` | Start local development. This is the supported Ops CLI workflow. |
-| `npx polterbase app setup ops --path .` | Prepare a source checkout before running the app locally. |
-| `npx polterbase app configure ops --path .` | Refresh development and runtime connection material when the backend changes. |
+| `npx polter app setup ops --path .` | Prepare a source checkout before running the app locally. |
+| `npx polter app configure ops --path .` | Refresh development and runtime connection material when the backend changes. |

@@ -1,0 +1,59 @@
+---
+title: Troubleshooting
+description: Common issues and solutions when using Polter.
+---
+
+## Tool not found
+
+A CLI tool (`supabase`, `gh`, `vercel`, or `pulumi`) is not installed or not in your `PATH`.
+
+**Fix:**
+
+1. Install the missing tool — see [Tool Status](/docs/polter/tool-status) for install links
+2. Restart your terminal
+3. Run `polter status` to verify detection
+
+## Pulumi: project not initialized
+
+Pulumi commands require a `Pulumi.yaml` in the current directory. If it's missing, commands will fail.
+
+**Fix:**
+
+1. Navigate to your infrastructure directory
+2. Run `pulumi new` to create a project from a template, or ensure `Pulumi.yaml` exists
+
+## Editor did not open
+
+The `edit config` and `edit code` commands use `$VISUAL` or `$EDITOR` to open files. If neither is set, the editor won't launch.
+
+**Fix:**
+
+```bash
+export EDITOR="code --wait"   # VS Code
+export EDITOR="vim"           # Vim
+```
+
+Add the export to your shell profile (`~/.zshrc`, `~/.bashrc`) and restart your terminal.
+
+## Command exits with non-zero code
+
+Polter forwards execution to the underlying CLI tool. Re-run with `--debug` to see detailed output.
+
+1. Select the same command
+2. Add the same extra args
+3. Enable `--debug` in the flags picker
+4. Review the output
+
+## Pinned commands are missing
+
+Pins are stored in OS-level app config. If you switch machines or clear app data, pins need to be recreated. Press `→` on a command to pin it.
+
+## Interactive prompt did not open
+
+Polter requires a TTY-capable terminal. CI runners, non-interactive shells, and piped commands don't support interactive input. Use `polter pipeline run <name>` for headless execution.
+
+## Security Notes
+
+- Polter executes shell commands through your installed CLI tools. It does not store or transmit credentials.
+- Keep tokens out of shared shells and CI logs — this applies to Supabase access tokens, GitHub tokens, and Pulumi Cloud tokens.
+- Prefer short-lived tokens and least-privileged access.

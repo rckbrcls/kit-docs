@@ -1,0 +1,79 @@
+---
+title: Command Board
+description: The interactive command board — tabs, pins, flags, and shell execution across all four CLI tools.
+---
+
+The command board is Polter's main interface. It organizes commands from Supabase, GitHub, Vercel, and Pulumi into feature tabs, lets you build commands interactively, and pin frequently used workflows.
+
+## Feature Tabs
+
+Commands are grouped into 9 tabs based on what you're doing, not which tool they belong to:
+
+| Tab | What it groups |
+|---|---|
+| 🗄 **Database** | Supabase `db`, `migration`, `seed`, `inspect` |
+| ⚡ **Functions** | Supabase edge functions |
+| 🚀 **Deploy** | Vercel deploy/promote/rollback, Pulumi up/preview, Supabase db/functions |
+| 📦 **Repo** | GitHub repos, PRs, issues, releases |
+| 🔄 **CI/CD** | GitHub workflows/runs, Vercel env vars, Pulumi preview/up |
+| 🔐 **Auth & Storage** | Supabase storage, secrets, SSO |
+| 🌐 **Networking** | Supabase and Vercel domains, SSL, network restrictions |
+| 🏗 **Infrastructure** | Pulumi stacks, config, deploy, import, state, editor |
+| ⚙️ **Setup** | Login and linking for all 4 tools |
+
+Some commands appear in multiple tabs when they're relevant to more than one workflow (e.g. `pulumi up` in both Deploy and Infrastructure).
+
+## Interactive Command Builder
+
+When you select a command, Polter walks you through:
+
+1. **Suggested args** — common subcommands shown as selectable options
+2. **Custom args** — free-form text input for anything not listed
+3. **Flags** — tool-specific flags presented as checkboxes
+
+The final command is assembled and shown for confirmation before execution.
+
+## Flags
+
+Flags vary by tool and are presented in the flag picker after arg selection:
+
+**Supabase:** `--debug`, `--yes`, `--create-ticket`, `--experimental`
+
+**Vercel:** `--yes`, `--debug`
+
+**Pulumi:** `--yes`, `--debug`, `--stack <name>`
+
+## Pinned Commands and Runs
+
+Two pinned sections sit at the top of the board:
+
+- **Pinned Commands** — base commands like `db` or `deploy` for quick access
+- **Pinned Runs** — exact commands with args and flags, like `db pull --yes`
+
+Press `→` on a command to pin/unpin it. After a successful execution, Polter can also pin that exact run.
+
+Pins are stored locally using OS-level app config and persist across sessions.
+
+## Custom Command Mode
+
+Bypass the guided flow and type raw args for any tool:
+
+```
+-v
+status -o json
+db pull
+projects list
+```
+
+## Shell Execution
+
+Polter resolves each tool binary before running it:
+
+- **supabase** — resolved from the current repository first (`node_modules/.bin`), then `PATH`
+- **gh, vercel, pulumi** — resolved from `PATH`
+
+All commands execute as:
+
+```bash
+<tool> <command> <extra-args> <flags>
+```

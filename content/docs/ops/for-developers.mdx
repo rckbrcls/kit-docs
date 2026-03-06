@@ -5,7 +5,7 @@ description: See where the app code and migrations live, how runtime config work
 
 Ops development is centered around the app code, the Supabase contract, and the runtime configuration model that lets packaged apps connect after installation.
 
-The most important architectural habit is to respect the current boundary: the Ops CLI starts development, and Polterbase owns the Supabase workflows around the app.
+The most important architectural habit is to respect the current boundary: the Ops CLI starts development, and Polter owns the Supabase workflows around the app.
 
 ## High-level project structure
 
@@ -38,7 +38,7 @@ App-facing behavior lives in the React and Tauri layers. Backend-facing behavior
 
 ### Start from a linked and configured checkout
 
-Use Polterbase setup and link workflows before changing app or database behavior.
+Use Polter setup and link workflows before changing app or database behavior.
 
 ### Treat migrations as the backend contract
 
@@ -56,7 +56,7 @@ Avoid adding new Supabase workflow responsibilities back into the Ops CLI unless
 
 ## Current CLI boundary
 
-| | Owned by Ops CLI | Owned by Polterbase |
+| | Owned by Ops CLI | Owned by Polter |
 |---|---|---|
 | **Primary role** | Start local development with pnpm ops dev. | Handle setup, link, migrate, configure, and install workflows. |
 | **Typical user action** | Choose web-only or desktop dev mode. | Prepare the repository or packaged app for the intended Supabase project. |

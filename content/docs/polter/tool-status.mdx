@@ -1,0 +1,39 @@
+---
+title: Tool Status
+description: Check which CLI tools are installed and their versions.
+---
+
+The Tool Status screen shows which CLI tools Polter can detect on your system.
+
+## How It Works
+
+Polter checks for each tool binary in your `PATH` (for `supabase`, it also checks the repository's `node_modules/.bin` first). For each detected tool, it runs the version command and displays the result.
+
+| Tool | Version command |
+|---|---|
+| Supabase CLI | `supabase --version` |
+| GitHub CLI | `gh --version` |
+| Vercel CLI | `vercel --version` |
+| Pulumi CLI | `pulumi version` |
+
+## Status Badges
+
+Each tool shows one of:
+
+- **Installed** with version number — tool is ready to use
+- **Not found** — tool is not in your `PATH`
+
+## Missing Tools
+
+Commands for missing tools are still visible in the board but will fail at execution time. Install the missing tool and restart Polter to resolve.
+
+Install links:
+
+- [Supabase CLI](https://supabase.com/docs/guides/cli)
+- [GitHub CLI](https://cli.github.com/)
+- [Vercel CLI](https://vercel.com/docs/cli)
+- [Pulumi CLI](https://www.pulumi.com/docs/install/)
+
+## Accessing Tool Status
+
+Run `polter status` from the command line, or navigate to the Tool Status screen from within interactive mode.

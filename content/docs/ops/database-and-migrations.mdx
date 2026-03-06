@@ -1,17 +1,17 @@
 ---
 title: Database and Migrations
-description: Run linked-project workflows safely with Polterbase and understand the difference between push, lint, reset, and local-reset.
+description: Run linked-project workflows safely with Polter and understand the difference between push, lint, reset, and local-reset.
 ---
 
-Ops stores its database contract in Supabase migrations. The recommended way to operate that contract is through Polterbase app workflows that understand the Ops repository layout.
+Ops stores its database contract in Supabase migrations. The recommended way to operate that contract is through Polter app workflows that understand the Ops repository layout.
 
 Linking matters because migration commands target a concrete Supabase project. Destructive commands matter even more because they can wipe data if used carelessly.
 
 ## Linked project workflows
 
 ```bash
-npx polterbase app link ops --path .
-npx polterbase app migrate ops push --path .
+npx polter app link ops --path .
+npx polter app migrate ops push --path .
 ```
 
 Link first when the repository is not already associated with the correct Supabase project. After that, push applies pending migrations to the linked backend.
@@ -20,10 +20,10 @@ Link first when the repository is not already associated with the correct Supaba
 
 | Command | Description |
 |---|---|
-| `npx polterbase app migrate ops push --path .` | Apply pending migrations to the linked remote Supabase project. |
-| `npx polterbase app migrate ops lint --path .` | Validate migration quality before applying changes. |
-| `npx polterbase app migrate ops reset --path .` | Destructively reset the linked remote database and then reapply migrations. |
-| `npx polterbase app migrate ops local-reset --path .` | Destructively reset the local Docker-based database stack used for local Supabase work. |
+| `npx polter app migrate ops push --path .` | Apply pending migrations to the linked remote Supabase project. |
+| `npx polter app migrate ops lint --path .` | Validate migration quality before applying changes. |
+| `npx polter app migrate ops reset --path .` | Destructively reset the linked remote database and then reapply migrations. |
+| `npx polter app migrate ops local-reset --path .` | Destructively reset the local Docker-based database stack used for local Supabase work. |
 
 ## Safety guidance
 

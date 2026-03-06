@@ -1,0 +1,60 @@
+---
+title: Pipelines
+description: Chain multiple commands into reusable sequential workflows that run across any tool.
+---
+
+Pipelines let you chain multiple commands into a named, reusable workflow. Each step references a command from any tool (Supabase, GitHub, Vercel, or Pulumi) with its own args and flags.
+
+## Creating a Pipeline
+
+Use the **Pipeline Builder** screen in interactive mode to create a pipeline:
+
+1. Name the pipeline and add an optional description
+2. Add steps — each step picks a command from the board
+3. Configure args, flags, and whether to continue on error
+4. Save to project or global scope
+
+## Pipeline Steps
+
+Each step has:
+
+| Field | Description |
+|---|---|
+| `commandId` | Reference to a command (e.g. `supabase:db`, `vercel:deploy:prod`, `pulumi:up`) |
+| `args` | Extra arguments for the command |
+| `flags` | Flags like `--yes` or `--debug` |
+| `continueOnError` | If `true`, the pipeline continues even if this step fails |
+| `label` | Optional display label |
+
+Steps run sequentially. If a step fails and `continueOnError` is `false`, remaining steps are skipped.
+
+## Storage
+
+Pipelines can be stored at two levels:
+
+- **Project** — saved in `.polter/config.json` at the repository root. Shared via version control.
+- **Global** — saved in OS-level app config. Available across all repositories.
+
+Project pipelines take precedence when both levels define a pipeline with the same ID.
+
+## Headless Execution
+
+Run a pipeline without the interactive UI:
+
+```bash
+polter pipeline run <name>
+```
+
+This resolves the pipeline by name (project scope first, then global) and executes all steps sequentially, printing progress to stdout.
+
+## Example
+
+A "deploy" pipeline that pulls migrations, deploys functions, and pushes to Vercel:
+
+| Step | Command | Flags |
+|---|---|---|
+| 1 | `supabase db pull` | `--yes` |
+| 2 | `supabase functions deploy` | |
+| 3 | `vercel deploy --prod` | |
+
+If step 1 fails, steps 2 and 3 are skipped (unless `continueOnError` is set).

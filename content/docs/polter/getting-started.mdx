@@ -1,0 +1,103 @@
+---
+title: Getting Started
+description: Install and use Polter, the interactive CLI orchestrator for Supabase, GitHub, Vercel, and Pulumi.
+---
+
+Polter is an interactive CLI orchestrator that unifies four developer tools — Supabase, GitHub (`gh`), Vercel, and Pulumi — into one discoverable interface. Instead of memorizing command trees across multiple CLIs, you browse a tabbed board, pick args interactively, attach flags, and pin common workflows for reuse.
+
+## Installation
+
+### Run one-off without installing
+
+```bash
+npx @polterware/polter@latest
+```
+
+### Install in a repository
+
+```bash
+npm install -D @polterware/polter
+```
+
+Then run it from that repository:
+
+```bash
+npx polter
+```
+
+### Install globally
+
+```bash
+npm install -g @polterware/polter
+```
+
+Then run:
+
+```bash
+polter
+```
+
+Use a repository install when you want the CLI version pinned to one project.
+Use a global install when you want the same CLI version across every repository.
+
+### Update
+
+If installed globally:
+
+```bash
+npm install -g @polterware/polter@latest
+```
+
+If installed in a repository:
+
+```bash
+npm install -D @polterware/polter@latest
+```
+
+You can also update from inside Polter — go to **Actions > Update Polter** and choose repository or global.
+
+## Requirements
+
+- **Node.js** >= 18
+
+CLI tools are optional. Polter detects which ones are installed and shows their status on the [Tool Status](/docs/polter/tool-status) screen:
+
+- **Supabase CLI** — [Install guide](https://supabase.com/docs/guides/cli)
+- **GitHub CLI (`gh`)** — [Install guide](https://cli.github.com/)
+- **Vercel CLI** — [Install guide](https://vercel.com/docs/cli)
+- **Pulumi CLI** — [Install guide](https://www.pulumi.com/docs/install/)
+
+Check your environment:
+
+```bash
+node -v
+supabase --version
+gh --version
+vercel --version
+pulumi version
+```
+
+## Typical Flow
+
+1. Choose a command from the board
+2. Optionally pin/unpin with `→`
+3. Choose suggested args or type custom extra args
+4. Pick optional flags
+5. Confirm and execute
+
+## Next Steps
+
+<Cards>
+  <Card title="Command Board" href="/docs/polter/command-board">
+    Browse commands across all tools with tabs, pins, and interactive arg building.
+  </Card>
+  <Card title="Pipelines" href="/docs/polter/pipelines">
+    Chain multiple commands into reusable, sequential workflows.
+  </Card>
+  <Card title="Infrastructure" href="/docs/polter/infrastructure">
+    Manage Pulumi stacks, preview changes, and deploy infrastructure.
+  </Card>
+  <Card title="Configuration" href="/docs/polter/configuration">
+    Declarative project config with polter.yaml — plan and apply state.
+  </Card>
+</Cards>

@@ -1,0 +1,67 @@
+---
+title: CI/CD
+description: GitHub workflows, Vercel deployments, and environment management through Polter.
+---
+
+The **CI/CD** tab groups commands for continuous integration and deployment across GitHub, Vercel, and Pulumi.
+
+## GitHub Workflows
+
+| Command | What it does |
+|---|---|
+| `workflow list` | List repository workflows |
+| `workflow run` | Trigger a workflow manually |
+| `workflow view` | View workflow details |
+| `run list` | List recent workflow runs |
+| `run view` | View a specific run |
+| `run watch` | Watch a run in real time |
+
+## Vercel Deployments
+
+Deploy and manage Vercel projects:
+
+| Command | What it does |
+|---|---|
+| `deploy` | Deploy a preview |
+| `deploy --prod` | Deploy to production |
+| `promote` | Promote a deployment |
+| `rollback` | Rollback to a previous deployment |
+| `logs` | View deployment logs |
+| `inspect` | Inspect a deployment |
+| `ls` | List deployments |
+
+## Environment Variables
+
+Manage Vercel env vars without leaving Polter:
+
+| Command | What it does |
+|---|---|
+| `env ls` | List environment variables |
+| `env add` | Add an environment variable |
+| `env rm` | Remove an environment variable |
+| `env pull` | Pull env vars to a local `.env` file |
+
+## Infrastructure Deploys
+
+Pulumi `preview` and `up` also appear in this tab for workflows that combine app deployment with infrastructure changes.
+
+## GitHub Repos, PRs, and Issues
+
+These live in the **Repo** tab but are closely related to CI/CD workflows:
+
+| Command | What it does |
+|---|---|
+| `pr create` | Create a pull request |
+| `pr list` | List pull requests |
+| `pr merge` | Merge a pull request |
+| `issue create` | Create an issue |
+| `release create` | Create a release |
+
+## Example: Deploy App and Infrastructure
+
+Using a [pipeline](/docs/polter/pipelines), you can chain a Vercel deploy with a Pulumi update:
+
+| Step | Command |
+|---|---|
+| 1 | `vercel deploy --prod` |
+| 2 | `pulumi up --yes` |

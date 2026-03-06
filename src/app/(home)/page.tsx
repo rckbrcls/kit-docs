@@ -12,11 +12,11 @@ const products = [
     tags: ['Desktop', 'Supabase', 'Tauri'],
   },
   {
-    name: 'Polterbase',
+    name: 'Polter',
     description:
       'Interactive CLI for Supabase workflows. Setup, linking, migrations, runtime configuration, and packaged app installation.',
-    href: '/docs/polterbase/getting-started',
-    github: 'https://github.com/polterware/polterbase',
+    href: '/docs/polter/getting-started',
+    github: 'https://github.com/polterware/polter',
     icon: Terminal,
     tags: ['CLI', 'Supabase', 'Migrations'],
   },
@@ -34,11 +34,11 @@ const products = [
 const quickStart = [
   {
     label: 'Bootstrap Ops from source',
-    code: 'npx polterbase app setup ops --path .',
+    code: 'npx polter app setup ops --path .',
   },
   {
     label: 'Install packaged macOS app',
-    code: 'npx @polterware/polterbase@latest app install ops',
+    code: 'npx @polterware/polter@latest app install ops',
   },
   {
     label: 'Add PWA install detection',
