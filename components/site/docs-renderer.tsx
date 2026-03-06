@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import type { DocBlock } from "@/content/docs";
-import { getDocHref } from "@/content/docs";
 import { Callout } from "@/components/site/callout";
 import { CodePanel } from "@/components/site/code-panel";
 import { WorkflowDiagram } from "@/components/site/workflow-diagram";
@@ -11,7 +11,7 @@ function blockTitle(title?: string) {
   }
 
   return (
-    <h3 className="font-display text-xl font-semibold tracking-tight text-slate-950">
+    <h3 className="text-foreground font-display text-xl font-semibold tracking-tight">
       {title}
     </h3>
   );
@@ -27,7 +27,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
               <div key={index} className="space-y-4">
                 {blockTitle(block.title)}
                 {block.values.map((value) => (
-                  <p key={value} className="text-base leading-8 text-slate-600">
+                  <p key={value} className="text-muted-foreground text-base leading-8">
                     {value}
                   </p>
                 ))}
@@ -39,7 +39,7 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
               <div key={index} className="space-y-4">
                 {blockTitle(block.title)}
                 {block.style === "ordered" ? (
-                  <ol className="space-y-3 pl-6 text-base leading-8 text-slate-600">
+                  <ol className="text-muted-foreground space-y-3 pl-6 text-base leading-8">
                     {block.items.map((item) => (
                       <li key={item} className="list-decimal">
                         {item}
@@ -47,10 +47,14 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                     ))}
                   </ol>
                 ) : (
-                  <ul className="space-y-3 text-base leading-8 text-slate-600">
+                  <ul className="text-muted-foreground space-y-3 text-base leading-8">
                     {block.items.map((item) => (
                       <li key={item} className="flex gap-3">
-                        <span className="mt-3 size-2 rounded-full bg-teal-600" />
+                        {block.style === "check" ? (
+                          <CheckCircle2 className="text-foreground mt-1 size-5 shrink-0" />
+                        ) : (
+                          <span className="bg-foreground/70 mt-3 size-2" />
+                        )}
                         <span>{item}</span>
                       </li>
                     ))}
@@ -67,15 +71,15 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                   {block.items.map((item, stepIndex) => (
                     <div
                       key={item.title}
-                      className="rounded-[28px] border border-slate-900/10 bg-white/75 p-5"
+                      className="bg-card border border-border p-5"
                     >
-                      <div className="text-xs uppercase tracking-[0.22em] text-teal-700">
+                      <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                         Step {stepIndex + 1}
                       </div>
-                      <h4 className="mt-2 font-display text-lg font-semibold tracking-tight text-slate-950">
+                      <h4 className="text-foreground mt-2 font-display text-lg font-semibold tracking-tight">
                         {item.title}
                       </h4>
-                      <p className="mt-2 text-sm leading-7 text-slate-600">
+                      <p className="text-muted-foreground mt-2 text-sm leading-7">
                         {item.body}
                       </p>
                     </div>
@@ -108,16 +112,16 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
             return (
               <div key={index} className="space-y-4">
                 {blockTitle(block.title)}
-                <div className="overflow-hidden rounded-[28px] border border-slate-900/10 bg-white/80">
-                  {block.commands.map((command, commandIndex) => (
+                <div className="bg-card overflow-hidden border border-border">
+                  {block.commands.map((command) => (
                     <div
                       key={command.command}
-                      className="grid gap-3 border-b border-slate-900/8 px-5 py-4 last:border-b-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]"
+                      className="grid gap-3 border-b border-border px-5 py-4 last:border-b-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]"
                     >
-                      <code className="overflow-x-auto rounded-2xl bg-slate-950 px-3 py-2 text-sm text-slate-100">
+                      <code className="bg-muted text-foreground overflow-x-auto px-3 py-2 text-sm">
                         {command.command}
                       </code>
-                      <p className="text-sm leading-7 text-slate-600">
+                      <p className="text-muted-foreground text-sm leading-7">
                         {command.description}
                       </p>
                     </div>
@@ -131,27 +135,27 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
               <div key={index} className="space-y-4">
                 {blockTitle(block.title)}
                 <div className="grid gap-4 md:grid-cols-2">
-                  {block.links.map((link) => {
-                    const external = link.href.startsWith("http");
-                    const href = external ? link.href : getDocHref(link.href.replace(/^\/docs\/?/, ""));
+                {block.links.map((link) => {
+                  const external = link.href.startsWith("http");
+                  const href = link.href;
 
-                    return (
-                      <Link
-                        key={link.label}
-                        href={href}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noreferrer" : undefined}
-                        className="rounded-[28px] border border-slate-900/10 bg-white/80 p-5 transition hover:-translate-y-0.5 hover:border-slate-900/20"
-                      >
-                        <div className="font-display text-xl font-semibold tracking-tight text-slate-950">
-                          {link.label}
-                        </div>
-                        <p className="mt-2 text-sm leading-7 text-slate-600">
-                          {link.description}
-                        </p>
-                      </Link>
-                    );
-                  })}
+                  return (
+                    <Link
+                      key={link.label}
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noreferrer" : undefined}
+                      className="bg-card hover:bg-accent border border-border p-5 transition hover:-translate-y-0.5"
+                    >
+                      <div className="text-foreground font-display text-xl font-semibold tracking-tight">
+                        {link.label}
+                      </div>
+                      <p className="text-muted-foreground mt-2 text-sm leading-7">
+                        {link.description}
+                      </p>
+                    </Link>
+                  );
+                })}
                 </div>
               </div>
             );
@@ -159,31 +163,31 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
           case "comparison":
             return (
               <div key={index} className="space-y-4">
-                <h3 className="font-display text-xl font-semibold tracking-tight text-slate-950">
+                <h3 className="text-foreground font-display text-xl font-semibold tracking-tight">
                   {block.title}
                 </h3>
-                <div className="overflow-hidden rounded-[28px] border border-slate-900/10 bg-white/80">
-                  <div className="grid gap-4 border-b border-slate-900/8 bg-slate-950/4 px-5 py-4 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,1fr)]">
+                <div className="bg-card overflow-hidden border border-border">
+                  <div className="bg-muted grid gap-4 border-b border-border px-5 py-4 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,1fr)]">
                     <div />
-                    <div className="text-sm font-medium text-slate-950">
+                    <div className="text-foreground text-sm font-medium">
                       {block.columns[0]}
                     </div>
-                    <div className="text-sm font-medium text-slate-950">
+                    <div className="text-foreground text-sm font-medium">
                       {block.columns[1]}
                     </div>
                   </div>
                   {block.rows.map((row) => (
                     <div
                       key={row.label}
-                      className="grid gap-4 border-b border-slate-900/8 px-5 py-4 last:border-b-0 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,1fr)]"
+                      className="grid gap-4 border-b border-border px-5 py-4 last:border-b-0 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,1fr)]"
                     >
-                      <div className="text-sm font-medium text-slate-950">
+                      <div className="text-foreground text-sm font-medium">
                         {row.label}
                       </div>
-                      <div className="text-sm leading-7 text-slate-600">
+                      <div className="text-muted-foreground text-sm leading-7">
                         {row.values[0]}
                       </div>
-                      <div className="text-sm leading-7 text-slate-600">
+                      <div className="text-muted-foreground text-sm leading-7">
                         {row.values[1]}
                       </div>
                     </div>
@@ -199,15 +203,15 @@ export function DocsRenderer({ blocks }: { blocks: DocBlock[] }) {
                   <Link
                     key={item.audience}
                     href={item.href ?? "#"}
-                    className="rounded-[28px] border border-slate-900/10 bg-white/80 p-5 transition hover:-translate-y-0.5 hover:border-slate-900/20"
+                    className="bg-card hover:bg-accent border border-border p-5 transition hover:-translate-y-0.5"
                   >
-                    <div className="text-xs uppercase tracking-[0.22em] text-teal-700">
+                    <div className="text-muted-foreground text-xs uppercase tracking-[0.22em]">
                       {item.audience}
                     </div>
-                    <div className="mt-2 font-display text-xl font-semibold tracking-tight text-slate-950">
+                    <div className="text-foreground mt-2 font-display text-xl font-semibold tracking-tight">
                       {item.heading}
                     </div>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">
+                    <p className="text-muted-foreground mt-2 text-sm leading-7">
                       {item.body}
                     </p>
                   </Link>
