@@ -1,0 +1,93 @@
+---
+title: MCP / AI Integration
+description: Connect Polter to AI tools like Claude Code and Cursor via the Model Context Protocol.
+---
+
+Polter exposes an MCP (Model Context Protocol) server so AI tools can discover and execute commands natively. Instead of copy-pasting CLI invocations, your AI assistant can browse available commands, run pipelines, and manage infrastructure directly.
+
+## Installation
+
+### Automatic
+
+The fastest way to register Polter as an MCP server:
+
+```bash
+polter mcp install
+```
+
+This adds the server to your **local** Claude Code config (scoped to the current project).
+
+#### Project scope (shared via repo)
+
+```bash
+polter mcp install --project
+```
+
+Writes to `.mcp.json` in the repository root so every collaborator gets the same setup.
+
+#### Global scope (all projects)
+
+```bash
+polter mcp install --global
+```
+
+Registers the server in your global Claude Code settings.
+
+### Manual
+
+If you prefer to register manually:
+
+```bash
+claude mcp add polter -- npx -y -p @polterware/polter polter-mcp
+```
+
+Or add this entry directly to `~/.claude/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "polter": {
+      "command": "npx",
+      "args": ["-y", "-p", "@polterware/polter", "polter-mcp"]
+    }
+  }
+}
+```
+
+## Available Tools
+
+Once connected, the AI client can call these tools:
+
+| Tool | Description | Input |
+|---|---|---|
+| `polter_list_commands` | Browse and filter available commands | `tool?`, `search?` |
+| `polter_run_command` | Execute a command by ID | `commandId`, `args?`, `flags?` |
+| `polter_status` | Show tool versions and project linkage | — |
+| `polter_list_pipelines` | List saved pipelines | `scope?` |
+| `polter_run_pipeline` | Execute a pipeline by name | `name` |
+| `polter_plan` | Dry-run declarative diff from `polter.yaml` | — |
+| `polter_apply` | Apply declarative changes | — |
+
+<Callout type="warn" title="polter_apply executes real commands">
+  `polter_apply` runs actual CLI commands against your linked projects (deploys, secret writes, domain changes). These actions are not reversible. Always run `polter_plan` first to review what will change.
+</Callout>
+
+## Example Workflows
+
+Natural language prompts and the tools they trigger:
+
+| Prompt | Tool Called | Arguments |
+|---|---|---|
+| "deploy to production" | `polter_run_command` | `commandId: "vercel:deploy:prod"` |
+| "create a PR" | `polter_run_command` | `commandId: "gh:pr:create"` |
+| "what would change if I apply?" | `polter_plan` | — |
+| "run the deploy pipeline" | `polter_run_pipeline` | `name: "deploy"` |
+| "show all supabase commands" | `polter_list_commands` | `tool: "supabase"` |
+
+The AI assistant resolves the right tool and arguments from your natural language request — no need to remember command IDs.
+
+## Supported Clients
+
+- **Claude Code** — full support via `polter mcp install`
+- **Cursor** — add the server in Cursor's MCP settings
+- Any client that implements the [Model Context Protocol](https://modelcontextprotocol.io)
