@@ -1,0 +1,43 @@
+---
+title: Troubleshooting
+description: Common issues and solutions when using Polterbase, plus security notes.
+---
+
+## supabase: command not found
+
+Supabase CLI is not installed in the current repository and is not available in your `PATH`.
+
+**Fix:**
+
+1. Install Supabase CLI globally or in the current repository
+2. Restart your terminal
+3. Verify with `supabase --version`
+
+See the [Supabase CLI Guide](https://supabase.com/docs/guides/cli) for installation instructions.
+
+## Command exits with non-zero code
+
+Polterbase forwards execution to Supabase CLI. Use `--debug` and re-run the command to inspect detailed logs.
+
+Interactive path:
+
+1. Select the same command
+2. Add the same extra args
+3. Enable `--debug` in the flags picker
+4. Review the output
+
+## Pinned commands are missing
+
+Pins are managed directly in the board. Select a base command and press `→` to pin it, or pin an exact run after a successful execution.
+
+Pins are stored using OS-level app config storage. If you switch machines or clear app data, pins will need to be recreated.
+
+## Interactive prompt did not open correctly
+
+Ensure you are running in a terminal that supports interactive TTY prompts. Some environments (CI runners, non-interactive shells, piped commands) do not support interactive input.
+
+## Security Notes
+
+- Polterbase executes local shell commands through your installed Supabase CLI.
+- Keep Supabase tokens out of shared shells and CI logs.
+- Prefer short-lived tokens and least-privileged project access.

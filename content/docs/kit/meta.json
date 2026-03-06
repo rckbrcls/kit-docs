@@ -1,9 +1,8 @@
 {
   "title": "polterware/kit",
-  "description": "Open-source tools for business operations and modern web apps.",
+  "description": "Developer tools built for personal use, open for everyone.",
   "root": true,
   "pages": [
-    "index",
     "introduction"
   ]
 }

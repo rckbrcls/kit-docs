@@ -1,9 +1,9 @@
 ---
-title: Polterbase Getting Started
+title: Getting Started
 description: Install and use Polterbase, the interactive CLI for managing Supabase CLI workflows.
 ---
 
-Polterbase is an optimized interactive CLI for managing Supabase CLI workflows with more speed, consistency, and discoverability. It is a productivity layer on top of the official supabase CLI.
+Polterbase is an optimized interactive CLI for managing Supabase CLI workflows with more speed, consistency, and discoverability. It is a productivity layer on top of the official `supabase` CLI.
 
 Instead of memorizing command trees, you browse one unified board, add extra args interactively, attach global flags, and pin common workflows for one-click reuse.
 
@@ -21,41 +21,79 @@ npx @polterware/polterbase@latest
 npm install -D @polterware/polterbase
 ```
 
+Then run it from that repository:
+
+```bash
+npx polterbase
+```
+
 ### Install globally
 
 ```bash
 npm install -g @polterware/polterbase
 ```
 
-## Features
+Then run:
 
-- Interactive command builder with guided flow for command, subcommand, and extra args.
-- Unified command board with pinned runs, pinned commands, grouped categories, and actions.
-- Global flags picker for common flags like --debug, --yes, and --experimental.
-- Pinned commands and runs for one-click reuse of frequent workflows.
-- Custom command mode for raw Supabase arguments.
-- Built-in self-update through npm.
-- App workflows for repository-aware setup, linking, migrations, runtime configuration, and app installation.
+```bash
+polterbase
+```
 
-## App workflows
+Use a repository install when you want the CLI version pinned to one project.
+Use a global install when you want the same CLI version across every repository.
 
-| Command | Description |
-|---|---|
-| `polterbase app setup ops --path .` | Full source-checkout bootstrap: install dependencies, collect Supabase connection data, link, push migrations, and write the runtime bootstrap payload. |
-| `polterbase app link ops --path .` | Link or relink the checkout to the intended Supabase project. |
-| `polterbase app migrate ops push --path .` | Push pending migrations to the linked Supabase project. |
-| `polterbase app configure ops --path .` | Refresh runtime connection payload without reinstalling the app. |
-| `polterbase app install ops` | Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection. |
-| `polterbase app update ops` | Update an existing install to a newer release while preserving runtime configuration and settings. |
+### Update
+
+If installed globally:
+
+```bash
+npm install -g @polterware/polterbase@latest
+```
+
+If installed in a repository:
+
+```bash
+npm install -D @polterware/polterbase@latest
+```
+
+You can also update from inside Polterbase:
+
+1. Go to the **Actions** section
+2. Choose **Update Polterbase**
+3. Choose **Current repository** or **Global install**
+4. Confirm the npm update command
 
 ## Requirements
 
-- Node.js >= 18.
-- Supabase CLI installed globally or locally in the current repository.
+- **Node.js** >= 18
+- **Supabase CLI** installed globally or locally in the current repository
 
-### References
+Check your environment:
+
+```bash
+node -v
+supabase --version
+```
+
+Install Supabase CLI: [Supabase CLI Guide](https://supabase.com/docs/guides/cli)
+
+## Typical Flow
+
+1. Choose a command from the unified board
+2. Optionally pin/unpin with `→`
+3. Choose suggested args or type custom extra args
+4. Pick optional global flags
+5. Confirm and execute
+
+## Next Steps
 
 <Cards>
+  <Card title="Features" href="/docs/polterbase/features">
+    Interactive command builder, unified board, pins, and more.
+  </Card>
+  <Card title="App Workflows" href="/docs/polterbase/app-workflows">
+    Repository-aware setup, linking, migrations, and app installation.
+  </Card>
   <Card title="Polterbase on npm" href="https://www.npmjs.com/package/@polterware/polterbase">
     Package and installation reference.
   </Card>
