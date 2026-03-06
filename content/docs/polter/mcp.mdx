@@ -38,7 +38,7 @@ Registers the server in your global Claude Code settings.
 If you prefer to register manually:
 
 ```bash
-claude mcp add polter -- npx -y -p @polterware/polter polter-mcp
+claude mcp add polter -- npx -y -p @polterware/polter@latest polter-mcp
 ```
 
 Or add this entry directly to `~/.claude/settings.json`:
@@ -48,11 +48,51 @@ Or add this entry directly to `~/.claude/settings.json`:
   "mcpServers": {
     "polter": {
       "command": "npx",
-      "args": ["-y", "-p", "@polterware/polter", "polter-mcp"]
+      "args": ["-y", "-p", "@polterware/polter@latest", "polter-mcp"]
     }
   }
 }
 ```
+
+## Management
+
+### Update
+
+Re-register the MCP server with the latest version:
+
+```bash
+polter mcp update
+```
+
+This clears the npx cache and re-registers with `@latest`, ensuring you always run the newest release.
+
+| Flag | Effect |
+|---|---|
+| `--project` | Update the project-scoped `.mcp.json` registration |
+| `--global` | Update the global Claude Code registration |
+
+### Status
+
+Check your current MCP server installation:
+
+```bash
+polter mcp status
+```
+
+Shows the installed version, latest available version on npm, and registration status for each scope (local, project, global).
+
+### Remove
+
+Unregister the MCP server:
+
+```bash
+polter mcp remove
+```
+
+| Flag | Effect |
+|---|---|
+| `--project` | Remove the project-scoped registration |
+| `--global` | Remove the global registration |
 
 ## Available Tools
 
@@ -60,11 +100,14 @@ Once connected, the AI client can call these tools:
 
 | Tool | Description | Input |
 |---|---|---|
-| `polter_list_commands` | Browse and filter available commands | `tool?`, `search?` |
+| `polter_list_commands` | Browse and filter available commands | `tool?` |
 | `polter_run_command` | Execute a command by ID | `commandId`, `args?`, `flags?` |
 | `polter_status` | Show tool versions and project linkage | — |
-| `polter_list_pipelines` | List saved pipelines | `scope?` |
+| `polter_list_pipelines` | List saved pipelines | — |
 | `polter_run_pipeline` | Execute a pipeline by name | `name` |
+| `polter_create_pipeline` | Create a new pipeline | `name`, `steps`, `description?`, `source?` |
+| `polter_update_pipeline` | Update an existing pipeline | `name`, `description?`, `steps?` |
+| `polter_delete_pipeline` | Delete a pipeline | `name` |
 | `polter_plan` | Dry-run declarative diff from `polter.yaml` | — |
 | `polter_apply` | Apply declarative changes | — |
 
