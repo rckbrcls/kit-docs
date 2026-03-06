@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Terminal, Database, Globe, ArrowRight, ChevronRight } from 'lucide-react';
+import { Terminal, Database, Globe, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
 
 const products = [
   {
@@ -7,6 +7,7 @@ const products = [
     description:
       'Desktop business manager powered by Supabase. Product catalog, inventory, orders, sales, payments, and analytics.',
     href: '/docs/ops/getting-started',
+    github: 'https://github.com/polterware/ops',
     icon: Database,
     tags: ['Desktop', 'Supabase', 'Tauri'],
   },
@@ -15,6 +16,7 @@ const products = [
     description:
       'Interactive CLI for Supabase workflows. Setup, linking, migrations, runtime configuration, and packaged app installation.',
     href: '/docs/polterbase/getting-started',
+    github: 'https://github.com/polterware/polterbase',
     icon: Terminal,
     tags: ['CLI', 'Supabase', 'Migrations'],
   },
@@ -23,6 +25,7 @@ const products = [
     description:
       'Headless install utilities and manifest tools. Detect environments, show manual guides, and use React hooks.',
     href: '/docs/pwa/getting-started',
+    github: 'https://github.com/polterware/pwa',
     icon: Globe,
     tags: ['Runtime API', 'React', 'Manifest'],
   },
@@ -48,7 +51,6 @@ export default function HomePage() {
     <main className="flex flex-col flex-1">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-fd-border">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--color-fd-accent)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-20 sm:pt-32 sm:pb-28">
           <div className="flex flex-col items-start gap-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card/60 px-3 py-1 text-xs tracking-wide text-fd-muted-foreground backdrop-blur-sm">
@@ -56,25 +58,25 @@ export default function HomePage() {
               Open Source
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-fd-foreground leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-fd-foreground font-mono leading-[1.1]">
               <span className="text-fd-muted-foreground font-normal">polterware/</span>kit
             </h1>
 
             <p className="max-w-xl text-lg text-fd-muted-foreground leading-relaxed">
-              Open-source tools for business operations and modern web apps.
+              Developer tools built for personal use, open for everyone.
               Three projects, one ecosystem.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
-                href="/docs/kit"
+                href="/docs/kit/introduction"
                 className="inline-flex items-center gap-2 rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90"
               >
                 Documentation
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                href="https://github.com/polterware/kit"
+                href="https://github.com/polterware"
                 className="inline-flex items-center gap-2 rounded-lg border border-fd-border bg-fd-card/60 px-5 py-2.5 text-sm font-medium text-fd-foreground backdrop-blur-sm transition-colors hover:bg-fd-accent"
               >
                 GitHub
@@ -92,24 +94,36 @@ export default function HomePage() {
 
         <div className="grid gap-4 sm:grid-cols-3">
           {products.map((product) => (
-            <Link
+            <div
               key={product.name}
-              href={product.href}
               className="group relative flex flex-col gap-4 rounded-xl border border-fd-border bg-fd-card/50 p-6 transition-colors hover:bg-fd-accent/40"
             >
               <div className="flex items-center justify-between">
                 <product.icon className="size-5 text-fd-muted-foreground" />
-                <ChevronRight className="size-4 text-fd-muted-foreground opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={product.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
+                    aria-label={`${product.name} on GitHub`}
+                  >
+                    <ExternalLink className="size-3.5" />
+                  </Link>
+                  <Link href={product.href}>
+                    <ChevronRight className="size-4 text-fd-muted-foreground opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+                  </Link>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-2">
+              <Link href={product.href} className="flex flex-col gap-2">
                 <h3 className="text-lg font-semibold text-fd-foreground">
                   {product.name}
                 </h3>
                 <p className="text-sm leading-relaxed text-fd-muted-foreground">
                   {product.description}
                 </p>
-              </div>
+              </Link>
 
               <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
                 {product.tags.map((tag) => (
@@ -121,7 +135,7 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -158,7 +172,7 @@ export default function HomePage() {
             MIT Licensed. Built with Supabase, Tauri, and React.
           </p>
           <Link
-            href="/docs/kit"
+            href="/docs/kit/introduction"
             className="text-sm font-medium text-fd-foreground underline underline-offset-4 decoration-fd-muted-foreground/40 hover:decoration-fd-foreground transition-colors"
           >
             Read the docs

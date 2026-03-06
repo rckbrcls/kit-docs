@@ -2,5 +2,12 @@
   "title": "Polterbase",
   "description": "CLI workflow manager for Supabase operations.",
   "root": true,
-  "pages": ["getting-started"]
+  "pages": [
+    "getting-started",
+    "features",
+    "app-workflows",
+    "command-reference",
+    "usage-examples",
+    "troubleshooting"
+  ]
 }

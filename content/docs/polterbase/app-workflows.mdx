@@ -1,0 +1,95 @@
+---
+title: App Workflows
+description: Repository-aware workflows for setup, linking, migrations, runtime configuration, and app installation.
+---
+
+Polterbase keeps generic Supabase execution separate from app-specific automation. Use the `app` namespace when you want project-aware workflows:
+
+```bash
+polterbase app <action> <target> [options]
+```
+
+## setup ops
+
+Full source-checkout bootstrap: installs dependencies, collects Supabase connection data, links the project, pushes migrations, and writes the runtime bootstrap payload used by the desktop app.
+
+```bash
+polterbase app setup ops --path .
+```
+
+The `--path` flag points to the root of the Ops source checkout.
+
+## link ops
+
+Link or relink the checkout to the intended Supabase project.
+
+```bash
+polterbase app link ops --path .
+```
+
+## migrate ops
+
+Push pending migrations to the linked Supabase project. Supports subcommands:
+
+```bash
+polterbase app migrate ops push --path .
+```
+
+Available migrate subcommands:
+
+| Subcommand | Description |
+|---|---|
+| `push` | Push pending migrations to the linked project |
+| `lint` | Lint migration files |
+| `reset` | Reset remote database and replay migrations |
+| `local-reset` | Reset local database and replay migrations |
+
+## configure ops
+
+Refresh the runtime connection payload without reinstalling the app.
+
+```bash
+polterbase app configure ops --path .
+```
+
+Use this when you need to update connection details without going through the full setup flow.
+
+## install ops
+
+Install the packaged macOS app from GitHub Releases and prepare the runtime Supabase connection.
+
+```bash
+polterbase app install ops
+```
+
+Currently macOS-only. By default it resolves the latest GitHub release from `polterware/ops`.
+
+### Options
+
+| Option | Description |
+|---|---|
+| `--version <version>` | Pin a specific release version |
+| `--artifact-url <url>` | Manual override for the download URL |
+
+### Environment Variables
+
+| Variable | Description |
+|---|---|
+| `POLTERBASE_OPS_MACOS_ARTIFACT_URL` | Manual override for the macOS artifact URL |
+| `POLTERBASE_OPS_GITHUB_REPO` | Resolve releases from a fork or different repository (format: `owner/repo`) |
+
+Install a specific release:
+
+```bash
+polterbase app install ops --version 1.0.0
+```
+
+## update ops
+
+Replace the installed `ops.app` with a newer release while preserving the persisted runtime configuration, local settings, and Supabase session state stored outside the app bundle.
+
+```bash
+polterbase app update ops
+```
+
+Also macOS-only. Use `POLTERBASE_OPS_GITHUB_REPO=owner/repo` when you need to resolve releases from a fork or a different repository.
