@@ -3,7 +3,7 @@ title: CI/CD
 description: GitHub workflows, Vercel deployments, and environment management through Polter.
 ---
 
-The **CI/CD** tab groups commands for continuous integration and deployment across GitHub, Vercel, and Pulumi.
+The **CI/CD** tab groups commands for continuous integration and deployment across GitHub and Vercel.
 
 ## GitHub Workflows
 
@@ -41,10 +41,6 @@ Manage Vercel env vars without leaving Polter:
 | `env rm` | Remove an environment variable |
 | `env pull` | Pull env vars to a local `.env` file |
 
-## Infrastructure Deploys
-
-Pulumi `preview` and `up` also appear in this tab for workflows that combine app deployment with infrastructure changes.
-
 ## GitHub Repos, PRs, and Issues
 
 These live in the **Repo** tab but are closely related to CI/CD workflows:
@@ -57,11 +53,11 @@ These live in the **Repo** tab but are closely related to CI/CD workflows:
 | `issue create` | Create an issue |
 | `release create` | Create a release |
 
-## Example: Deploy App and Infrastructure
+## Example: Deploy Pipeline
 
-Using a [pipeline](/docs/polter/pipelines), you can chain a Vercel deploy with a Pulumi update:
+Using a [pipeline](/docs/polter/pipelines), you can chain a full deploy:
 
 | Step | Command |
 |---|---|
-| 1 | `vercel deploy --prod` |
-| 2 | `pulumi up --yes` |
+| 1 | `supabase db pull --yes` |
+| 2 | `vercel deploy --prod` |

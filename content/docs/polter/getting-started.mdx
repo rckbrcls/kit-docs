@@ -1,9 +1,9 @@
 ---
 title: Getting Started
-description: Install and use Polter, the interactive CLI orchestrator for Supabase, GitHub, Vercel, and Pulumi.
+description: Install and use Polter, the interactive CLI orchestrator for Supabase, GitHub, Vercel, and your package manager.
 ---
 
-Polter is an interactive CLI orchestrator that unifies four developer tools — Supabase, GitHub (`gh`), Vercel, and Pulumi — into one discoverable interface. Instead of memorizing command trees across multiple CLIs, you browse a tabbed board, pick args interactively, attach flags, and pin common workflows for reuse.
+Polter is an interactive CLI orchestrator that unifies four tool categories — Supabase, GitHub (`gh`), Vercel, and your package manager (npm/pnpm/yarn/bun) — into one discoverable interface. Instead of memorizing command trees across multiple CLIs, you browse a tabbed board, pick args interactively, attach flags, and pin common workflows for reuse.
 
 ## Installation
 
@@ -40,6 +40,15 @@ polter
 Use a repository install when you want the CLI version pinned to one project.
 Use a global install when you want the same CLI version across every repository.
 
+### Set Up AI Integration
+
+```bash
+polter setup          # Install Claude Code skill
+polter mcp install    # Register MCP server
+```
+
+This installs the `/polter` skill for Claude Code and registers Polter as an MCP server. See [MCP / AI Integration](/docs/polter/mcp) for details.
+
 ### Update
 
 If installed globally:
@@ -65,7 +74,7 @@ CLI tools are optional. Polter detects which ones are installed and shows their 
 - **Supabase CLI** — [Install guide](https://supabase.com/docs/guides/cli)
 - **GitHub CLI (`gh`)** — [Install guide](https://cli.github.com/)
 - **Vercel CLI** — [Install guide](https://vercel.com/docs/cli)
-- **Pulumi CLI** — [Install guide](https://www.pulumi.com/docs/install/)
+- **Package manager** — auto-detected from your lock file (npm, pnpm, yarn, or bun). No extra configuration required.
 
 Check your environment:
 
@@ -74,7 +83,6 @@ node -v
 supabase --version
 gh --version
 vercel --version
-pulumi version
 ```
 
 ## Typical Flow
@@ -94,11 +102,11 @@ pulumi version
   <Card title="Pipelines" href="/docs/polter/pipelines">
     Chain multiple commands into reusable, sequential workflows.
   </Card>
-  <Card title="Infrastructure" href="/docs/polter/infrastructure">
-    Manage Pulumi stacks, preview changes, and deploy infrastructure.
-  </Card>
-  <Card title="Configuration" href="/docs/polter/configuration">
+<Card title="Configuration" href="/docs/polter/configuration">
     Declarative project config with polter.yaml — plan and apply state.
+  </Card>
+  <Card title="Process Management" href="/docs/polter/processes">
+    Start, monitor, and control background dev servers and scripts.
   </Card>
   <Card title="MCP / AI Integration" href="/docs/polter/mcp">
     Connect Polter to Claude Code, Cursor, and other AI tools via MCP.

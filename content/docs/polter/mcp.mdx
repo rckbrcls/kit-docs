@@ -3,7 +3,7 @@ title: MCP / AI Integration
 description: Connect Polter to AI tools like Claude Code and Cursor via the Model Context Protocol.
 ---
 
-Polter exposes an MCP (Model Context Protocol) server so AI tools can discover and execute commands natively. Instead of copy-pasting CLI invocations, your AI assistant can browse available commands, run pipelines, and manage infrastructure directly.
+Polter exposes an MCP (Model Context Protocol) server so AI tools can discover and execute commands natively. Instead of copy-pasting CLI invocations, your AI assistant can browse available commands, run pipelines, and handle package management (npm, pnpm, yarn, bun) directly.
 
 ## Installation
 
@@ -110,10 +110,45 @@ Once connected, the AI client can call these tools:
 | `polter_delete_pipeline` | Delete a pipeline | `name` |
 | `polter_plan` | Dry-run declarative diff from `polter.yaml` | — |
 | `polter_apply` | Apply declarative changes | — |
+| `polter_pkg_build` | Run the build script | — |
+| `polter_pkg_publish` | Publish to npm registry | `tag?`, `dryRun?` |
+| `polter_pkg_install` | Install dependencies | `packages?`, `dev?` |
+| `polter_pkg_run_script` | Run a package.json script | `script`, `args?` |
+| `polter_pkg_version_bump` | Bump semver version | `type: patch/minor/major` |
+| `polter_pkg_audit` | Security audit | `fix?` |
+| `polter_pkg_info` | Package registry info | `package` |
+| `polter_ps` | List all tracked background processes | — |
+| `polter_start` | Start a command as background process | `command`, `args?`, `id?`, `cwd?` |
+| `polter_stop` | Stop a background process | `id` |
+| `polter_logs` | Read captured output from a process | `id`, `tail?`, `stream?` |
+| `polter_find_process` | Find processes by directory | `cwd?`, `filter?`, `tail?` |
+| `polter_smart_start` | Start package.json script as background process | `script?`, `cwd?`, `tail?` |
+| `polter_run_script_bg` | Run a package.json script in background | `script`, `args?`, `cwd?` |
 
 <Callout type="warn" title="polter_apply executes real commands">
   `polter_apply` runs actual CLI commands against your linked projects (deploys, secret writes, domain changes). These actions are not reversible. Always run `polter_plan` first to review what will change.
 </Callout>
+
+## Resources
+
+The MCP server also exposes read-only resources that AI clients can inspect:
+
+| URI | Content |
+|---|---|
+| `polter://package-json` | Parsed package.json (name, version, deps, scripts) |
+| `polter://dependency-tree` | Dependency tree (npm ls --json equivalent) |
+| `polter://scripts` | Scripts from package.json |
+| `polter://pkg-manager` | Detected manager info (id, version, lockFile) |
+
+## Prompts
+
+Pre-built prompts that guide the AI through common workflows:
+
+| Prompt | Description | Params |
+|---|---|---|
+| `polter_publish_workflow` | Step-by-step publish guide | — |
+| `polter_version_strategy` | Semver strategy suggestion | `currentVersion`, `changeType` |
+| `polter_audit_resolution` | Audit finding resolution guide | — |
 
 ## Example Workflows
 
@@ -126,8 +161,40 @@ Natural language prompts and the tools they trigger:
 | "what would change if I apply?" | `polter_plan` | — |
 | "run the deploy pipeline" | `polter_run_pipeline` | `name: "deploy"` |
 | "show all supabase commands" | `polter_list_commands` | `tool: "supabase"` |
+| "install react" | `polter_pkg_install` | `packages: ["react"]` |
+| "run the build script" | `polter_pkg_run_script` | `script: "build"` |
+| "bump the patch version" | `polter_pkg_version_bump` | `type: "patch"` |
+| "audit my dependencies" | `polter_pkg_audit` | — |
+| "start the dev server" | `polter_smart_start` | `script: "dev"` |
+| "check for errors in the dev server" | `polter_logs` | `id: "npm-run-dev"`, `stream: "stderr"`, `tail: 30` |
+| "what's running?" | `polter_ps` | — |
+| "stop the dev server" | `polter_stop` | `id: "npm-run-dev"` |
 
 The AI assistant resolves the right tool and arguments from your natural language request — no need to remember command IDs.
+
+## Skill Setup
+
+Polter includes a Claude Code skill that teaches the AI assistant how to use all available tools proactively.
+
+### Install the skill
+
+```bash
+polter setup
+```
+
+This installs the skill file at `~/.claude/skills/polter/SKILL.md`. The command is idempotent — running it again updates the file if needed, or reports that it's already up to date.
+
+### Activate in Claude Code
+
+Use the `/polter` slash command in Claude Code to activate the skill for the current session. The skill guides the AI to:
+
+- Run `polter_ps` at the start of a session to check for active processes
+- Check `polter_logs` after code changes for compilation errors
+- Suggest creating pipelines for repetitive workflows
+
+### TUI access
+
+You can also install the skill from the TUI via **System > Skill Setup**.
 
 ## Supported Clients
 

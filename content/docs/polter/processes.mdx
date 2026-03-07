@@ -1,0 +1,89 @@
+---
+title: Process Management
+description: Start, monitor, and control background processes like dev servers from the TUI, MCP tools, or AI assistants.
+---
+
+Polter tracks background processes (dev servers, build watchers, test runners), captures their output in a ring buffer, and exposes everything via the TUI and MCP tools. When TUI and MCP run together, they share state via IPC.
+
+## Quick Start
+
+```bash
+# From an AI assistant — start the dev server
+polter_smart_start script: "dev"
+
+# Check what's running
+polter_ps
+
+# Read recent logs
+polter_logs id: "npm-run-dev" tail: 30
+```
+
+## MCP Tools
+
+| Tool | Description | Input |
+|---|---|---|
+| `polter_ps` | List all tracked processes | — |
+| `polter_start` | Start a command as background process | `command`, `args?`, `id?`, `cwd?` |
+| `polter_stop` | Stop a process by ID | `id` |
+| `polter_logs` | Read captured stdout/stderr | `id`, `tail?`, `stream?` |
+| `polter_find_process` | Find processes by directory | `cwd?`, `filter?`, `tail?` |
+| `polter_smart_start` | Start package.json script (idempotent) | `script?`, `cwd?`, `tail?` |
+| `polter_run_script_bg` | Run script in background | `script`, `args?`, `cwd?` |
+
+### Key Behaviors
+
+- **`polter_smart_start` is idempotent** — if the process is already running, it returns the current info and recent logs instead of starting a duplicate.
+- **Output is captured in a ring buffer** of 1000 lines per stream (stdout and stderr).
+- **`polter_stop` sends SIGTERM**, then escalates to SIGKILL after 5 seconds if the process hasn't exited.
+
+## TUI Screens
+
+### Process List
+
+Navigate to **Workflows > Processes** to see all tracked processes as cards showing status, PID, command, and uptime.
+
+| Key | Action |
+|---|---|
+| `Enter` | View process logs |
+| `x` | Stop process |
+| `d` | Remove from list |
+
+### Script Picker
+
+Navigate to **Workflows > Scripts** to browse scripts from your `package.json` and start them as background processes with one keypress.
+
+## IPC
+
+<Callout type="info" title="Shared state between TUI and MCP">
+  When the TUI is running, it creates a Unix socket. The MCP client connects via JSON-RPC 2.0, so processes started from either side appear everywhere. If the TUI is not running, the MCP server uses its own in-process registry as a fallback.
+</Callout>
+
+## Process Lifecycle
+
+Each tracked process exposes these fields:
+
+| Field | Description |
+|---|---|
+| `id` | Human-readable identifier (e.g. `npm-run-dev`) |
+| `command` | Executable (e.g. `npm`) |
+| `args` | Command arguments (e.g. `["run", "dev"]`) |
+| `cwd` | Working directory |
+| `pid` | OS process ID |
+| `status` | `running`, `exited`, or `errored` |
+| `exitCode` | Exit code (when exited) |
+| `signal` | Signal that terminated the process (if any) |
+| `startedAt` | ISO timestamp |
+| `exitedAt` | ISO timestamp (when exited) |
+| `uptime` | Human-readable duration |
+
+## Example Workflows
+
+| Prompt | Tool | Arguments |
+|---|---|---|
+| "start the dev server" | `polter_smart_start` | `script: "dev"` |
+| "what's running?" | `polter_ps` | — |
+| "show dev server logs" | `polter_logs` | `id: "npm-run-dev"` |
+| "check for errors" | `polter_logs` | `id: "npm-run-dev"`, `stream: "stderr"`, `tail: 30` |
+| "stop the dev server" | `polter_stop` | `id: "npm-run-dev"` |
+| "find all processes in this repo" | `polter_find_process` | — |
+| "run tests in background" | `polter_run_script_bg` | `script: "test"` |
