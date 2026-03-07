@@ -40,6 +40,15 @@ polter
 Use a repository install when you want the CLI version pinned to one project.
 Use a global install when you want the same CLI version across every repository.
 
+### Set Up AI Integration
+
+```bash
+polter setup          # Install Claude Code skill
+polter mcp install    # Register MCP server
+```
+
+This installs the `/polter` skill for Claude Code and registers Polter as an MCP server. See [MCP / AI Integration](/docs/polter/mcp) for details.
+
 ### Update
 
 If installed globally:
@@ -95,6 +104,9 @@ vercel --version
   </Card>
 <Card title="Configuration" href="/docs/polter/configuration">
     Declarative project config with polter.yaml — plan and apply state.
+  </Card>
+  <Card title="Process Management" href="/docs/polter/processes">
+    Start, monitor, and control background dev servers and scripts.
   </Card>
   <Card title="MCP / AI Integration" href="/docs/polter/mcp">
     Connect Polter to Claude Code, Cursor, and other AI tools via MCP.

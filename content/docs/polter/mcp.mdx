@@ -117,6 +117,13 @@ Once connected, the AI client can call these tools:
 | `polter_pkg_version_bump` | Bump semver version | `type: patch/minor/major` |
 | `polter_pkg_audit` | Security audit | `fix?` |
 | `polter_pkg_info` | Package registry info | `package` |
+| `polter_ps` | List all tracked background processes | — |
+| `polter_start` | Start a command as background process | `command`, `args?`, `id?`, `cwd?` |
+| `polter_stop` | Stop a background process | `id` |
+| `polter_logs` | Read captured output from a process | `id`, `tail?`, `stream?` |
+| `polter_find_process` | Find processes by directory | `cwd?`, `filter?`, `tail?` |
+| `polter_smart_start` | Start package.json script as background process | `script?`, `cwd?`, `tail?` |
+| `polter_run_script_bg` | Run a package.json script in background | `script`, `args?`, `cwd?` |
 
 <Callout type="warn" title="polter_apply executes real commands">
   `polter_apply` runs actual CLI commands against your linked projects (deploys, secret writes, domain changes). These actions are not reversible. Always run `polter_plan` first to review what will change.
@@ -158,8 +165,36 @@ Natural language prompts and the tools they trigger:
 | "run the build script" | `polter_pkg_run_script` | `script: "build"` |
 | "bump the patch version" | `polter_pkg_version_bump` | `type: "patch"` |
 | "audit my dependencies" | `polter_pkg_audit` | — |
+| "start the dev server" | `polter_smart_start` | `script: "dev"` |
+| "check for errors in the dev server" | `polter_logs` | `id: "npm-run-dev"`, `stream: "stderr"`, `tail: 30` |
+| "what's running?" | `polter_ps` | — |
+| "stop the dev server" | `polter_stop` | `id: "npm-run-dev"` |
 
 The AI assistant resolves the right tool and arguments from your natural language request — no need to remember command IDs.
+
+## Skill Setup
+
+Polter includes a Claude Code skill that teaches the AI assistant how to use all available tools proactively.
+
+### Install the skill
+
+```bash
+polter setup
+```
+
+This installs the skill file at `~/.claude/skills/polter/SKILL.md`. The command is idempotent — running it again updates the file if needed, or reports that it's already up to date.
+
+### Activate in Claude Code
+
+Use the `/polter` slash command in Claude Code to activate the skill for the current session. The skill guides the AI to:
+
+- Run `polter_ps` at the start of a session to check for active processes
+- Check `polter_logs` after code changes for compilation errors
+- Suggest creating pipelines for repetitive workflows
+
+### TUI access
+
+You can also install the skill from the TUI via **System > Skill Setup**.
 
 ## Supported Clients
 
