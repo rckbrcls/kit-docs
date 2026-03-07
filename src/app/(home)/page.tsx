@@ -69,7 +69,7 @@ export default function HomePage() {
 
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
-                href="/docs/kit/introduction"
+                href="/docs/ops/getting-started"
                 className="inline-flex items-center gap-2 rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90"
               >
                 Documentation
@@ -172,7 +172,7 @@ export default function HomePage() {
             MIT Licensed. Built with Supabase, Tauri, and React.
           </p>
           <Link
-            href="/docs/kit/introduction"
+            href="/docs/ops/getting-started"
             className="text-sm font-medium text-fd-foreground underline underline-offset-4 decoration-fd-muted-foreground/40 hover:decoration-fd-foreground transition-colors"
           >
             Read the docs

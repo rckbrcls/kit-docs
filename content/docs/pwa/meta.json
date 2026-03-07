@@ -1,6 +1,7 @@
 {
   "title": "PWA",
   "description": "Headless install utilities and manifest tools.",
+  "icon": "Globe",
   "root": true,
   "pages": [
     "getting-started",
