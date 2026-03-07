@@ -14,7 +14,9 @@ Polter checks for each tool binary in your `PATH` (for `supabase`, it also check
 | Supabase CLI | `supabase --version` |
 | GitHub CLI | `gh --version` |
 | Vercel CLI | `vercel --version` |
-| Pulumi CLI | `pulumi version` |
+| Package Manager | `<detected> --version` |
+
+The package manager is auto-detected from your lock file: `bun.lockb` → bun, `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm. No manual configuration is required.
 
 ## Status Badges
 
@@ -32,7 +34,10 @@ Install links:
 - [Supabase CLI](https://supabase.com/docs/guides/cli)
 - [GitHub CLI](https://cli.github.com/)
 - [Vercel CLI](https://vercel.com/docs/cli)
-- [Pulumi CLI](https://www.pulumi.com/docs/install/)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [pnpm](https://pnpm.io/installation)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Bun](https://bun.sh/docs/installation)
 
 ## Accessing Tool Status
 

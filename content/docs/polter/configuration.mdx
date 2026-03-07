@@ -16,7 +16,7 @@ Stored at `.polter/config.json` in the repository root. Created automatically wh
     "supabase": { "projectRef": "abc123" },
     "vercel": { "projectId": "prj_xxx", "orgId": "team_xxx" },
     "gh": { "repo": "org/repo" },
-    "pulumi": { "stackName": "dev", "orgName": "my-org" }
+    "pkg": { "manager": "pnpm" }
   },
   "pipelines": []
 }
@@ -56,6 +56,9 @@ github:
   secrets:
     - SUPABASE_URL
 
+pkg:
+  manager: pnpm
+
 pipelines:
   deploy:
     description: Full deploy pipeline
@@ -66,7 +69,7 @@ pipelines:
 
 ## Plan and Apply
 
-The plan/apply workflow works like Terraform or Pulumi:
+The plan/apply workflow works like Terraform:
 
 ### Plan
 

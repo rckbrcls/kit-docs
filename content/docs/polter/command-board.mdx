@@ -1,9 +1,9 @@
 ---
 title: Command Board
-description: The interactive command board — tabs, pins, flags, and shell execution across all four CLI tools.
+description: The interactive command board — tabs, pins, flags, and shell execution across all five tool categories.
 ---
 
-The command board is Polter's main interface. It organizes commands from Supabase, GitHub, Vercel, and Pulumi into feature tabs, lets you build commands interactively, and pin frequently used workflows.
+The command board is Polter's main interface. It organizes commands from Supabase, GitHub, Vercel, and your package manager into feature tabs, lets you build commands interactively, and pin frequently used workflows.
 
 ## Feature Tabs
 
@@ -13,15 +13,15 @@ Commands are grouped into 9 tabs based on what you're doing, not which tool they
 |---|---|
 | 🗄 **Database** | Supabase `db`, `migration`, `seed`, `inspect` |
 | ⚡ **Functions** | Supabase edge functions |
-| 🚀 **Deploy** | Vercel deploy/promote/rollback, Pulumi up/preview, Supabase db/functions |
-| 📦 **Repo** | GitHub repos, PRs, issues, releases |
-| 🔄 **CI/CD** | GitHub workflows/runs, Vercel env vars, Pulumi preview/up |
+| 🚀 **Deploy** | Vercel deploy/promote/rollback, Supabase db/functions |
+| 🗃️ **Repo** | GitHub repos, PRs, issues, releases |
+| 📦 **Packages** | npm/pnpm/yarn/bun: install, add, remove, build, publish, audit, scripts |
+| 🔄 **CI/CD** | GitHub workflows/runs, Vercel env vars |
 | 🔐 **Auth & Storage** | Supabase storage, secrets, SSO |
 | 🌐 **Networking** | Supabase and Vercel domains, SSL, network restrictions |
-| 🏗 **Infrastructure** | Pulumi stacks, config, deploy, import, state, editor |
-| ⚙️ **Setup** | Login and linking for all 4 tools |
+| ⚙️ **Setup** | Login and linking for all tools |
 
-Some commands appear in multiple tabs when they're relevant to more than one workflow (e.g. `pulumi up` in both Deploy and Infrastructure).
+Some commands appear in multiple tabs when they're relevant to more than one workflow.
 
 ## Interactive Command Builder
 
@@ -41,7 +41,7 @@ Flags vary by tool and are presented in the flag picker after arg selection:
 
 **Vercel:** `--yes`, `--debug`
 
-**Pulumi:** `--yes`, `--debug`, `--stack <name>`
+**Package Manager:** `--save-dev`, `--global`, `--dry-run`
 
 ## Pinned Commands and Runs
 
@@ -70,7 +70,8 @@ projects list
 Polter resolves each tool binary before running it:
 
 - **supabase** — resolved from the current repository first (`node_modules/.bin`), then `PATH`
-- **gh, vercel, pulumi** — resolved from `PATH`
+- **gh, vercel** — resolved from `PATH`
+- **npm/pnpm/yarn/bun** — auto-detected from lock file (`bun.lockb` → bun, `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm)
 
 All commands execute as:
 

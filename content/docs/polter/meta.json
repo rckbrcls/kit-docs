@@ -1,12 +1,11 @@
 {
   "title": "Polter",
-  "description": "Interactive CLI orchestrator for Supabase, GitHub, Vercel, and Pulumi.",
+  "description": "Interactive CLI orchestrator for Supabase, GitHub, Vercel, and your package manager.",
   "root": true,
   "pages": [
     "getting-started",
     "command-board",
     "pipelines",
-    "infrastructure",
     "ci-cd",
     "tool-status",
     "configuration",

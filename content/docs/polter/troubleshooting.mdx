@@ -5,22 +5,13 @@ description: Common issues and solutions when using Polter.
 
 ## Tool not found
 
-A CLI tool (`supabase`, `gh`, `vercel`, or `pulumi`) is not installed or not in your `PATH`.
+A CLI tool (`supabase`, `gh`, or `vercel`) is not installed or not in your `PATH`.
 
 **Fix:**
 
 1. Install the missing tool — see [Tool Status](/docs/polter/tool-status) for install links
 2. Restart your terminal
 3. Run `polter status` to verify detection
-
-## Pulumi: project not initialized
-
-Pulumi commands require a `Pulumi.yaml` in the current directory. If it's missing, commands will fail.
-
-**Fix:**
-
-1. Navigate to your infrastructure directory
-2. Run `pulumi new` to create a project from a template, or ensure `Pulumi.yaml` exists
 
 ## Editor did not open
 
@@ -55,5 +46,5 @@ Polter requires a TTY-capable terminal. CI runners, non-interactive shells, and 
 ## Security Notes
 
 - Polter executes shell commands through your installed CLI tools. It does not store or transmit credentials.
-- Keep tokens out of shared shells and CI logs — this applies to Supabase access tokens, GitHub tokens, and Pulumi Cloud tokens.
+- Keep tokens out of shared shells and CI logs — this applies to Supabase access tokens and GitHub tokens.
 - Prefer short-lived tokens and least-privileged access.
