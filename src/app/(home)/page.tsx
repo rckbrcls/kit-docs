@@ -33,12 +33,12 @@ const products = [
 
 const quickStart = [
   {
-    label: 'Bootstrap Ops from source',
-    code: 'npx polter app setup ops --path .',
+    label: 'Install Polter globally',
+    code: 'npm install -g @polterware/polter',
   },
   {
-    label: 'Install packaged macOS app',
-    code: 'npx @polterware/polter@latest app install ops',
+    label: 'Launch interactive CLI',
+    code: 'polter',
   },
   {
     label: 'Add PWA install detection',

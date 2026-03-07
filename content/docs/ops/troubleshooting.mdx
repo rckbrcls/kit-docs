@@ -5,15 +5,15 @@ description: Resolve the most common Ops setup, authentication, migration, and r
 
 Most Ops startup issues come from one of four causes: missing Supabase configuration, broken connectivity, a repository that is not linked correctly, or a runtime payload that was never prepared.
 
-This page focuses on those recurring problems so beginners can recover quickly and technical users know where to look next.
-
 ## Missing Supabase configuration
 
-- In a source checkout, make sure .env.local contains VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY.
-- In an installed app, rerun the configuration workflow or provide the connection through the runtime form when the app asks for it.
+- In a source checkout, make sure `.env.local` contains `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY`.
+- In an installed app, provide the connection through the runtime form when the app asks for it.
+
+To regenerate the environment file in a source checkout:
 
 ```bash
-npx polter app configure ops --path .
+pnpm ops setup
 ```
 
 ## Auth and network issues
@@ -25,19 +25,13 @@ npx polter app configure ops --path .
 ## Migration and link issues
 
 ```bash
-npx polter app link ops --path .
-npx polter app migrate ops lint --path .
-npx polter app migrate ops push --path .
+supabase link
+pnpm ops db lint
+pnpm ops db push
 ```
 
-If push fails, confirm the repository is linked to the right project and that you have whatever credentials the Supabase workflow needs to apply migrations.
+If push fails, confirm the repository is linked to the right project and that you have the credentials needed for migrations.
 
 ## Runtime configuration issues
 
-If the packaged app does not connect on first launch, assume the runtime bootstrap step did not complete. Re-run the configuration or installation workflow and then relaunch the app.
-
-## Why Polter is required
-
-<Callout type="info" title="Short answer">
-Because Ops no longer treats Supabase workflows as app CLI responsibilities. Polter is the supported workflow layer for those jobs, and the documentation assumes that split.
-</Callout>
+If the packaged app does not connect on first launch, use the connection form in the app to enter your Supabase URL and publishable key. For source checkouts, re-run `pnpm ops setup` to regenerate `.env.local`.

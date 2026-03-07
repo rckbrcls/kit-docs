@@ -5,8 +5,6 @@ description: Review the high-level technical model behind the Ops desktop app, t
 
 Ops is best understood as a desktop interface over a Supabase-backed application contract. The desktop bundle is important, but the real business guarantees come from the database rules, auth model, and server-side operations.
 
-Polter completes the picture by acting as the workflow orchestrator that prepares repositories and packaged apps for a specific backend.
-
 ## Desktop app
 
 The desktop layer presents the operational interface, stores local runtime connection details, and bridges into native packaging behavior through Tauri. It should stay thin with respect to backend business rules.
@@ -36,12 +34,12 @@ After the payload is imported, the app stores the resolved connection locally fo
 
 ### Fall back to env in development
 
-If runtime config is not present in a source checkout, .env.local can still supply the development connection.
+If runtime config is not present in a source checkout, `.env.local` can still supply the development connection.
 
 </Steps>
 
-## Polter as workflow orchestrator
+## Workflow overview
 
-- **Repository bootstrap** — setup and link workflows prepare the source checkout for the intended project.
-- **Migration control** — migrate commands provide explicit push, lint, reset, and local-reset operations.
-- **Runtime preparation** — configure and install write the bootstrap material used by the packaged app.
+- **Repository bootstrap** — `pnpm ops setup` prepares the source checkout with dependencies, environment, and Supabase linking.
+- **Migration control** — `pnpm ops db` commands provide explicit push, lint, reset, and local-reset operations.
+- **Runtime preparation** — The install script or manual configuration prepares the bootstrap material used by the packaged app.

@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Short answers to the recurring questions about Polter, Supabase, packaged apps, and configuration models.
+description: Short answers to the recurring questions about Supabase, packaged apps, and configuration models.
 ---
 
 These answers are short on purpose. If you need the full operational detail, follow the linked pages in the rest of the documentation.
@@ -9,24 +9,20 @@ These answers are short on purpose. If you need the full operational detail, fol
 
 <Steps>
 
-### Can I use Ops without Polter?
-
-Not for the recommended setup, migration, configuration, and installation workflows. The current documentation assumes Polter for those responsibilities.
-
 ### Do I need Supabase CLI?
 
-Yes for repository and migration workflows. Polter is a workflow layer on top of the Supabase tooling rather than a replacement for the backend itself.
+Yes for repository and migration workflows. The Ops CLI wraps Supabase CLI commands for setup and migration operations.
 
 ### Can I use a packaged app without rebuilding?
 
-Yes. That is exactly what the macOS install workflow is for. Use Polter install and runtime configuration instead of rebuilding.
+Yes. Use the install script to download a release from GitHub and install it to `/Applications/`. The app presents a connection form on first launch.
 
 ### How do I switch to another Supabase project?
 
-Relink the source checkout with the link workflow and refresh configuration with configure. For packaged apps, refresh the runtime connection rather than rebuilding.
+Relink the source checkout with `supabase link` and then run `pnpm ops db push` to apply migrations. For packaged apps, update the connection in app settings.
 
 ### What is the difference between env config and runtime config?
 
-env config is the development fallback used mainly in source checkouts. Runtime config is the persisted desktop connection used by installed apps.
+env config is the development fallback used in source checkouts (`.env.local`). Runtime config is the persisted desktop connection used by installed apps.
 
 </Steps>

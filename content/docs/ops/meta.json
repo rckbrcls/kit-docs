@@ -6,7 +6,6 @@
   "pages": [
     "getting-started",
     "installation",
-    "polter",
     "configuration",
     "running-ops",
     "database-and-migrations",

@@ -1,11 +1,9 @@
 ---
 title: For Developers
-description: See where the app code and migrations live, how runtime config works, and how to contribute safely within the current CLI boundary.
+description: See where the app code and migrations live, how runtime config works, and how to contribute safely.
 ---
 
 Ops development is centered around the app code, the Supabase contract, and the runtime configuration model that lets packaged apps connect after installation.
-
-The most important architectural habit is to respect the current boundary: the Ops CLI starts development, and Polter owns the Supabase workflows around the app.
 
 ## High-level project structure
 
@@ -21,14 +19,16 @@ supabase/
 src-tauri/
   src/lib.rs         Desktop shell integration
 cli/
-  index.ts           Minimal development launcher
+  index.ts           CLI entry (setup, dev, db, check)
+  commands/          Command implementations
+  utils/             Shared CLI utilities
 ```
 
 App-facing behavior lives in the React and Tauri layers. Backend-facing behavior lives in Supabase migrations, policies, and functions. Keep those responsibilities clear when you make changes.
 
 ## Where runtime config lives
 
-- Source checkout fallback comes from .env.local.
+- Source checkout fallback comes from `.env.local`.
 - Runtime desktop configuration is persisted by the app after bootstrap or manual save.
 - The one-time bootstrap payload is consumed on first launch and then deleted.
 
@@ -38,7 +38,7 @@ App-facing behavior lives in the React and Tauri layers. Backend-facing behavior
 
 ### Start from a linked and configured checkout
 
-Use Polter setup and link workflows before changing app or database behavior.
+Run `pnpm ops setup` before changing app or database behavior.
 
 ### Treat migrations as the backend contract
 
@@ -48,16 +48,13 @@ If you change data requirements, make the matching migration changes instead of 
 
 Consider both source fallback and packaged runtime configuration whenever you touch Supabase connection logic.
 
-### Keep the CLI boundary intact
-
-Avoid adding new Supabase workflow responsibilities back into the Ops CLI unless the product direction explicitly changes.
-
 </Steps>
 
-## Current CLI boundary
+## CLI commands
 
-| | Owned by Ops CLI | Owned by Polter |
-|---|---|---|
-| **Primary role** | Start local development with pnpm ops dev. | Handle setup, link, migrate, configure, and install workflows. |
-| **Typical user action** | Choose web-only or desktop dev mode. | Prepare the repository or packaged app for the intended Supabase project. |
-| **What to avoid** | Growing the app CLI into a second workflow manager. | Documenting old Ops workflow commands as if they were current. |
+| Command | Description |
+|---|---|
+| `pnpm ops setup` | Full setup wizard (prereqs, env, deps, supabase link, migrations) |
+| `pnpm ops dev` | Start local development (web or desktop) |
+| `pnpm ops db [push\|lint\|reset\|local-reset]` | Database migration operations |
+| `pnpm ops check` | Run Prettier + ESLint |

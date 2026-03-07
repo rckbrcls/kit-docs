@@ -5,20 +5,22 @@ description: Understand .env.local fallback, runtime Supabase connections, boots
 
 Ops supports two related configuration models: build-time environment fallback for development and runtime Supabase connection storage for desktop app installs.
 
-The practical rule is straightforward. Source checkouts may still use .env.local. Packaged desktop installs are meant to use runtime configuration, usually prepared by Polter.
+Source checkouts use `.env.local`. Packaged desktop installs use runtime configuration entered through the app or prepared manually.
 
 ## .env.local fallback for development
 
-In a source checkout, Ops can still resolve its Supabase connection from .env.local using the development fallback variables. This keeps local development simple and compatible with existing repo-based workflows.
+In a source checkout, Ops resolves its Supabase connection from `.env.local` using the development fallback variables. This keeps local development simple and compatible with existing repo-based workflows.
 
 ```dotenv
 VITE_SUPABASE_URL=...
 VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...
 ```
 
+The setup wizard (`pnpm ops setup`) creates this file automatically.
+
 ## Runtime Supabase connection for installed apps
 
-Installed desktop apps should not depend on source-repository env files. Instead, Ops stores a runtime Supabase connection after first launch or after the user saves a new connection in the app settings.
+Installed desktop apps should not depend on source-repository env files. Instead, Ops stores a runtime Supabase connection after first launch when the user saves a connection in the app settings form.
 
 This makes packaged deployments practical because the app can be repointed to another backend without rebuilding the desktop bundle.
 
@@ -26,9 +28,9 @@ This makes packaged deployments practical because the app can be repointed to an
 
 <Steps>
 
-### Polter prepares a bootstrap payload
+### Prepare connection details
 
-The payload contains the Supabase URL, publishable key, and optional project reference for the intended deployment.
+The bootstrap payload contains the Supabase URL, publishable key, and optional project reference. This can be prepared manually or by the install script.
 
 ### Ops consumes it on first launch
 
@@ -46,10 +48,10 @@ Think of the bootstrap payload as a handoff document from the operator workflow 
 
 ## How to reconfigure a connection later
 
+For source checkouts, update `.env.local` directly or re-run the setup wizard:
+
 ```bash
-npx polter app configure ops --path .
+pnpm ops setup
 ```
 
-Use configure when the Supabase project URL or publishable key changes, or when you want to refresh both development fallback data and runtime bootstrap material.
-
-End users can also adjust the runtime connection from inside the app when the connection form is exposed, but operator-managed configuration through Polter is the recommended path for controlled deployments.
+End users can adjust the runtime connection from inside the app when the connection form is exposed in app settings.

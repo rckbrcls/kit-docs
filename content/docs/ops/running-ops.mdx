@@ -1,34 +1,33 @@
 ---
 title: Running Ops
-description: Use the minimal Ops CLI for development only, and understand how web and desktop dev modes relate to the current workflow boundary.
+description: Use the Ops CLI for development and Supabase workflows.
 ---
 
-The current Ops CLI is intentionally narrow. Its job is to start local development, not to own Supabase operations.
+The Ops CLI handles both local development startup and Supabase workflow operations.
 
-That keeps the command surface small and reduces confusion about where setup, migration, configuration, and installation workflows belong.
+## CLI commands
 
-## The command that still matters
+| Command | Description |
+|---|---|
+| `pnpm ops` | Interactive menu |
+| `pnpm ops setup` | Full setup wizard (prereqs, env, deps, supabase link, migrations) |
+| `pnpm ops dev` | Start local development (web or desktop) |
+| `pnpm ops db push` | Push migrations to the linked Supabase project |
+| `pnpm ops db lint` | Lint migration files |
+| `pnpm ops db reset` | Reset linked remote database (destructive) |
+| `pnpm ops db local-reset` | Reset local Docker database (destructive) |
+| `pnpm ops check` | Run Prettier + ESLint |
+
+## Development mode
 
 ```bash
 pnpm ops dev
 ```
 
-This is the development entry point that remains inside Ops. Use it after the repository has already been prepared with Polter.
+This is the development entry point. Use it after the repository has been set up with `pnpm ops setup`.
 
 ## Web versus desktop development mode
 
 - Web-only mode starts the Vite-based web experience for fast UI iteration.
 - Desktop mode starts the Tauri shell plus the web app so you can verify native desktop behavior.
 - Desktop mode requires the Rust toolchain and Tauri prerequisites.
-
-## What the minimal CLI does not do anymore
-
-<Callout type="warn" title="Responsibilities moved to Polter">
-Do not rely on Ops CLI commands for setup, database linking, migration management, runtime configuration, or packaged app installation. Those workflows are owned by Polter.
-</Callout>
-
-| Command | Description |
-|---|---|
-| `pnpm ops dev` | Start local development. This is the supported Ops CLI workflow. |
-| `npx polter app setup ops --path .` | Prepare a source checkout before running the app locally. |
-| `npx polter app configure ops --path .` | Refresh development and runtime connection material when the backend changes. |
