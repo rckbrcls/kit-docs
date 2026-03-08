@@ -1,8 +1,0 @@
-{
-  "title": "polterware/kit",
-  "description": "Developer tools built for personal use, open for everyone.",
-  "root": true,
-  "pages": [
-    "introduction"
-  ]
-}

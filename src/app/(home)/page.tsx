@@ -1,16 +1,7 @@
 import Link from 'next/link';
-import { Terminal, Database, Globe, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
+import { Terminal, Globe, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
 
 const products = [
-  {
-    name: 'Ops',
-    description:
-      'Desktop business manager powered by Supabase. Product catalog, inventory, orders, sales, payments, and analytics.',
-    href: '/docs/ops/getting-started',
-    github: 'https://github.com/polterware/ops',
-    icon: Database,
-    tags: ['Desktop', 'Supabase', 'Tauri'],
-  },
   {
     name: 'Polter',
     description:
@@ -33,12 +24,12 @@ const products = [
 
 const quickStart = [
   {
-    label: 'Bootstrap Ops from source',
-    code: 'npx polter app setup ops --path .',
+    label: 'Install Polter globally',
+    code: 'npm install -g @polterware/polter',
   },
   {
-    label: 'Install packaged macOS app',
-    code: 'npx @polterware/polter@latest app install ops',
+    label: 'Launch interactive CLI',
+    code: 'polter',
   },
   {
     label: 'Add PWA install detection',
@@ -64,12 +55,12 @@ export default function HomePage() {
 
             <p className="max-w-xl text-lg text-fd-muted-foreground leading-relaxed">
               Developer tools built for personal use, open for everyone.
-              Three projects, one ecosystem.
+              Two projects, one ecosystem.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
-                href="/docs/kit/introduction"
+                href="/docs/polter/getting-started"
                 className="inline-flex items-center gap-2 rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90"
               >
                 Documentation
@@ -92,7 +83,7 @@ export default function HomePage() {
           Projects
         </p>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {products.map((product) => (
             <div
               key={product.name}
@@ -169,10 +160,10 @@ export default function HomePage() {
       <section className="border-t border-fd-border">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-10">
           <p className="text-sm text-fd-muted-foreground">
-            MIT Licensed. Built with Supabase, Tauri, and React.
+            MIT Licensed. Built with Supabase and React.
           </p>
           <Link
-            href="/docs/kit/introduction"
+            href="/docs/polter/getting-started"
             className="text-sm font-medium text-fd-foreground underline underline-offset-4 decoration-fd-muted-foreground/40 hover:decoration-fd-foreground transition-colors"
           >
             Read the docs

@@ -196,6 +196,130 @@ Use the `/polter` slash command in Claude Code to activate the skill for the cur
 
 You can also install the skill from the TUI via **System > Skill Setup**.
 
+## Skill Usage Examples
+
+After installing the skill, use `/polter` in Claude Code to activate it. Then ask naturally:
+
+### Process management
+
+```
+/polter start the dev server and watch for errors
+```
+
+The skill runs `polter_smart_start` to launch `npm run dev` in the background, then periodically checks `polter_logs` for compilation errors or warnings.
+
+```
+/polter check what's running and show me any errors
+```
+
+Runs `polter_ps` to list active processes, then `polter_logs` on each with `stream: "stderr"` to surface issues.
+
+### Pipelines
+
+```
+/polter create a pipeline to build, test, and deploy
+```
+
+The skill calls `polter_create_pipeline` with steps for `pkg:build`, `pkg:run_script test`, and `vercel:deploy:prod`, then confirms the pipeline was saved.
+
+```
+/polter run the deploy pipeline
+```
+
+Executes `polter_run_pipeline` with the named pipeline and streams output.
+
+### Command discovery
+
+```
+/polter check what supabase commands are available
+```
+
+Calls `polter_list_commands` with `tool: "supabase"` and presents a categorized list of all Supabase CLI commands Polter can run.
+
+```
+/polter show me all GitHub commands
+```
+
+Calls `polter_list_commands` with `tool: "gh"` to list PR creation, issue management, and other GitHub CLI operations.
+
+### Package management
+
+```
+/polter audit dependencies and fix vulnerabilities
+```
+
+Runs `polter_pkg_audit` first, then `polter_pkg_audit` with `fix: true` if issues are found. Uses the `polter_audit_resolution` prompt for guidance on manual fixes.
+
+```
+/polter bump version, build, and publish to npm
+```
+
+Sequences `polter_pkg_version_bump`, `polter_pkg_build`, and `polter_pkg_publish` — using the `polter_version_strategy` and `polter_publish_workflow` prompts to decide the bump type and validate pre-publish checks.
+
+### Declarative state
+
+```
+/polter what would change if I apply the polter.yaml?
+```
+
+Runs `polter_plan` to show the diff between current infrastructure state and the desired state in `polter.yaml`, without executing anything.
+
+## MCP Tool Usage Examples
+
+When using Polter as an MCP server (without the skill), Claude Code calls tools directly. Here are real workflow examples:
+
+### Monitor after code changes
+
+After editing source files, Claude Code can automatically check for build errors:
+
+```
+User: "fix the type error in utils.ts"
+
+Claude Code:
+1. Reads and edits utils.ts
+2. Calls polter_logs({ id: "npm-run-dev", stream: "stderr", tail: 20 })
+3. Verifies the fix compiled cleanly
+```
+
+### Multi-step deploy workflow
+
+```
+User: "deploy to production"
+
+Claude Code:
+1. polter_pkg_build() — runs the build script
+2. polter_pkg_run_script({ script: "test" }) — runs tests
+3. polter_run_command({ commandId: "vercel:deploy:prod" }) — deploys
+```
+
+### Manage background processes
+
+```
+User: "start the API and the frontend"
+
+Claude Code:
+1. polter_start({ command: "npm", args: ["run", "api"], id: "api" })
+2. polter_smart_start({ script: "dev" })
+3. polter_ps() — confirms both are running
+```
+
+### Create reusable pipelines from patterns
+
+```
+User: "I keep running build, test, deploy — save that as a pipeline"
+
+Claude Code:
+1. polter_create_pipeline({
+     name: "release",
+     description: "Build, test, and deploy to production",
+     steps: [
+       { commandId: "pkg:build" },
+       { commandId: "pkg:run_script", args: { script: "test" } },
+       { commandId: "vercel:deploy:prod" }
+     ]
+   })
+```
+
 ## Supported Clients
 
 - **Claude Code** — full support via `polter mcp install`
