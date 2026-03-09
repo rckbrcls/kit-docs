@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import './global.css';
 import { Inter, Fira_Code } from 'next/font/google';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Kit',
+    template: '%s | Kit',
+  },
+};
 
 const inter = Inter({
   subsets: ['latin'],
