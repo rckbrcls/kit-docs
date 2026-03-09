@@ -5,11 +5,11 @@ const products = [
   {
     name: 'Polter',
     description:
-      'Interactive CLI for Supabase workflows. Setup, linking, migrations, runtime configuration, and packaged app installation.',
+      'Infrastructure orchestrator CLI for managing dev processes, pipelines, CLI commands (Supabase, GitHub, Vercel, Git), and packages from one unified interface.',
     href: '/docs/polter/getting-started',
     github: 'https://github.com/polterware/polter',
     icon: Terminal,
-    tags: ['CLI', 'Supabase', 'Migrations'],
+    tags: ['CLI', 'Orchestrator', 'Pipelines'],
   },
   {
     name: 'PWA',
@@ -28,7 +28,7 @@ const quickStart = [
     code: 'npm install -g @polterware/polter',
   },
   {
-    label: 'Launch interactive CLI',
+    label: 'Launch Polter',
     code: 'polter',
   },
   {

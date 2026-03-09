@@ -1,6 +1,6 @@
 {
   "title": "Polter",
-  "description": "Interactive CLI orchestrator for Supabase, GitHub, Vercel, and your package manager.",
+  "description": "Infrastructure orchestrator CLI for managing dev processes, pipelines, CLI commands, and packages.",
   "icon": "Terminal",
   "root": true,
   "pages": [
