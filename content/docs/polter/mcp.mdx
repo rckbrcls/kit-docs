@@ -38,7 +38,7 @@ Registers the server in your global Claude Code settings.
 If you prefer to register manually:
 
 ```bash
-claude mcp add polter -- npx -y -p @polterware/polter@latest polter-mcp
+claude mcp add polter -- ~/.polter/bin/polter-mcp
 ```
 
 Or add this entry directly to `~/.claude/settings.json`:
@@ -47,8 +47,7 @@ Or add this entry directly to `~/.claude/settings.json`:
 {
   "mcpServers": {
     "polter": {
-      "command": "npx",
-      "args": ["-y", "-p", "@polterware/polter@latest", "polter-mcp"]
+      "command": "~/.polter/bin/polter-mcp"
     }
   }
 }
@@ -64,7 +63,7 @@ Re-register the MCP server with the latest version:
 polter mcp update
 ```
 
-This clears the npx cache and re-registers with `@latest`, ensuring you always run the newest release.
+This re-registers the MCP server pointing to your installed binary. Run the install script first to update the binary itself.
 
 | Flag | Effect |
 |---|---|
@@ -79,7 +78,7 @@ Check your current MCP server installation:
 polter mcp status
 ```
 
-Shows the installed version, latest available version on npm, and registration status for each scope (local, project, global).
+Shows the installed version, latest available version, and registration status for each scope (local, project, global).
 
 ### Remove
 
