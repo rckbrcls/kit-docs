@@ -7,30 +7,29 @@ Documentation hub for Polterware tools. It currently documents Polter and `@polt
 
 ## Summary
 
-- [What it is](#what-it-is)
-- [Goals](#goals)
-- [Documentation areas](#documentation-areas)
-- [Project map](#project-map)
-- [Current state](#current-state)
-- [Working notes](#working-notes)
+- Fumadocs-powered Next.js documentation hub for Polterware developer tools.
+- Solves shared docs for Polter and `@polterware/pwa`, including installation, configuration, runtime behavior, CLI usage, browser support, and troubleshooting.
+- Main stack: Next.js, Fumadocs, MDX content, `source.config.ts`, TypeScript, and content metadata files.
+- Current status: active docs shell, with some Polter pages potentially describing older CLI/TUI direction.
+- Technical value: separates public tool documentation from implementation repositories.
 
-## What it is
+## Overview
 
 `kit-docs` is the public docs site for small Polterware developer tools. It provides task-focused pages for installation, configuration, runtime behavior, browser support, CLI usage, and troubleshooting.
 
-## Goals
+## Motivation
 
 - Give Polterware tools one shared documentation surface.
 - Keep docs practical and navigable by product area.
 - Separate product documentation from implementation repositories.
 - Make it easier to ship small tools without repeating setup guides in every README.
 
-## Documentation areas
+## Features
 
 - `content/docs/polter`: command board, pipelines, process management, configuration, MCP, CI/CD, tool status, and troubleshooting.
 - `content/docs/pwa`: installation, runtime API, React hook, manifest helpers, CLI usage, and browser support matrix.
 
-## Project map
+## Project Structure
 
 ```text
 kit-docs/
@@ -41,11 +40,11 @@ kit-docs/
 └── package.json
 ```
 
-## Current state
+## Current Status
 
 The site is a documentation shell with active content for Polter and PWA. Some Polter docs still describe the older CLI/TUI direction, so check the current Polter repository before making architectural claims.
 
-## Working notes
+## Known Limitations
 
 - Keep pages short, specific, and command-oriented.
 - Update docs when public package behavior changes.
